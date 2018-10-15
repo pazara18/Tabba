@@ -19,3 +19,14 @@ frozen 1.0 workbench ran through eight of them.
 - [x] **M5 - Export pipeline** (PDF-ready tab rendering, text export) - closed **2023-10-19**, 15:10 CEST
 - [x] **M6 - Project model** (local-first storage, autosave, versioned sessions) - closed **2024-11-28**, 09:55 CET
 - [x] **M7 - Analysis assist** (suggested fingerings, musician-always-decides flow) - closed **2025-12-11**, 12:00 CET
+- [x] **M8 - Tabba 1.0 - stable project format freeze** - closed **2026-08-09**, 12:00 CEST
+
+### Commits per year - the build log
+
+\\	ext
+2018 ▇▇▇▇ 26
+2019 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 120
+2020 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 130
+2021 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 140
+2022 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 150
+2023 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 160
