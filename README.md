@@ -30,3 +30,15 @@ frozen 1.0 workbench ran through eight of them.
 2021 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 140
 2022 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 150
 2023 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 160
+2024 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 170
+2025 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 180
+2026 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 120
+\
+## The field team
+
+- **rShimizu1988** - audited the development setup on a clean checkout and
+  documented the exact Node/browser versions that build green (Sep 2025).
+- **DavideEvans77347** - reviewed the planning chapter and tied every open
+  item to a measurable exit check (Oct 2025).
+- **HuseyinGupta78** - extended the project-files guide with the analysis
+  pipeline map and where each test lives (Nov 2025).
