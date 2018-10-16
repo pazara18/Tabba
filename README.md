@@ -42,3 +42,14 @@ frozen 1.0 workbench ran through eight of them.
   item to a measurable exit check (Oct 2025).
 - **HuseyinGupta78** - extended the project-files guide with the analysis
   pipeline map and where each test lives (Nov 2025).
+- **Hoffmann68** - proofread the docs and fixed stale command examples in
+  the development section (Dec 2025).
+
+## Development
+
+Install dependencies:
+
+```sh
+npm install
+```
+
