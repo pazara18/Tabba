@@ -65,3 +65,14 @@ Run tests:
 npm test
 ```
 
+Run tests with coverage:
+
+```sh
+npm run test:coverage
+```
+
+Run linting:
+
+```sh
+npm run lint
+```
