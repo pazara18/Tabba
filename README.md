@@ -53,3 +53,15 @@ Install dependencies:
 npm install
 ```
 
+Start the local development server:
+
+```sh
+npm run dev
+```
+
+Run tests:
+
+```sh
+npm test
+```
+
