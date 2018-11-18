@@ -8,3 +8,7 @@ export default tseslint.config(
   { ignores: ["dist"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      ecmaVersion: 2022,
