@@ -7,3 +7,4 @@
     "skipLibCheck": true,
     "moduleResolution": "Bundler",
     "allowSyntheticDefaultImports": true,
+    "strict": true,
