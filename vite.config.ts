@@ -5,3 +5,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     coverage: {
+      all: true,
+      exclude: ["**/*.test.ts", "**/*.test.tsx"],
+      include: [
+        "src/domain/fingering/*.ts",
