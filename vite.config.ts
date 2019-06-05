@@ -9,3 +9,7 @@ export default defineConfig({
       exclude: ["**/*.test.ts", "**/*.test.tsx"],
       include: [
         "src/domain/fingering/*.ts",
+        "src/domain/pitch/*.ts",
+        "src/features/analysis/services/*.ts",
+        "src/features/editor/services/*.ts",
+        "src/features/audio/services/*.ts",
