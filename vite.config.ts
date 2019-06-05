@@ -17,3 +17,7 @@ export default defineConfig({
         "src/features/project/services/*.ts",
       ],
       provider: "v8",
+      reporter: ["text", "json-summary"],
+      thresholds: {
+        branches: 85,
+        functions: 95,
