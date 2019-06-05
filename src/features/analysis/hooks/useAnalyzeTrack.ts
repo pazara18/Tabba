@@ -15,3 +15,13 @@ interface UseAnalyzeTrackOptions {
   setProjectNotice: (notice: string) => void;
 }
 
+export function useAnalyzeTrack({
+  activeSource,
+  project,
+  setProject,
+  setProjectNotice,
+}: UseAnalyzeTrackOptions) {
+  return useCallback(
+    (trackId: string) => {
+      const track = project.tracks.find((candidate) => candidate.id === trackId);
+
