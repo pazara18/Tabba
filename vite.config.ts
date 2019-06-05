@@ -13,3 +13,7 @@ export default defineConfig({
         "src/features/analysis/services/*.ts",
         "src/features/editor/services/*.ts",
         "src/features/audio/services/*.ts",
+        "src/domain/instruments/standardTunings.ts",
+        "src/features/project/services/*.ts",
+      ],
+      provider: "v8",
