@@ -6,3 +6,12 @@ import type { TabbaProject } from "../../project/types";
 import { createSuggestedTabEvents } from "../services/createSuggestedTabEvents";
 import { getInstrumentPitchOptions } from "../services/instrumentAnalysisOptions";
 import { alignNotesToEnergyOnsets } from "../services/noteOnsetAlignment";
+import { analyzePitchFrames, groupPitchFrames } from "../services/pitchDetection";
+
+interface UseAnalyzeTrackOptions {
+  activeSource?: RuntimeStemSource;
+  project: TabbaProject;
+  setProject: Dispatch<SetStateAction<TabbaProject>>;
+  setProjectNotice: (notice: string) => void;
+}
+
