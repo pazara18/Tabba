@@ -25,3 +25,12 @@ export function useAnalyzeTrack({
     (trackId: string) => {
       const track = project.tracks.find((candidate) => candidate.id === trackId);
 
+      if (!track || !activeSource) {
+        setProjectNotice("Import audio and create a track before analyzing.");
+        return;
+      }
+
+      if (activeSource.stemId !== track.stemId) {
+        setProjectNotice("Select the stem attached to this track before analyzing.");
+        return;
+      }
