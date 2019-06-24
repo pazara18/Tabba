@@ -34,3 +34,13 @@ export function useAnalyzeTrack({
         setProjectNotice("Select the stem attached to this track before analyzing.");
         return;
       }
+
+      setProjectNotice("Analyzing selected stem...");
+      decodeAudioFile(activeSource.file)
+        .then((decoded) => {
+          const options = getInstrumentPitchOptions(track.instrument);
+          const frames = analyzePitchFrames(decoded.samples, decoded.sampleRate, options);
+          const notes = alignNotesToEnergyOnsets(
+            groupPitchFrames(frames, options),
+            decoded.samples,
+            decoded.sampleRate
