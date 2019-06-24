@@ -44,3 +44,12 @@ export function useAnalyzeTrack({
             groupPitchFrames(frames, options),
             decoded.samples,
             decoded.sampleRate
+          );
+          const events = createSuggestedTabEvents(notes, track.tuning, {
+            lockedEvents: track.events.filter((event) => event.locked),
+          });
+
+          const htmlAudioDurationSeconds = project.stems.find(
+            (stem) => stem.id === track.stemId
+          )?.durationSeconds;
+          console.info("[tabba analyze diagnostic]", {
