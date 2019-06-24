@@ -53,3 +53,13 @@ export function useAnalyzeTrack({
             (stem) => stem.id === track.stemId
           )?.durationSeconds;
           console.info("[tabba analyze diagnostic]", {
+            trackId,
+            decodedDurationSeconds: decoded.durationSeconds,
+            decodedSampleRate: decoded.sampleRate,
+            decodedSampleCount: decoded.samples.length,
+            htmlAudioDurationSeconds,
+            durationDeltaSeconds:
+              htmlAudioDurationSeconds === undefined
+                ? undefined
+                : decoded.durationSeconds - htmlAudioDurationSeconds,
+            firstEventStartSeconds: events[0]?.startSeconds,
