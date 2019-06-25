@@ -41,3 +41,18 @@ describe("createSuggestedTabEvents", () => {
             confidence: 0.9,
             durationSeconds: 0.5,
             frequencyHz: 32.7,
+            pitch: "C1",
+            startSeconds: 0,
+          },
+        ],
+        standardGuitarTuning
+      )
+    ).toEqual([]);
+  });
+
+  it("uses locked earlier positions as fingering context", () => {
+    const [event] = createSuggestedTabEvents(
+      [
+        {
+          confidence: 0.82,
+          durationSeconds: 0.5,
