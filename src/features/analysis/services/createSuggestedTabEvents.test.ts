@@ -26,3 +26,18 @@ describe("createSuggestedTabEvents", () => {
       kind: "single",
       texture: "mono",
       detectedPitches: [{ pitch: "E3", confidence: 0.82, frequencyHz: 164.81 }],
+      chosenPositions: [{ stringNumber: 4, fret: 2, pitch: "E3" }],
+      confidence: 0.82,
+      locked: false,
+    });
+    expect(events[0].candidates.length).toBeGreaterThan(1);
+  });
+
+  it("skips notes that cannot be played on the tuning", () => {
+    expect(
+      createSuggestedTabEvents(
+        [
+          {
+            confidence: 0.9,
+            durationSeconds: 0.5,
+            frequencyHz: 32.7,
