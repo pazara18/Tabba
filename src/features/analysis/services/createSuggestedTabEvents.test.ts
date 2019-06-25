@@ -56,3 +56,18 @@ describe("createSuggestedTabEvents", () => {
         {
           confidence: 0.82,
           durationSeconds: 0.5,
+          frequencyHz: 329.63,
+          pitch: "E4",
+          startSeconds: 2,
+        },
+      ],
+      standardGuitarTuning,
+      {
+        createId: () => "suggested-1",
+        lockedEvents: [
+          {
+            id: "locked-1",
+            startSeconds: 1,
+            durationSeconds: 0.5,
+            kind: "single",
+            texture: "mono",
