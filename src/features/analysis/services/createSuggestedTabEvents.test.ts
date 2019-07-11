@@ -86,3 +86,18 @@ describe("createSuggestedTabEvents", () => {
 
   it("uses the nearest earlier locked position when locked events are unsorted", () => {
     const [event] = createSuggestedTabEvents(
+      [
+        {
+          confidence: 0.82,
+          durationSeconds: 0.5,
+          frequencyHz: 329.63,
+          pitch: "E4",
+          startSeconds: 3,
+        },
+      ],
+      standardGuitarTuning,
+      {
+        createId: () => "suggested-1",
+        lockedEvents: [
+          lockedEvent("locked-older", 1, { stringNumber: 1, fret: 0, pitch: "E4" }),
+          lockedEvent("locked-nearest", 2, { stringNumber: 2, fret: 5, pitch: "E4" }),
