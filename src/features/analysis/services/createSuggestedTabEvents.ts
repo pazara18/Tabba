@@ -5,3 +5,12 @@ import type { DetectedNote } from "../types";
 
 interface SuggestedEventOptions {
   createId?: () => string;
+  lockedEvents?: TabEvent[];
+}
+
+const defaultCreateId = () => crypto.randomUUID();
+
+export function createSuggestedTabEvents(
+  notes: DetectedNote[],
+  tuning: InstrumentTuning,
+  options: SuggestedEventOptions = {}
