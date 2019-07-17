@@ -14,3 +14,12 @@ export function createSuggestedTabEvents(
   notes: DetectedNote[],
   tuning: InstrumentTuning,
   options: SuggestedEventOptions = {}
+): TabEvent[] {
+  const createId = options.createId ?? defaultCreateId;
+  const lockedEvents = sortEventsByStart(options.lockedEvents ?? []);
+  const createdEvents: TabEvent[] = [];
+  let lockedEventIndex = 0;
+  let previousPosition: TabPosition | undefined;
+  let previousPositionStartSeconds = -Infinity;
+
+  for (const note of [...notes].sort((left, right) => left.startSeconds - right.startSeconds)) {
