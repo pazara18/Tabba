@@ -23,3 +23,11 @@ export function createSuggestedTabEvents(
   let previousPositionStartSeconds = -Infinity;
 
   for (const note of [...notes].sort((left, right) => left.startSeconds - right.startSeconds)) {
+    while (
+      lockedEventIndex < lockedEvents.length &&
+      lockedEvents[lockedEventIndex].startSeconds < note.startSeconds
+    ) {
+      const lockedEvent = lockedEvents[lockedEventIndex];
+      const lockedPosition = lockedEvent.chosenPositions[0];
+
+      if (lockedPosition && lockedEvent.startSeconds >= previousPositionStartSeconds) {
