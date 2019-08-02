@@ -31,3 +31,12 @@ export function createSuggestedTabEvents(
       const lockedPosition = lockedEvent.chosenPositions[0];
 
       if (lockedPosition && lockedEvent.startSeconds >= previousPositionStartSeconds) {
+        previousPosition = lockedPosition;
+        previousPositionStartSeconds = lockedEvent.startSeconds;
+      }
+
+      lockedEventIndex += 1;
+    }
+
+    const candidates = createPositionCandidates(note.pitch, tuning, { previousPosition });
+    const chosenPosition = candidates[0]?.positions[0];
