@@ -40,3 +40,12 @@ export function createSuggestedTabEvents(
 
     const candidates = createPositionCandidates(note.pitch, tuning, { previousPosition });
     const chosenPosition = candidates[0]?.positions[0];
+
+    if (!chosenPosition) {
+      continue;
+    }
+
+    createdEvents.push({
+      id: createId(),
+      startSeconds: note.startSeconds,
+      durationSeconds: note.durationSeconds,
