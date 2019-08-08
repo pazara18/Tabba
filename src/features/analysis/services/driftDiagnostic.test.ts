@@ -62,3 +62,19 @@ function nearestDetectedTime(detectedTimes: number[], target: number): number {
 }
 
 describe("analysis pipeline drift", () => {
+  it("matches known attack times exactly at 44.1 kHz (60 seconds, 60 attacks)", { timeout: 60_000 }, () => {
+    const sampleRate = 44_100;
+    const attackCount = 60;
+    const samples = createEvenlySpacedAttacks({
+      attackIntervalSeconds: 1,
+      attackCount,
+      noteDurationSeconds: 0.5,
+      frequencyHz: 82.41,
+      sampleRate,
+    });
+
+    const detectedTimes = runFullPipeline(samples, sampleRate).map((note) => note.startSeconds);
+    const residuals = Array.from({ length: attackCount }, (_, attack) => {
+      const expected = attack;
+      const detected = nearestDetectedTime(detectedTimes, expected);
+      return detected - expected;
