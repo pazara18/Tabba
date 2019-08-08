@@ -49,3 +49,12 @@ export function createSuggestedTabEvents(
       id: createId(),
       startSeconds: note.startSeconds,
       durationSeconds: note.durationSeconds,
+      kind: "single",
+      texture: "mono",
+      detectedPitches: [
+        {
+          confidence: note.confidence,
+          frequencyHz: note.frequencyHz,
+          pitch: note.pitch,
+        },
+      ],
