@@ -46,3 +46,19 @@ function createEvenlySpacedAttacks(options: {
   }
 
   return samples;
+}
+
+function runFullPipeline(samples: Float32Array, sampleRate: number) {
+  const options = getInstrumentPitchOptions("bass");
+  const frames = analyzePitchFrames(samples, sampleRate, options);
+  return alignNotesToEnergyOnsets(groupPitchFrames(frames, options), samples, sampleRate);
+}
+
+function nearestDetectedTime(detectedTimes: number[], target: number): number {
+  return detectedTimes.reduce(
+    (best, time) => (Math.abs(time - target) < Math.abs(best - target) ? time : best),
+    detectedTimes[0] ?? NaN
+  );
+}
+
+describe("analysis pipeline drift", () => {
