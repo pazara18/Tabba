@@ -31,3 +31,18 @@ function createEvenlySpacedAttacks(options: {
     );
     const attackLengthSamples = Math.round(options.noteDurationSeconds * options.sampleRate);
 
+    for (let offset = 0; offset < attackLengthSamples; offset += 1) {
+      const sampleIndex = attackStartSample + offset;
+
+      if (sampleIndex >= totalSamples) {
+        break;
+      }
+
+      const elapsedSeconds = offset / options.sampleRate;
+      const envelope = Math.exp(-elapsedSeconds / decayTimeConstant);
+      const phase = (2 * Math.PI * options.frequencyHz * sampleIndex) / options.sampleRate;
+      samples[sampleIndex] = 0.6 * envelope * Math.sin(phase);
+    }
+  }
+
+  return samples;
