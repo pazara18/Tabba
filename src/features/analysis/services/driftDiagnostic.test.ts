@@ -15,3 +15,19 @@ import { analyzePitchFrames, groupPitchFrames } from "./pitchDetection";
 function createEvenlySpacedAttacks(options: {
   attackIntervalSeconds: number;
   attackCount: number;
+  noteDurationSeconds: number;
+  frequencyHz: number;
+  sampleRate: number;
+}) {
+  const totalSamples = Math.ceil(
+    options.attackIntervalSeconds * options.attackCount * options.sampleRate
+  );
+  const samples = new Float32Array(totalSamples);
+  const decayTimeConstant = 0.18;
+
+  for (let attack = 0; attack < options.attackCount; attack += 1) {
+    const attackStartSample = Math.round(
+      attack * options.attackIntervalSeconds * options.sampleRate
+    );
+    const attackLengthSamples = Math.round(options.noteDurationSeconds * options.sampleRate);
+
