@@ -78,3 +78,19 @@ describe("analysis pipeline drift", () => {
       const expected = attack;
       const detected = nearestDetectedTime(detectedTimes, expected);
       return detected - expected;
+    });
+
+    // Every residual should be well under a frame hop; sample-index math is
+    // exact, so the only error comes from where the attack falls relative to
+    // the hop grid.
+    for (const residual of residuals) {
+      expect(Math.abs(residual)).toBeLessThan(0.005);
+    }
+  });
+
+  it("preserves timing when decoded samples are at a different rate than the source file", () => {
+    // Simulates decodeAudioData resampling a 44.1 kHz file into a 48 kHz
+    // AudioContext — the scenario that would occur on most macOS/Linux systems
+    // with a 48 kHz output device. If timing survives this, any perceived
+    // drift is NOT coming from the AudioContext sample-rate path.
+    const fileSampleRate = 44_100;
