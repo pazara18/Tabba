@@ -94,3 +94,18 @@ describe("analysis pipeline drift", () => {
     // with a 48 kHz output device. If timing survives this, any perceived
     // drift is NOT coming from the AudioContext sample-rate path.
     const fileSampleRate = 44_100;
+    const contextSampleRate = 48_000;
+    const attackCount = 30;
+    const original = createEvenlySpacedAttacks({
+      attackIntervalSeconds: 1,
+      attackCount,
+      noteDurationSeconds: 0.5,
+      frequencyHz: 82.41,
+      sampleRate: fileSampleRate,
+    });
+
+    const ratio = contextSampleRate / fileSampleRate;
+    const resampled = new Float32Array(Math.round(original.length * ratio));
+
+    for (let index = 0; index < resampled.length; index += 1) {
+      const sourceIndex = index / ratio;
