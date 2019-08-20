@@ -125,3 +125,19 @@ describe("analysis pipeline drift", () => {
       // Within one hop at 48 kHz (~21 ms).
       expect(Math.abs(detected - attack)).toBeLessThan(1024 / contextSampleRate);
     }
+  });
+
+  it("realistic bass (varying pitch, 500 ms spacing, 60 s) has no cumulative drift", { timeout: 20_000 }, () => {
+    const sampleRate = 44_100;
+    const samples = new Float32Array(sampleRate * 60);
+    const decayTimeConstant = 0.18;
+    const frequenciesHz = [82.41, 110, 146.83, 98, 123.47];
+    const attackPositions: Array<{ expectedSeconds: number; frequencyHz: number }> = [];
+
+    for (let attack = 0; attack < 120; attack += 1) {
+      const expectedSeconds = attack * 0.5;
+      const startSample = Math.round(expectedSeconds * sampleRate);
+      const frequencyHz = frequenciesHz[attack % frequenciesHz.length];
+      attackPositions.push({ expectedSeconds, frequencyHz });
+      const attackLength = Math.round(0.45 * sampleRate);
+
