@@ -109,3 +109,19 @@ describe("analysis pipeline drift", () => {
 
     for (let index = 0; index < resampled.length; index += 1) {
       const sourceIndex = index / ratio;
+      const leftIndex = Math.floor(sourceIndex);
+      const rightIndex = Math.min(original.length - 1, leftIndex + 1);
+      const fraction = sourceIndex - leftIndex;
+      resampled[index] =
+        original[leftIndex] * (1 - fraction) + original[rightIndex] * fraction;
+    }
+
+    const detectedTimes = runFullPipeline(resampled, contextSampleRate).map(
+      (note) => note.startSeconds
+    );
+
+    for (let attack = 0; attack < attackCount; attack += 1) {
+      const detected = nearestDetectedTime(detectedTimes, attack);
+      // Within one hop at 48 kHz (~21 ms).
+      expect(Math.abs(detected - attack)).toBeLessThan(1024 / contextSampleRate);
+    }
