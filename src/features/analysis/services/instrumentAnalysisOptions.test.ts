@@ -5,3 +5,5 @@ describe("instrumentAnalysisOptions", () => {
   it("uses a lower and steadier pitch range for bass", () => {
     expect(getInstrumentPitchOptions("bass")).toMatchObject({
       frameSize: 4096,
+      maxFrequencyHz: 450,
+      minFrequencyHz: 38,
