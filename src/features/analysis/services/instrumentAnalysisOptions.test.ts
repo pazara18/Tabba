@@ -10,3 +10,5 @@ describe("instrumentAnalysisOptions", () => {
       pitchWobbleSemitones: 2,
     });
   });
+
+  it("covers the upper frets for guitar analysis", () => {
