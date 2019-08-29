@@ -7,3 +7,6 @@ describe("instrumentAnalysisOptions", () => {
       frameSize: 4096,
       maxFrequencyHz: 450,
       minFrequencyHz: 38,
+      pitchWobbleSemitones: 2,
+    });
+  });
