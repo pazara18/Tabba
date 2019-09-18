@@ -8,3 +8,6 @@ export function getInstrumentPitchOptions(instrument: InstrumentKind): PitchDete
       hopSize: 1024,
       maxFrequencyHz: 450,
       minDurationSeconds: 0.12,
+      minFrequencyHz: 38,
+      pitchWobbleMergeSeconds: 0.28,
+      pitchWobbleSemitones: 2,
