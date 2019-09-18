@@ -31,3 +31,21 @@ describe("noteOnsetAlignment", () => {
 
   it("leaves notes alone when no nearby onset is found", () => {
     const note = {
+      confidence: 0.9,
+      durationSeconds: 0.2,
+      frequencyHz: 55,
+      pitch: "A1",
+      startSeconds: 0.25,
+    };
+
+    expect(
+      alignNotesToEnergyOnsets([note], new Float32Array(1_000), 1_000, {
+        hopSize: 20,
+        maxLookbackSeconds: 0.2,
+        rmsThreshold: 0.01,
+        windowSize: 20,
+      })
+    ).toEqual([note]);
+  });
+
+  it("does not collapse later notes onto an earlier phrase onset", () => {
