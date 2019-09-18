@@ -13,3 +13,21 @@ describe("noteOnsetAlignment", () => {
     const [note] = alignNotesToEnergyOnsets(
       [
         {
+          confidence: 0.9,
+          durationSeconds: 0.2,
+          frequencyHz: 55,
+          pitch: "A1",
+          startSeconds: 0.25,
+        },
+      ],
+      samples,
+      sampleRate,
+      { hopSize: 20, maxLookbackSeconds: 0.2, rmsThreshold: 0.01, windowSize: 20 }
+    );
+
+    expect(note.startSeconds).toBeCloseTo(0.12);
+    expect(note.durationSeconds).toBeCloseTo(0.33);
+  });
+
+  it("leaves notes alone when no nearby onset is found", () => {
+    const note = {
