@@ -5,3 +5,6 @@ export function getInstrumentPitchOptions(instrument: InstrumentKind): PitchDete
   if (instrument === "bass") {
     return {
       frameSize: 4096,
+      hopSize: 1024,
+      maxFrequencyHz: 450,
+      minDurationSeconds: 0.12,
