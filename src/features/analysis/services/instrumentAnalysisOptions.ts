@@ -11,3 +11,6 @@ export function getInstrumentPitchOptions(instrument: InstrumentKind): PitchDete
       minFrequencyHz: 38,
       pitchWobbleMergeSeconds: 0.28,
       pitchWobbleSemitones: 2,
+      rmsThreshold: 0.012,
+    };
+  }
