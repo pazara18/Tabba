@@ -84,3 +84,21 @@ describe("noteOnsetAlignment", () => {
     }
     for (let index = 250; index < 500; index += 1) {
       samples[index] = 0.08;
+    }
+
+    const alignedNotes = alignNotesToEnergyOnsets(
+      [
+        {
+          confidence: 0.9,
+          durationSeconds: 0.45,
+          frequencyHz: 55,
+          pitch: "A1",
+          startSeconds: 0.12,
+        },
+      ],
+      samples,
+      sampleRate,
+      {
+        hopSize: 20,
+        maxLookbackSeconds: 0.1,
+        minDurationSeconds: 0.05,
