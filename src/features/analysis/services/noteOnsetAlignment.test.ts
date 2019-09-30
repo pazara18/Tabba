@@ -67,3 +67,20 @@ describe("noteOnsetAlignment", () => {
         maxLookbackSeconds: 0.3,
         hopSize: 20,
         minNoteSeparationSeconds: 0.05,
+        rmsThreshold: 0.01,
+        windowSize: 20,
+      }
+    );
+
+    expect(alignedNotes.map((alignedNote) => alignedNote.startSeconds)).toEqual([0.1, 0.36]);
+  });
+
+  it("splits a sustained same-pitch note at repeated energy onsets", () => {
+    const sampleRate = 1_000;
+    const samples = new Float32Array(1_000);
+
+    for (let index = 100; index < 250; index += 1) {
+      samples[index] = 0.04;
+    }
+    for (let index = 250; index < 500; index += 1) {
+      samples[index] = 0.08;
