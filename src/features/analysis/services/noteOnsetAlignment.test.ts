@@ -102,3 +102,21 @@ describe("noteOnsetAlignment", () => {
         hopSize: 20,
         maxLookbackSeconds: 0.1,
         minDurationSeconds: 0.05,
+        minNoteSeparationSeconds: 0.05,
+        onsetRiseRatio: 1.2,
+        rmsThreshold: 0.01,
+        windowSize: 20,
+      }
+    );
+
+    expect(alignedNotes.map((alignedNote) => alignedNote.startSeconds)).toEqual([0.1, 0.24]);
+    expect(alignedNotes.map((alignedNote) => alignedNote.durationSeconds)).toEqual([
+      expect.closeTo(0.14),
+      expect.closeTo(0.33),
+    ]);
+  });
+
+  it("can move a pitch-window start forward to the actual onset", () => {
+    const sampleRate = 1_000;
+    const samples = new Float32Array(1_000);
+
