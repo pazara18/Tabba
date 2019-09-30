@@ -49,3 +49,21 @@ describe("noteOnsetAlignment", () => {
   });
 
   it("does not collapse later notes onto an earlier phrase onset", () => {
+    const sampleRate = 1_000;
+    const samples = new Float32Array(1_000);
+
+    for (let index = 100; index < 700; index += 1) {
+      samples[index] = 0.08;
+    }
+
+    const alignedNotes = alignNotesToEnergyOnsets(
+      [
+        note("A1", 0.2),
+        note("B1", 0.36),
+      ],
+      samples,
+      sampleRate,
+      {
+        maxLookbackSeconds: 0.3,
+        hopSize: 20,
+        minNoteSeparationSeconds: 0.05,
