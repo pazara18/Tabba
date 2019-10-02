@@ -37,3 +37,23 @@ export function alignNotesToEnergyOnsets(
   const onsets = detectEnergyOnsets(samples, sampleRate, settings);
   let previousStartSeconds = -Infinity;
 
+  return [...notes].sort((left, right) => left.startSeconds - right.startSeconds).flatMap((note) => {
+    const onset = findNearestAvailableOnset(
+      note.startSeconds,
+      onsets,
+      previousStartSeconds,
+      settings
+    );
+
+    if (
+      !onset ||
+      onset.seconds < previousStartSeconds + settings.minNoteSeparationSeconds
+    ) {
+      const splitNotes = splitNoteAtInnerOnsets(note, onsets, settings);
+      previousStartSeconds = splitNotes[splitNotes.length - 1]?.startSeconds ?? note.startSeconds;
+      return splitNotes;
+    }
+
+    const noteEndSeconds = note.startSeconds + note.durationSeconds;
+    const alignedNote = {
+      ...note,
