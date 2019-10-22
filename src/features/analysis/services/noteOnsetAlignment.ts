@@ -57,3 +57,23 @@ export function alignNotesToEnergyOnsets(
     const noteEndSeconds = note.startSeconds + note.durationSeconds;
     const alignedNote = {
       ...note,
+      durationSeconds: Math.max(settings.minDurationSeconds, noteEndSeconds - onset.seconds),
+      startSeconds: onset.seconds,
+    };
+
+    const splitNotes = splitNoteAtInnerOnsets(alignedNote, onsets, settings);
+    previousStartSeconds = splitNotes[splitNotes.length - 1]?.startSeconds ?? alignedNote.startSeconds;
+    return splitNotes;
+  });
+}
+
+function detectEnergyOnsets(
+  samples: Float32Array,
+  sampleRate: number,
+  settings: Required<NoteOnsetAlignmentOptions>
+): EnergyOnset[] {
+  const onsets: EnergyOnset[] = [];
+  let previousRms = 0;
+  let lastOnsetSeconds = -Infinity;
+
+  for (let start = 0; start + settings.windowSize <= samples.length; start += settings.hopSize) {
