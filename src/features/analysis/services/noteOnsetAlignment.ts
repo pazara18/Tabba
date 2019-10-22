@@ -96,3 +96,23 @@ function detectEnergyOnsets(
     previousRms = currentRms;
   }
 
+  return onsets;
+}
+
+function findNearestAvailableOnset(
+  startSeconds: number,
+  onsets: EnergyOnset[],
+  previousStartSeconds: number,
+  settings: Required<NoteOnsetAlignmentOptions>
+): EnergyOnset | undefined {
+  const minSeconds = Math.max(
+    previousStartSeconds + settings.minNoteSeparationSeconds,
+    startSeconds - settings.maxLookbackSeconds
+  );
+  const maxSeconds = startSeconds + settings.maxLookaheadSeconds;
+
+  const candidates = onsets.filter(
+    (onset) => onset.seconds >= minSeconds && onset.seconds <= maxSeconds
+  );
+
+  // Prefer onsets at or before the pitch-detected start — these are attack
