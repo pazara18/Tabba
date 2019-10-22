@@ -77,3 +77,22 @@ function detectEnergyOnsets(
   let lastOnsetSeconds = -Infinity;
 
   for (let start = 0; start + settings.windowSize <= samples.length; start += settings.hopSize) {
+    const frame = samples.subarray(start, start + settings.windowSize);
+    const currentRms = calculateRms(frame);
+    const seconds =
+      previousRms < settings.rmsThreshold
+        ? findFirstActiveSample(samples, start, start + settings.windowSize, settings) / sampleRate
+        : start / sampleRate;
+
+    if (
+      currentRms >= settings.rmsThreshold &&
+      isEnergyRise(currentRms, previousRms, settings) &&
+      seconds >= lastOnsetSeconds + settings.minNoteSeparationSeconds
+    ) {
+      onsets.push({ rms: currentRms, seconds });
+      lastOnsetSeconds = seconds;
+    }
+
+    previousRms = currentRms;
+  }
+
