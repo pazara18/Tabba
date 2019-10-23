@@ -116,3 +116,23 @@ function findNearestAvailableOnset(
   );
 
   // Prefer onsets at or before the pitch-detected start — these are attack
+  // transients that pitch analysis missed due to frame-size latency.
+  // Among earlier onsets, pick the closest one (latest before pitch start).
+  const earlierOnsets = candidates.filter((onset) => onset.seconds <= startSeconds);
+
+  if (earlierOnsets.length > 0) {
+    return earlierOnsets.sort((left, right) => right.seconds - left.seconds)[0];
+  }
+
+  // Fall back to nearest lookahead onset when no earlier onset exists.
+  return candidates.sort((left, right) => left.seconds - right.seconds)[0];
+}
+
+function splitNoteAtInnerOnsets(
+  note: DetectedNote,
+  onsets: EnergyOnset[],
+  settings: Required<NoteOnsetAlignmentOptions>
+): DetectedNote[] {
+  const noteEndSeconds = note.startSeconds + note.durationSeconds;
+  const innerOnsets = onsets
+    .map((onset) => onset.seconds)
