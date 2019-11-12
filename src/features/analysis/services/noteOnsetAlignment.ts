@@ -136,3 +136,23 @@ function splitNoteAtInnerOnsets(
   const noteEndSeconds = note.startSeconds + note.durationSeconds;
   const innerOnsets = onsets
     .map((onset) => onset.seconds)
+    .filter(
+      (seconds) =>
+        seconds >= note.startSeconds + settings.minNoteSeparationSeconds &&
+        seconds <= noteEndSeconds - settings.minDurationSeconds
+    )
+    .sort((left, right) => left - right);
+
+  if (innerOnsets.length === 0) {
+    return [note];
+  }
+
+  const boundaries = [note.startSeconds, ...innerOnsets, noteEndSeconds];
+
+  return boundaries.slice(0, -1).map((startSeconds, index) => ({
+    ...note,
+    durationSeconds: Math.max(settings.minDurationSeconds, boundaries[index + 1] - startSeconds),
+    startSeconds,
+  }));
+}
+
