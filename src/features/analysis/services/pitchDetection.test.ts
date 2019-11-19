@@ -11,3 +11,19 @@ describe("pitchDetection", () => {
     const sampleRate = 8_000;
     const samples = createSineWave(110, sampleRate, 0.25);
     const estimate = estimateFundamentalFrequency(samples, sampleRate, {
+      correlationThreshold: 0.5,
+      frameSize: samples.length,
+      hopSize: samples.length,
+      maxFrequencyHz: 300,
+      minDurationSeconds: 0.05,
+      minFrequencyHz: 60,
+      rmsThreshold: 0.01,
+    });
+
+    expect(estimate?.frequencyHz).toBeCloseTo(110, 0);
+    expect(estimate?.confidence).toBeGreaterThan(0.8);
+  });
+
+  it("ignores low-energy frames", () => {
+    const estimate = estimateFundamentalFrequency(new Float32Array(1024), 8_000, {
+      correlationThreshold: 0.5,
