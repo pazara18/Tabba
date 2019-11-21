@@ -27,3 +27,18 @@ describe("pitchDetection", () => {
   it("ignores low-energy frames", () => {
     const estimate = estimateFundamentalFrequency(new Float32Array(1024), 8_000, {
       correlationThreshold: 0.5,
+      frameSize: 1024,
+      hopSize: 512,
+      maxFrequencyHz: 300,
+      minDurationSeconds: 0.05,
+      minFrequencyHz: 60,
+      rmsThreshold: 0.01,
+    });
+
+    expect(estimate).toBeUndefined();
+  });
+
+  it("analyzes pitch frames and maps them to pitch names", () => {
+    const sampleRate = 8_000;
+    const samples = createSineWave(110, sampleRate, 0.4);
+    const frames = analyzePitchFrames(samples, sampleRate, {
