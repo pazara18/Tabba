@@ -58,3 +58,19 @@ describe("pitchDetection", () => {
     const notes = groupPitchFrames([
       frame("A2", 0),
       frame("A2", 0.05),
+      frame("C3", 0.1),
+      frame("C3", 0.15),
+    ], { minDurationSeconds: 0.05 });
+
+    expect(notes.map((note) => note.pitch)).toEqual(["A2", "C3"]);
+    expect(notes[0].durationSeconds).toBeCloseTo(0.1);
+  });
+
+  it("merges short semitone wobble into one dominant note", () => {
+    const notes = groupPitchFrames(
+      [
+        frame("C2", 0),
+        frame("B1", 0.05),
+        frame("A#1", 0.1),
+        frame("A#1", 0.15),
+        frame("A#1", 0.2),
