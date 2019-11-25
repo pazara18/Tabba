@@ -74,3 +74,18 @@ describe("pitchDetection", () => {
         frame("A#1", 0.1),
         frame("A#1", 0.15),
         frame("A#1", 0.2),
+      ],
+      {
+        minDurationSeconds: 0.05,
+        pitchWobbleMergeSeconds: 0.3,
+        pitchWobbleSemitones: 2,
+      }
+    );
+
+    expect(notes).toHaveLength(1);
+    expect(notes[0]).toMatchObject({
+      durationSeconds: 0.25,
+      pitch: "A#1",
+      startSeconds: 0,
+    });
+  });
