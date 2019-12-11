@@ -89,3 +89,19 @@ describe("pitchDetection", () => {
       startSeconds: 0,
     });
   });
+
+  it("splits matching pitches separated by a long unvoiced gap", () => {
+    const notes = groupPitchFrames(
+      [frame("A2", 0), frame("A2", 0.05), frame("A2", 0.5), frame("A2", 0.55)],
+      { maxFrameGapSeconds: 0.1, minDurationSeconds: 0.05 }
+    );
+
+    expect(notes.map((note) => note.startSeconds)).toEqual([0, 0.5]);
+  });
+
+  it("maps frequencies to nearest pitch names", () => {
+    expect(frequencyToPitch(440)).toBe("A4");
+    expect(frequencyToPitch(41.2)).toBe("E1");
+  });
+});
+
