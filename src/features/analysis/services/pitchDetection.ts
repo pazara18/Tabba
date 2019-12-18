@@ -10,3 +10,17 @@ export interface PitchDetectionOptions {
   maxFrameGapSeconds?: number;
   minDurationSeconds?: number;
   minFrequencyHz?: number;
+  pitchWobbleMergeSeconds?: number;
+  pitchWobbleSemitones?: number;
+  rmsThreshold?: number;
+}
+
+interface PitchEstimate {
+  confidence: number;
+  frequencyHz: number;
+}
+
+const defaultOptions = {
+  correlationThreshold: 0.62,
+  frameSize: 2048,
+  hopSize: 1024,
