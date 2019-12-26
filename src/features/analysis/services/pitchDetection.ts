@@ -38,3 +38,18 @@ export function analyzePitchFrames(
   sampleRate: number,
   options: PitchDetectionOptions = {}
 ): PitchFrame[] {
+  const settings = { ...defaultOptions, ...options };
+  const frames: PitchFrame[] = [];
+
+  for (let start = 0; start + settings.frameSize <= samples.length; start += settings.hopSize) {
+    const frame = samples.subarray(start, start + settings.frameSize);
+    const estimate = estimateFundamentalFrequency(frame, sampleRate, settings);
+
+    if (estimate) {
+      frames.push({
+        confidence: estimate.confidence,
+        durationSeconds: settings.frameSize / sampleRate,
+        frequencyHz: estimate.frequencyHz,
+        pitch: frequencyToPitch(estimate.frequencyHz),
+        startSeconds: start / sampleRate,
+      });
