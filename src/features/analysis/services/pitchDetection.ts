@@ -24,3 +24,17 @@ const defaultOptions = {
   correlationThreshold: 0.62,
   frameSize: 2048,
   hopSize: 1024,
+  maxFrequencyHz: 900,
+  maxFrameGapSeconds: 0.12,
+  minDurationSeconds: 0.08,
+  minFrequencyHz: 55,
+  pitchWobbleMergeSeconds: 0.18,
+  pitchWobbleSemitones: 1,
+  rmsThreshold: 0.015,
+};
+
+export function analyzePitchFrames(
+  samples: Float32Array,
+  sampleRate: number,
+  options: PitchDetectionOptions = {}
+): PitchFrame[] {
