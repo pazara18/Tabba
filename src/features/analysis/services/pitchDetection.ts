@@ -67,3 +67,17 @@ export function estimateFundamentalFrequency(
   const settings = { ...defaultOptions, ...options };
 
   if (calculateRms(frame) < settings.rmsThreshold) {
+    return undefined;
+  }
+
+  const minLag = Math.floor(sampleRate / settings.maxFrequencyHz);
+  const maxLag = Math.ceil(sampleRate / settings.minFrequencyHz);
+  let bestCorrelation = 0;
+  let bestLag = 0;
+
+  for (let lag = minLag; lag <= maxLag; lag += 1) {
+    const correlation = normalizedCorrelation(frame, lag);
+
+    if (correlation > bestCorrelation) {
+      bestCorrelation = correlation;
+      bestLag = lag;
