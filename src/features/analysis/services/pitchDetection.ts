@@ -53,3 +53,17 @@ export function analyzePitchFrames(
         pitch: frequencyToPitch(estimate.frequencyHz),
         startSeconds: start / sampleRate,
       });
+    }
+  }
+
+  return frames;
+}
+
+export function estimateFundamentalFrequency(
+  frame: Float32Array,
+  sampleRate: number,
+  options: PitchDetectionOptions = {}
+): PitchEstimate | undefined {
+  const settings = { ...defaultOptions, ...options };
+
+  if (calculateRms(frame) < settings.rmsThreshold) {
