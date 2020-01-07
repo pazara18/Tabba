@@ -81,3 +81,17 @@ export function estimateFundamentalFrequency(
     if (correlation > bestCorrelation) {
       bestCorrelation = correlation;
       bestLag = lag;
+    }
+  }
+
+  if (bestLag === 0 || bestCorrelation < settings.correlationThreshold) {
+    return undefined;
+  }
+
+  return {
+    confidence: bestCorrelation,
+    frequencyHz: sampleRate / bestLag,
+  };
+}
+
+export function frequencyToPitch(frequencyHz: number): string {
