@@ -27,3 +27,20 @@ function createPitchFrameGroups(
   frames: PitchFrame[],
   settings: Required<typeof defaultGroupingOptions>
 ): PitchFrameGroup[] {
+  const groups: PitchFrameGroup[] = [];
+  let group: PitchFrame[] = [];
+
+  for (const frame of [...frames].sort((left, right) => left.startSeconds - right.startSeconds)) {
+    const previous = group[group.length - 1];
+    const gapSeconds = previous
+      ? frame.startSeconds - (previous.startSeconds + previous.durationSeconds)
+      : 0;
+
+    if (!previous || (previous.pitch === frame.pitch && gapSeconds <= settings.maxFrameGapSeconds)) {
+      group.push(frame);
+    } else {
+      groups.push({ frames: group });
+      group = [frame];
+    }
+  }
+
