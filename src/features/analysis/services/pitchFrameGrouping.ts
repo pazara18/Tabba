@@ -44,3 +44,19 @@ function createPitchFrameGroups(
     }
   }
 
+  if (group.length > 0) {
+    groups.push({ frames: group });
+  }
+
+  return groups;
+}
+
+function mergePitchWobbleGroups(
+  groups: PitchFrameGroup[],
+  settings: Required<typeof defaultGroupingOptions>
+): PitchFrameGroup[] {
+  return groups.reduce<PitchFrameGroup[]>((mergedGroups, group) => {
+    const previous = mergedGroups[mergedGroups.length - 1];
+
+    if (previous && shouldMergePitchWobble(previous, group, settings)) {
+      previous.frames = [...previous.frames, ...group.frames];
