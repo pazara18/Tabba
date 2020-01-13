@@ -60,3 +60,19 @@ function mergePitchWobbleGroups(
 
     if (previous && shouldMergePitchWobble(previous, group, settings)) {
       previous.frames = [...previous.frames, ...group.frames];
+      return mergedGroups;
+    }
+
+    return [...mergedGroups, { frames: [...group.frames] }];
+  }, []);
+}
+
+function shouldMergePitchWobble(
+  left: PitchFrameGroup,
+  right: PitchFrameGroup,
+  settings: Required<typeof defaultGroupingOptions>
+): boolean {
+  const gapSeconds = getGroupStartSeconds(right) - getGroupEndSeconds(left);
+  const pitchDistance = Math.abs(
+    pitchToMidi(getDominantPitch(left.frames)) - pitchToMidi(getDominantPitch(right.frames))
+  );
