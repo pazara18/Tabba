@@ -92,3 +92,19 @@ function createDetectedNote(
   minDurationSeconds: number
 ): DetectedNote[] {
   const durationSeconds = getGroupDurationSeconds(group);
+
+  if (durationSeconds < minDurationSeconds) {
+    return [];
+  }
+
+  return [
+    {
+      confidence: average(group.frames.map((frame) => frame.confidence)),
+      durationSeconds,
+      frequencyHz: average(group.frames.map((frame) => frame.frequencyHz)),
+      pitch: getDominantPitch(group.frames),
+      startSeconds: getGroupStartSeconds(group),
+    },
+  ];
+}
+
