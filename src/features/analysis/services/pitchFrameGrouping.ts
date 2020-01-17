@@ -76,3 +76,19 @@ function shouldMergePitchWobble(
   const pitchDistance = Math.abs(
     pitchToMidi(getDominantPitch(left.frames)) - pitchToMidi(getDominantPitch(right.frames))
   );
+  const hasShortSide =
+    getGroupDurationSeconds(left) <= settings.pitchWobbleMergeSeconds ||
+    getGroupDurationSeconds(right) <= settings.pitchWobbleMergeSeconds;
+
+  return (
+    gapSeconds <= settings.maxFrameGapSeconds &&
+    pitchDistance <= settings.pitchWobbleSemitones &&
+    hasShortSide
+  );
+}
+
+function createDetectedNote(
+  group: PitchFrameGroup,
+  minDurationSeconds: number
+): DetectedNote[] {
+  const durationSeconds = getGroupDurationSeconds(group);
