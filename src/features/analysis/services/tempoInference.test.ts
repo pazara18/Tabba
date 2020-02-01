@@ -13,3 +13,11 @@ describe("estimateTempoFromOnsets", () => {
   });
 
   it("recovers a 120 bpm grid from clean onsets", () => {
+    const onsets = generateBeatOnsets(120, 12);
+    const estimate = estimateTempoFromOnsets(onsets);
+
+    expect(estimate).toBeDefined();
+    expect(estimate?.bpm).toBeCloseTo(120, 1);
+    expect(estimate?.confidence).toBeGreaterThan(0.8);
+  });
+
