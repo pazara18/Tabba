@@ -29,3 +29,11 @@ describe("estimateTempoFromOnsets", () => {
     expect(estimate?.beatOffsetSeconds).toBeCloseTo(0.37, 2);
   });
 
+  it("tolerates small jitter on each onset", () => {
+    const clean = generateBeatOnsets(100, 16);
+    const jittered = clean.map((time, index) => time + ((index % 2 === 0 ? 1 : -1) * 0.01));
+
+    const estimate = estimateTempoFromOnsets(jittered);
+
+    expect(estimate?.bpm).toBeCloseTo(100, 1);
+    expect(estimate?.confidence).toBeGreaterThan(0.6);
