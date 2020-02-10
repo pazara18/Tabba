@@ -21,3 +21,11 @@ describe("estimateTempoFromOnsets", () => {
     expect(estimate?.confidence).toBeGreaterThan(0.8);
   });
 
+  it("recovers tempo when onsets are phase-shifted from zero", () => {
+    const onsets = generateBeatOnsets(90, 10, 0.37);
+    const estimate = estimateTempoFromOnsets(onsets);
+
+    expect(estimate?.bpm).toBeCloseTo(90, 1);
+    expect(estimate?.beatOffsetSeconds).toBeCloseTo(0.37, 2);
+  });
+
