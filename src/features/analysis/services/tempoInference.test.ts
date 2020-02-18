@@ -46,3 +46,11 @@ describe("estimateTempoFromOnsets", () => {
 
     expect(estimate).toBeDefined();
     expect(estimate!.bpm).toBeGreaterThanOrEqual(60);
+    expect(estimate!.bpm).toBeLessThanOrEqual(200);
+  });
+
+  it("respects custom bpm bounds", () => {
+    const onsets = generateBeatOnsets(72, 12);
+    const estimate = estimateTempoFromOnsets(onsets, { minBpm: 50, maxBpm: 90 });
+
+    expect(estimate?.bpm).toBeCloseTo(72, 1);
