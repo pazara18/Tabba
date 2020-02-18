@@ -37,3 +37,12 @@ describe("estimateTempoFromOnsets", () => {
 
     expect(estimate?.bpm).toBeCloseTo(100, 1);
     expect(estimate?.confidence).toBeGreaterThan(0.6);
+  });
+
+  it("folds extreme raw intervals back into the configured BPM range", () => {
+    // 240 BPM would be above the default max, but represents a 120 BPM beat.
+    const onsets = generateBeatOnsets(240, 20);
+    const estimate = estimateTempoFromOnsets(onsets);
+
+    expect(estimate).toBeDefined();
+    expect(estimate!.bpm).toBeGreaterThanOrEqual(60);
