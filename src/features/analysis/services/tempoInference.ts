@@ -35,3 +35,23 @@ export function estimateTempoFromOnsets(
 
   if (candidates.size === 0) {
     return undefined;
+  }
+
+  let best: TempoEstimate | undefined;
+
+  for (const bpm of candidates) {
+    const beatSeconds = 60 / bpm;
+
+    for (let index = 0; index < Math.min(MAX_PHASE_REFERENCES, sorted.length); index += 1) {
+      const phase = positiveModulo(sorted[index], beatSeconds);
+      const score = scoreAlignment(sorted, beatSeconds, phase, toleranceRatio);
+
+      if (!best || score > best.confidence) {
+        best = { bpm, beatOffsetSeconds: phase, confidence: score };
+      }
+    }
+  }
+
+  return best;
+}
+
