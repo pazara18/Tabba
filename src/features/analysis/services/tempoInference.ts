@@ -96,3 +96,23 @@ function collectBpmCandidates(sorted: number[], minBpm: number, maxBpm: number):
   }
 
   return expanded;
+}
+
+function foldBpmIntoRange(bpm: number, minBpm: number, maxBpm: number): number | undefined {
+  if (!Number.isFinite(bpm) || bpm <= 0) {
+    return undefined;
+  }
+
+  let value = bpm;
+
+  while (value < minBpm) {
+    value *= 2;
+  }
+
+  while (value > maxBpm) {
+    value /= 2;
+  }
+
+  if (value < minBpm || value > maxBpm) {
+    return undefined;
+  }
