@@ -76,3 +76,23 @@ function collectBpmCandidates(sorted: number[], minBpm: number, maxBpm: number):
 
   if (intervals.length > 0) {
     const meanInterval = intervals.reduce((sum, value) => sum + value, 0) / intervals.length;
+    const meanBpm = foldBpmIntoRange(60 / meanInterval, minBpm, maxBpm);
+
+    if (meanBpm !== undefined) {
+      fromIois.add(quantizeBpm(meanBpm));
+    }
+  }
+
+  const expanded = new Set(fromIois);
+
+  for (const bpm of fromIois) {
+    for (const factor of HARMONIC_FACTORS) {
+      const folded = foldBpmIntoRange(bpm * factor, minBpm, maxBpm);
+
+      if (folded !== undefined) {
+        expanded.add(quantizeBpm(folded));
+      }
+    }
+  }
+
+  return expanded;
