@@ -116,3 +116,23 @@ function foldBpmIntoRange(bpm: number, minBpm: number, maxBpm: number): number |
   if (value < minBpm || value > maxBpm) {
     return undefined;
   }
+
+  return value;
+}
+
+function quantizeBpm(bpm: number): number {
+  return Math.round(bpm / BPM_QUANTIZATION) * BPM_QUANTIZATION;
+}
+
+function scoreAlignment(
+  onsets: number[],
+  beatSeconds: number,
+  phase: number,
+  toleranceRatio: number
+): number {
+  const tolerance = beatSeconds * toleranceRatio;
+  let total = 0;
+
+  for (const time of onsets) {
+    const phaseOffset = positiveModulo(time - phase, beatSeconds);
+    const distance = Math.min(phaseOffset, beatSeconds - phaseOffset);
