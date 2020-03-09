@@ -55,3 +55,24 @@ export function estimateTempoFromOnsets(
   return best;
 }
 
+function collectBpmCandidates(sorted: number[], minBpm: number, maxBpm: number): Set<number> {
+  const fromIois = new Set<number>();
+  const intervals: number[] = [];
+
+  for (let index = 1; index < sorted.length; index += 1) {
+    const interval = sorted[index] - sorted[index - 1];
+
+    if (interval <= 0) {
+      continue;
+    }
+
+    intervals.push(interval);
+    const folded = foldBpmIntoRange(60 / interval, minBpm, maxBpm);
+
+    if (folded !== undefined) {
+      fromIois.add(quantizeBpm(folded));
+    }
+  }
+
+  if (intervals.length > 0) {
+    const meanInterval = intervals.reduce((sum, value) => sum + value, 0) / intervals.length;
