@@ -3,3 +3,5 @@ export interface PitchFrame {
   durationSeconds: number;
   frequencyHz: number;
   pitch: string;
+  startSeconds: number;
+}
