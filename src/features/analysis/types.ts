@@ -5,3 +5,5 @@ export interface PitchFrame {
   pitch: string;
   startSeconds: number;
 }
+
+export interface DetectedNote {
