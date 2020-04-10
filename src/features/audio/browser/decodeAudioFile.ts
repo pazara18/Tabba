@@ -8,3 +8,6 @@ export interface DecodedAudioFile {
 
 export async function decodeAudioFile(file: File): Promise<DecodedAudioFile> {
   const audioContext = new AudioContext();
+
+  try {
+    const audioData = await file.arrayBuffer();
