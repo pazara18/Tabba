@@ -15,3 +15,24 @@
 }
 
 .header div {
+  display: grid;
+  gap: 2px;
+}
+
+.header h2,
+.header span {
+  margin: 0;
+}
+
+.header h2 {
+  color: #1f2930;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.header span {
+  color: #748088;
+  font-size: 0.78rem;
+}
+
+.importButton {
