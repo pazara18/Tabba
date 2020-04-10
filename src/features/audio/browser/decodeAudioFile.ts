@@ -15,3 +15,7 @@ export async function decodeAudioFile(file: File): Promise<DecodedAudioFile> {
     const channels = Array.from({ length: audioBuffer.numberOfChannels }, (_, index) =>
       audioBuffer.getChannelData(index)
     );
+
+    return {
+      durationSeconds: audioBuffer.duration,
+      sampleRate: audioBuffer.sampleRate,
