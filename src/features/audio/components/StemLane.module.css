@@ -77,3 +77,23 @@
 .activeStem {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 50px;
+  padding: 6px 8px;
+  border: 1px solid #dce1df;
+  border-radius: 8px;
+  background: #f8faf9;
+}
+
+.activeStem {
+  border-color: #2f716c;
+  background: #e8f4f2;
+  box-shadow: inset 3px 0 0 #2f716c;
+}
+
+.stemSelect {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
