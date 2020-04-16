@@ -56,3 +56,24 @@
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+.emptyState {
+  display: grid;
+  min-height: 84px;
+  place-items: center;
+  border: 1px dashed #c9d1d4;
+  border-radius: 8px;
+  color: #748088;
+  background: #f8faf9;
+}
+
+.stemList {
+  display: grid;
+  gap: 8px;
+}
+
+.stemRow,
+.activeStem {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
