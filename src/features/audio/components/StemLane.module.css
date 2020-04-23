@@ -97,3 +97,24 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
+  min-height: 38px;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 6px;
+  color: #1f2930;
+  background: transparent;
+  cursor: pointer;
+  text-align: start;
+  font: inherit;
+}
+
+.stemSelect:hover {
+  background: rgba(47, 113, 108, 0.08);
+}
+
+.stemName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
