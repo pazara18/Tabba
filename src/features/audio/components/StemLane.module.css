@@ -118,3 +118,23 @@
   white-space: nowrap;
 }
 
+.stemSelect small {
+  color: #748088;
+  font-size: 0.75rem;
+}
+
+.mixControls {
+  display: flex;
+  gap: 4px;
+}
+
+.soloButton,
+.soloButtonActive,
+.muteButton,
+.muteButtonActive {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid #ccd3d6;
+  border-radius: 6px;
