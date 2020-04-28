@@ -22,3 +22,17 @@ export function StemLane({
   onToggleMute,
   onToggleSolo,
   projectNotice,
+  stems,
+}: StemLaneProps) {
+  const inputId = useId();
+
+  return (
+    <section className={styles.stemLane} aria-label="Stem lane">
+      <div className={styles.header}>
+        <div>
+          <h2>Stems</h2>
+          <span>{stems.length}</span>
+        </div>
+        <label htmlFor={inputId} className={styles.importButton}>
+          Import
+        </label>
