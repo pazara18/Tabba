@@ -36,3 +36,16 @@ export function StemLane({
         <label htmlFor={inputId} className={styles.importButton}>
           Import
         </label>
+        <input
+          accept="audio/*"
+          className={styles.fileInput}
+          id={inputId}
+          multiple
+          onChange={(event) => {
+            if (event.currentTarget.files) {
+              onImportFiles(event.currentTarget.files);
+            }
+
+            event.currentTarget.value = "";
+          }}
+          type="file"
