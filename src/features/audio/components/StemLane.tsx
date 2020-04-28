@@ -9,3 +9,16 @@ interface StemLaneProps {
   onImportFiles: (files: FileList) => void;
   onSelectStem: (stemId: string) => void;
   onToggleMute: (stemId: string) => void;
+  onToggleSolo: (stemId: string) => void;
+  projectNotice?: string;
+  stems: Stem[];
+}
+
+export function StemLane({
+  activeStemId,
+  mixStates,
+  onImportFiles,
+  onSelectStem,
+  onToggleMute,
+  onToggleSolo,
+  projectNotice,
