@@ -62,3 +62,17 @@ export function StemLane({
             return (
               <div
                 key={stem.id}
+                className={isActive ? styles.activeStem : styles.stemRow}
+              >
+                <button
+                  className={styles.stemSelect}
+                  onClick={() => onSelectStem(stem.id)}
+                  type="button"
+                >
+                  <span className={styles.stemName}>{stem.name}</span>
+                  <small>{formatDuration(stem.durationSeconds)}</small>
+                </button>
+                <div className={styles.mixControls}>
+                  <button
+                    aria-pressed={mix.solo}
+                    className={mix.solo ? styles.soloButtonActive : styles.soloButton}
