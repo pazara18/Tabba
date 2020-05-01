@@ -49,3 +49,16 @@ export function StemLane({
             event.currentTarget.value = "";
           }}
           type="file"
+        />
+      </div>
+      {stems.length === 0 ? (
+        <div className={styles.emptyState}>No stems</div>
+      ) : (
+        <div className={styles.stemList}>
+          {stems.map((stem) => {
+            const mix = getStemMix(mixStates, stem.id);
+            const isActive = stem.id === activeStemId;
+
+            return (
+              <div
+                key={stem.id}
