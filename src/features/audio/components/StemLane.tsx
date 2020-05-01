@@ -76,3 +76,16 @@ export function StemLane({
                   <button
                     aria-pressed={mix.solo}
                     className={mix.solo ? styles.soloButtonActive : styles.soloButton}
+                    onClick={() => onToggleSolo(stem.id)}
+                    title="Solo"
+                    type="button"
+                  >
+                    S
+                  </button>
+                  <button
+                    aria-pressed={mix.muted}
+                    className={mix.muted ? styles.muteButtonActive : styles.muteButton}
+                    onClick={() => onToggleMute(stem.id)}
+                    title="Mute"
+                    type="button"
+                  >
