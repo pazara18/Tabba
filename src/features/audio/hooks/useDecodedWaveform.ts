@@ -10,3 +10,10 @@ interface DecodedWaveformState {
 
 const peakCount = 96;
 
+export function useDecodedWaveform(file?: File): DecodedWaveformState {
+  const [state, setState] = useState<DecodedWaveformState>({
+    isLoading: false,
+    peaks: [],
+  });
+
+  useEffect(() => {
