@@ -17,3 +17,10 @@ export function useDecodedWaveform(file?: File): DecodedWaveformState {
   });
 
   useEffect(() => {
+    if (!file) {
+      setState({ isLoading: false, peaks: [] });
+      return;
+    }
+
+    let cancelled = false;
+    setState({ isLoading: true, peaks: [] });
