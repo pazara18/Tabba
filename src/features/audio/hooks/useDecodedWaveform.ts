@@ -24,3 +24,9 @@ export function useDecodedWaveform(file?: File): DecodedWaveformState {
 
     let cancelled = false;
     setState({ isLoading: true, peaks: [] });
+
+    decodeAudioFile(file)
+      .then((decoded) => createWaveformPeaks(decoded.samples, peakCount))
+      .then((peaks) => {
+        if (!cancelled) {
+          setState({ isLoading: false, peaks });
