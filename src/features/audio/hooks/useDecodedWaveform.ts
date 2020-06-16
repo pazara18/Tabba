@@ -30,3 +30,10 @@ export function useDecodedWaveform(file?: File): DecodedWaveformState {
       .then((peaks) => {
         if (!cancelled) {
           setState({ isLoading: false, peaks });
+        }
+      })
+      .catch((error: unknown) => {
+        if (!cancelled) {
+          setState({
+            error: error instanceof Error ? error.message : "Waveform decode failed.",
+            isLoading: false,
