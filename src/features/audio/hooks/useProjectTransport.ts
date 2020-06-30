@@ -150,3 +150,38 @@ export function useProjectTransport({
       const loop = loopRegionRef.current;
 
       if (!loop) {
+        source.loop = false;
+        source.loopStart = 0;
+        source.loopEnd = 0;
+        return;
+      }
+
+      const normalized = normalizeLoopRegion(loop, buffer.duration);
+      source.loop = normalized.enabled;
+      source.loopStart = normalized.startSeconds;
+      source.loopEnd = normalized.endSeconds;
+    },
+    []
+  );
+
+  const startPlaybackAt = useCallback(
+    (offsetSeconds: number) => {
+      const context = contextRef.current;
+      const buffers = buffersRef.current;
+
+      if (!context || buffers.size === 0) {
+        return;
+      }
+
+      teardownAllSources();
+
+      if (context.state === "suspended") {
+        void context.resume();
+      }
+
+      const startContextTime = context.currentTime + SOURCE_START_LEAD_SECONDS;
+      const rate = playbackRateRef.current;
+      const anyStemSoloed = isAnyStemSoloed(mixStatesRef.current);
+      const totalDuration = computeMaxDuration();
+      const safeOffset = Math.min(Math.max(0, offsetSeconds), totalDuration);
+
