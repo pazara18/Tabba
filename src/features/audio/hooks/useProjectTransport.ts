@@ -115,3 +115,38 @@ export function useProjectTransport({
     if (loop) {
       const normalized = normalizeLoopRegion(loop, totalDuration);
       if (normalized.enabled && rawOffset >= normalized.endSeconds) {
+        const loopDuration = normalized.endSeconds - normalized.startSeconds;
+        if (loopDuration > 0) {
+          return (
+            normalized.startSeconds +
+            ((rawOffset - normalized.startSeconds) % loopDuration)
+          );
+        }
+      }
+    }
+
+    return Math.min(Math.max(0, rawOffset), totalDuration);
+  }, [computeMaxDuration]);
+
+  const teardownAllSources = useCallback(() => {
+    const entries = sourceEntriesRef.current;
+    sourceEntriesRef.current = new Map();
+    anchorRef.current = null;
+
+    for (const { source, gain } of entries.values()) {
+      source.onended = null;
+      try {
+        source.stop();
+      } catch {
+        // Source may already have stopped.
+      }
+      source.disconnect();
+      gain.disconnect();
+    }
+  }, []);
+
+  const applyLoopRegionToSource = useCallback(
+    (source: AudioBufferSourceNode, buffer: AudioBuffer) => {
+      const loop = loopRegionRef.current;
+
+      if (!loop) {
