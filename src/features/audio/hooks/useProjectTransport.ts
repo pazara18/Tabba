@@ -185,3 +185,39 @@ export function useProjectTransport({
       const totalDuration = computeMaxDuration();
       const safeOffset = Math.min(Math.max(0, offsetSeconds), totalDuration);
 
+      let activeSourceCount = 0;
+
+      for (const [stemId, { buffer }] of buffers.entries()) {
+        if (safeOffset >= buffer.duration) {
+          continue;
+        }
+
+        const source = context.createBufferSource();
+        source.buffer = buffer;
+        source.playbackRate.value = rate;
+        applyLoopRegionToSource(source, buffer);
+
+        const gain = context.createGain();
+        const mix = getStemMix(mixStatesRef.current, stemId);
+        gain.gain.value = computeStemGain(mix, anyStemSoloed);
+
+        source.connect(gain);
+        gain.connect(context.destination);
+
+        source.start(startContextTime, safeOffset);
+        sourceEntriesRef.current.set(stemId, { source, gain });
+        activeSourceCount += 1;
+      }
+
+      if (activeSourceCount === 0) {
+        return;
+      }
+
+      anchorRef.current = {
+        bufferStartOffset: safeOffset,
+        contextStartTime: startContextTime,
+        playbackRate: rate,
+      };
+      pausedOffsetRef.current = safeOffset;
+
+      setIsPlaying(true);
