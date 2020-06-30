@@ -80,3 +80,38 @@ export function useProjectTransport({
     }
     return contextRef.current;
   }, []);
+
+  const stopFrameUpdates = useCallback(() => {
+    if (frameRequestRef.current !== undefined) {
+      cancelAnimationFrame(frameRequestRef.current);
+      frameRequestRef.current = undefined;
+    }
+  }, []);
+
+  const computeMaxDuration = useCallback((): number => {
+    let max = 0;
+    for (const entry of buffersRef.current.values()) {
+      if (entry.buffer.duration > max) {
+        max = entry.buffer.duration;
+      }
+    }
+    return max;
+  }, []);
+
+  const computeLivePosition = useCallback((): number => {
+    const anchor = anchorRef.current;
+    const context = contextRef.current;
+
+    if (!anchor || !context) {
+      return pausedOffsetRef.current;
+    }
+
+    const elapsedContextSeconds = Math.max(0, context.currentTime - anchor.contextStartTime);
+    const rawOffset =
+      anchor.bufferStartOffset + elapsedContextSeconds * anchor.playbackRate;
+    const totalDuration = computeMaxDuration();
+    const loop = loopRegionRef.current;
+
+    if (loop) {
+      const normalized = normalizeLoopRegion(loop, totalDuration);
+      if (normalized.enabled && rawOffset >= normalized.endSeconds) {
