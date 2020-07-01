@@ -221,3 +221,38 @@ export function useProjectTransport({
       pausedOffsetRef.current = safeOffset;
 
       setIsPlaying(true);
+      setCurrentTime(safeOffset);
+
+      stopFrameUpdates();
+      const tick = () => {
+        const offset = computeLivePosition();
+        pausedOffsetRef.current = offset;
+        setCurrentTime(offset);
+        frameRequestRef.current = requestAnimationFrame(tick);
+      };
+      frameRequestRef.current = requestAnimationFrame(tick);
+    },
+    [
+      applyLoopRegionToSource,
+      computeLivePosition,
+      computeMaxDuration,
+      stopFrameUpdates,
+      teardownAllSources,
+    ]
+  );
+
+  // Decode files for any sources we don't already have buffers for; drop removed ones.
+  useEffect(() => {
+    const buffers = buffersRef.current;
+    const knownStemIds = new Set(sources.map((source) => source.stemId));
+
+    // Drop buffers for stems no longer in the project.
+    for (const stemId of [...buffers.keys()]) {
+      if (!knownStemIds.has(stemId)) {
+        buffers.delete(stemId);
+      }
+    }
+
+    let cancelled = false;
+    const context = sources.length > 0 ? getContext() : contextRef.current;
+
