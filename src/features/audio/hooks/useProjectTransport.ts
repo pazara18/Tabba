@@ -326,3 +326,38 @@ export function useProjectTransport({
 
     if (needsRestart) {
       startPlaybackAt(livePosition);
+    }
+    // We intentionally key only on decodeTick: this effect should fire when
+    // the decoded set changes, not on every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [decodeTick]);
+
+  // Hot-apply mix state to playing sources.
+  useEffect(() => {
+    const context = contextRef.current;
+    if (!context) {
+      return;
+    }
+    const anyStemSoloed = isAnyStemSoloed(mixStates);
+    for (const [stemId, { gain }] of sourceEntriesRef.current.entries()) {
+      const mix = getStemMix(mixStates, stemId);
+      gain.gain.setTargetAtTime(
+        computeStemGain(mix, anyStemSoloed),
+        context.currentTime,
+        0.01
+      );
+    }
+  }, [mixStates]);
+
+  // Hot-apply loop-region changes.
+  useEffect(() => {
+    for (const { source } of sourceEntriesRef.current.values()) {
+      const buffer = source.buffer;
+      if (buffer) {
+        applyLoopRegionToSource(source, buffer);
+      }
+    }
+  }, [applyLoopRegionToSource, loopRegion]);
+
+  // Hot-apply playback rate by re-anchoring at the current offset.
+  useEffect(() => {
