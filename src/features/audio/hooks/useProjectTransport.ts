@@ -361,3 +361,39 @@ export function useProjectTransport({
 
   // Hot-apply playback rate by re-anchoring at the current offset.
   useEffect(() => {
+    const normalized = normalizePlaybackRate(playbackRate);
+    playbackRateRef.current = normalized;
+
+    const context = contextRef.current;
+    const entries = sourceEntriesRef.current;
+
+    if (!context || entries.size === 0) {
+      return;
+    }
+
+    const offset = computeLivePosition();
+    for (const { source } of entries.values()) {
+      source.playbackRate.value = normalized;
+    }
+    anchorRef.current = {
+      bufferStartOffset: offset,
+      contextStartTime: context.currentTime,
+      playbackRate: normalized,
+    };
+    pausedOffsetRef.current = offset;
+  }, [computeLivePosition, playbackRate]);
+
+  // Cleanup on unmount.
+  useEffect(() => {
+    return () => {
+      teardownAllSources();
+      stopFrameUpdates();
+      const context = contextRef.current;
+      contextRef.current = null;
+      buffersRef.current = new Map();
+      if (context) {
+        void context.close();
+      }
+    };
+  }, [stopFrameUpdates, teardownAllSources]);
+
