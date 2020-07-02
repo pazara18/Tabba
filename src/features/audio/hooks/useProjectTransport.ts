@@ -291,3 +291,38 @@ export function useProjectTransport({
           }
         }
       }
+
+      if (cancelled) {
+        return;
+      }
+
+      setHasSource(buffers.size > 0);
+      setDuration(computeMaxDuration());
+      setDecodeTick((tick) => tick + 1);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [computeMaxDuration, getContext, sources]);
+
+  // If a new stem was decoded while playing, restart from the current offset
+  // so it joins the playback.
+  useEffect(() => {
+    if (!isPlaying) {
+      return;
+    }
+
+    const livePosition = computeLivePosition();
+    const playingIds = new Set(sourceEntriesRef.current.keys());
+    let needsRestart = false;
+
+    for (const stemId of buffersRef.current.keys()) {
+      if (!playingIds.has(stemId)) {
+        needsRestart = true;
+        break;
+      }
+    }
+
+    if (needsRestart) {
+      startPlaybackAt(livePosition);
