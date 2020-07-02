@@ -256,3 +256,38 @@ export function useProjectTransport({
     let cancelled = false;
     const context = sources.length > 0 ? getContext() : contextRef.current;
 
+    if (!context) {
+      setHasSource(buffers.size > 0);
+      setDuration(computeMaxDuration());
+      return;
+    }
+
+    const pendingSources = sources.filter((source) => {
+      const existing = buffers.get(source.stemId);
+      return !existing || existing.fileToken !== source.file;
+    });
+
+    if (pendingSources.length === 0) {
+      setHasSource(buffers.size > 0);
+      setDuration(computeMaxDuration());
+      return;
+    }
+
+    (async () => {
+      for (const source of pendingSources) {
+        try {
+          const arrayBuffer = await source.file.arrayBuffer();
+          const buffer = await context.decodeAudioData(arrayBuffer);
+
+          if (cancelled) {
+            return;
+          }
+
+          buffers.set(source.stemId, { buffer, fileToken: source.file });
+          onStemDurationChangeRef.current?.(source.stemId, buffer.duration);
+        } catch (error) {
+          if (!cancelled) {
+            console.error("Failed to decode audio for playback", source.stemId, error);
+          }
+        }
+      }
