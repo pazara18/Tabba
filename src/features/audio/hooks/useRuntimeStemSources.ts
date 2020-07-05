@@ -9,3 +9,9 @@ interface UseRuntimeStemSourcesOptions {
 }
 
 export function useRuntimeStemSources({
+  existingStems = [],
+  onStemsCreated,
+}: UseRuntimeStemSourcesOptions) {
+  const [sources, setSources] = useState<RuntimeStemSource[]>([]);
+
+  const importFiles = useCallback(
