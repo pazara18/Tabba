@@ -15,3 +15,10 @@ export function useRuntimeStemSources({
   const [sources, setSources] = useState<RuntimeStemSource[]>([]);
 
   const importFiles = useCallback(
+    (files: FileList | File[]) => {
+      const imported = createRuntimeStemImports(files, existingStems);
+
+      if (imported.length === 0) {
+        return;
+      }
+
