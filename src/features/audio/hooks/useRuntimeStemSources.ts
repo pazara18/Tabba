@@ -29,3 +29,9 @@ export function useRuntimeStemSources({
       if (newStems.length > 0) {
         onStemsCreated(newStems);
       }
+
+      setSources((currentSources) => [
+        ...currentSources.filter(
+          (source) => !imported.some((entry) => entry.source.stemId === source.stemId)
+        ),
+        ...imported.map(({ source }) => source),
