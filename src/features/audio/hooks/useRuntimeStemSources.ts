@@ -22,3 +22,10 @@ export function useRuntimeStemSources({
         return;
       }
 
+      const newStems = imported
+        .map(({ stem }) => stem)
+        .filter((stem) => !existingStems.some((existingStem) => existingStem.id === stem.id));
+
+      if (newStems.length > 0) {
+        onStemsCreated(newStems);
+      }
