@@ -10,3 +10,6 @@ describe("createRuntimeStemImports", () => {
     expect(imports).toHaveLength(1);
     expect(imports[0].source.stemId).toBe(imports[0].stem.id);
   });
+
+  it("dedupes multiple files that match the same existing stem", () => {
+    const project = createProjectFixture();
