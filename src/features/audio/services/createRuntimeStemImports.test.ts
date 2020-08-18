@@ -13,3 +13,6 @@ describe("createRuntimeStemImports", () => {
 
   it("dedupes multiple files that match the same existing stem", () => {
     const project = createProjectFixture();
+    const fileA = new File([new Uint8Array(2048)], "lead.wav", { type: "audio/wav" });
+    const fileB = new File([new Uint8Array(2048)], "lead.wav", { type: "audio/wav" });
+    const imports = createRuntimeStemImports([fileA, fileB], project.stems);
