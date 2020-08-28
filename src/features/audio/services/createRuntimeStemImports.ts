@@ -8,3 +8,6 @@ export interface RuntimeStemImport {
   stem: Stem;
 }
 
+export function createRuntimeStemImports(
+  files: FileList | File[],
+  existingStems: Stem[]
