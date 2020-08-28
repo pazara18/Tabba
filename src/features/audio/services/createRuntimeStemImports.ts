@@ -4,3 +4,7 @@ import { findMatchingStemForAudioFile } from "./matchStemSource";
 import type { RuntimeStemSource } from "../types";
 
 export interface RuntimeStemImport {
+  source: RuntimeStemSource;
+  stem: Stem;
+}
+
