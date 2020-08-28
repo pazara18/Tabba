@@ -15,3 +15,7 @@ export function createRuntimeStemImports(
   const stemsById = new Map(existingStems.map((stem) => [stem.id, stem]));
   const importedByStemId = new Map<string, RuntimeStemImport>();
 
+  for (const file of Array.from(files)) {
+    const knownStems = [...stemsById.values()];
+    const stem = findMatchingStemForAudioFile(file, knownStems) ?? createStemFromAudioFile(file);
+
