@@ -11,3 +11,7 @@ export interface RuntimeStemImport {
 export function createRuntimeStemImports(
   files: FileList | File[],
   existingStems: Stem[]
+): RuntimeStemImport[] {
+  const stemsById = new Map(existingStems.map((stem) => [stem.id, stem]));
+  const importedByStemId = new Map<string, RuntimeStemImport>();
+
