@@ -18,3 +18,10 @@ describe("createStemFromAudioFile", () => {
       name: "lead-guitar",
       offsetSeconds: 0,
       file: {
+        name: "lead-guitar.wav",
+        type: "audio/wav",
+        sizeBytes: 4096,
+        lastModifiedMs: 1770000000000,
+      },
+    });
+  });
