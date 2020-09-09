@@ -10,3 +10,11 @@ describe("createStemFromAudioFile", () => {
         size: 4096,
         lastModified: 1770000000000,
       },
+      { createId: () => "stem-1" }
+    );
+
+    expect(stem).toEqual({
+      id: "stem-1",
+      name: "lead-guitar",
+      offsetSeconds: 0,
+      file: {
