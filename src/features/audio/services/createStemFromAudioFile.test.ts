@@ -25,3 +25,10 @@ describe("createStemFromAudioFile", () => {
       },
     });
   });
+
+  it("keeps extensionless names and falls back for empty names", () => {
+    expect(
+      createStemFromAudioFile({ name: "bass", type: "audio/mpeg", size: 100 }, {
+        createId: () => "stem-2",
+      }).name
+    ).toBe("bass");
