@@ -32,3 +32,11 @@ describe("createStemFromAudioFile", () => {
         createId: () => "stem-2",
       }).name
     ).toBe("bass");
+
+    expect(
+      createStemFromAudioFile({ name: "   ", type: "", size: 0 }, {
+        createId: () => "stem-3",
+      }).name
+    ).toBe("Untitled stem");
+  });
+
