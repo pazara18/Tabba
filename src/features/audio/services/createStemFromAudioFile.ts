@@ -6,3 +6,9 @@ interface CreateStemOptions {
 }
 
 const defaultCreateId = () => crypto.randomUUID();
+
+export function createStemFromAudioFile(
+  file: AudioStemFile,
+  options: CreateStemOptions = {}
+): Stem {
+  const createId = options.createId ?? defaultCreateId;
