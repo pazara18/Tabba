@@ -12,3 +12,8 @@ export function createStemFromAudioFile(
   options: CreateStemOptions = {}
 ): Stem {
   const createId = options.createId ?? defaultCreateId;
+
+  return {
+    id: createId(),
+    name: createStemName(file.name),
+    offsetSeconds: 0,
