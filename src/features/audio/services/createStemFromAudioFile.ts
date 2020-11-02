@@ -22,3 +22,8 @@ export function createStemFromAudioFile(
       type: file.type,
       sizeBytes: file.size,
       lastModifiedMs: file.lastModified,
+    },
+  };
+}
+
+function createStemName(fileName: string): string {
