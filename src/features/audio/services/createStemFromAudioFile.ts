@@ -17,3 +17,8 @@ export function createStemFromAudioFile(
     id: createId(),
     name: createStemName(file.name),
     offsetSeconds: 0,
+    file: {
+      name: file.name,
+      type: file.type,
+      sizeBytes: file.size,
+      lastModifiedMs: file.lastModified,
