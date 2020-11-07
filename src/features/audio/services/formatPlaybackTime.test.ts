@@ -7,3 +7,4 @@ describe("formatPlaybackTime", () => {
     expect(formatPlaybackTime(1.25)).toBe("0:01.250");
     expect(formatPlaybackTime(61.005)).toBe("1:01.005");
   });
+
