@@ -4,3 +4,4 @@ export function formatPlaybackTime(totalSeconds: number): string {
   const seconds = Math.floor(safeSeconds % 60);
   const milliseconds = Math.floor((safeSeconds % 1) * 1000);
 
+  return `${minutes}:${seconds.toString().padStart(2, "0")}.${milliseconds
