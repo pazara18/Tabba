@@ -11,3 +11,8 @@ describe("matchStemSource", () => {
         {
           name: "lead.wav",
           type: "audio/wav",
+          size: 2048,
+          lastModified: 1770000000000,
+        },
+        project.stems
+      )?.id
