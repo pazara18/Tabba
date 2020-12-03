@@ -16,3 +16,8 @@ describe("matchStemSource", () => {
         },
         project.stems
       )?.id
+    ).toBe("stem-1");
+  });
+
+  it("does not match files with different content metadata", () => {
+    const project = createProjectFixture();
