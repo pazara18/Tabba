@@ -21,3 +21,8 @@ describe("matchStemSource", () => {
 
   it("does not match files with different content metadata", () => {
     const project = createProjectFixture();
+
+    expect(
+      findMatchingStemForAudioFile(
+        {
+          name: "lead.wav",
