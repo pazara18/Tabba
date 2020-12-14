@@ -5,3 +5,6 @@ export function findMatchingStemForAudioFile(
   file: AudioStemFile,
   stems: Stem[]
 ): Stem | undefined {
+  return stems.find((stem) => {
+    const metadata = stem.file;
+
