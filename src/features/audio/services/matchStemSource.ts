@@ -8,3 +8,6 @@ export function findMatchingStemForAudioFile(
   return stems.find((stem) => {
     const metadata = stem.file;
 
+    if (!metadata) {
+      return false;
+    }
