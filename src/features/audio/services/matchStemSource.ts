@@ -11,3 +11,6 @@ export function findMatchingStemForAudioFile(
     if (!metadata) {
       return false;
     }
+
+    return (
+      metadata.name === file.name &&
