@@ -43,3 +43,12 @@ describe("toggleStemMute / toggleStemSolo", () => {
     expect(next.a).toEqual({ muted: true, solo: false });
 
     const after = toggleStemMute(next, "a");
+    expect(after.a).toEqual({ muted: false, solo: false });
+  });
+
+  it("toggles solo state immutably", () => {
+    const next = toggleStemSolo({ a: muted }, "a");
+    expect(next.a).toEqual({ muted: true, solo: true });
+  });
+});
+
