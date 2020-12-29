@@ -13,3 +13,12 @@ export function getStemMix(
 }
 
 export function isAnyStemSoloed(mixStates: Record<string, StemMix>): boolean {
+  for (const stemId in mixStates) {
+    if (mixStates[stemId]?.solo) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
