@@ -22,3 +22,12 @@ export function isAnyStemSoloed(mixStates: Record<string, StemMix>): boolean {
   return false;
 }
 
+export function computeStemGain(mix: StemMix, anyStemSoloed: boolean): number {
+  if (anyStemSoloed) {
+    return mix.solo ? 1 : 0;
+  }
+
+  return mix.muted ? 0 : 1;
+}
+
+export function toggleStemMute(
