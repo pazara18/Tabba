@@ -33,3 +33,13 @@ describe("isAnyStemSoloed", () => {
   it("detects a soloed stem in the mix map", () => {
     expect(isAnyStemSoloed({})).toBe(false);
     expect(isAnyStemSoloed({ a: normal, b: muted })).toBe(false);
+    expect(isAnyStemSoloed({ a: normal, b: solo })).toBe(true);
+  });
+});
+
+describe("toggleStemMute / toggleStemSolo", () => {
+  it("toggles mute state immutably", () => {
+    const next = toggleStemMute({}, "a");
+    expect(next.a).toEqual({ muted: true, solo: false });
+
+    const after = toggleStemMute(next, "a");
