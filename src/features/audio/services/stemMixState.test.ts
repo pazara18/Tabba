@@ -24,3 +24,12 @@ describe("computeStemGain", () => {
 
   it("plays only soloed stems when any stem is soloed", () => {
     expect(computeStemGain(solo, true)).toBe(1);
+    expect(computeStemGain(normal, true)).toBe(0);
+    expect(computeStemGain(muted, true)).toBe(0);
+  });
+});
+
+describe("isAnyStemSoloed", () => {
+  it("detects a soloed stem in the mix map", () => {
+    expect(isAnyStemSoloed({})).toBe(false);
+    expect(isAnyStemSoloed({ a: normal, b: muted })).toBe(false);
