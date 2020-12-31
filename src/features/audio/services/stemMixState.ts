@@ -31,3 +31,12 @@ export function computeStemGain(mix: StemMix, anyStemSoloed: boolean): number {
 }
 
 export function toggleStemMute(
+  mixStates: Record<string, StemMix>,
+  stemId: string
+): Record<string, StemMix> {
+  const current = getStemMix(mixStates, stemId);
+  return {
+    ...mixStates,
+    [stemId]: { ...current, muted: !current.muted },
+  };
+}
