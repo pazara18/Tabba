@@ -40,3 +40,12 @@ export function toggleStemMute(
     [stemId]: { ...current, muted: !current.muted },
   };
 }
+
+export function toggleStemSolo(
+  mixStates: Record<string, StemMix>,
+  stemId: string
+): Record<string, StemMix> {
+  const current = getStemMix(mixStates, stemId);
+  return {
+    ...mixStates,
+    [stemId]: { ...current, solo: !current.solo },
