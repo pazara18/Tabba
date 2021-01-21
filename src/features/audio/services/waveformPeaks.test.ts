@@ -18,3 +18,9 @@ describe("waveformPeaks", () => {
       { min: -1, max: 0 },
       { min: 0, max: 0.75 },
     ]);
+  });
+
+  it("merges channels into mono samples", () => {
+    const merged = mergeChannelsToMono([
+      new Float32Array([1, 0.5]),
+      new Float32Array([-1, 0.25]),
