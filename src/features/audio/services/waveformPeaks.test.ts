@@ -13,3 +13,8 @@ describe("waveformPeaks", () => {
 
   it("creates min and max peaks from samples", () => {
     const peaks = createWaveformPeaks(new Float32Array([-1, -0.25, 0.2, 0.75]), 2);
+
+    expect(peaks).toEqual([
+      { min: -1, max: 0 },
+      { min: 0, max: 0.75 },
+    ]);
