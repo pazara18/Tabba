@@ -24,3 +24,9 @@ describe("waveformPeaks", () => {
     const merged = mergeChannelsToMono([
       new Float32Array([1, 0.5]),
       new Float32Array([-1, 0.25]),
+    ]);
+
+    expect(Array.from(merged)).toEqual([0, 0.375]);
+  });
+
+  it("handles missing channels", () => {
