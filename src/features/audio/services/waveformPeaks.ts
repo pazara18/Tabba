@@ -11,3 +11,10 @@ export function createWaveformPeaks(samples: Float32Array, peakCount: number): W
   const samplesPerPeak = samples.length / peakCount;
 
   return Array.from({ length: peakCount }, (_, index) => {
+    const start = Math.floor(index * samplesPerPeak);
+    const end = Math.max(start + 1, Math.floor((index + 1) * samplesPerPeak));
+    return findPeak(samples, start, Math.min(end, samples.length));
+  });
+}
+
+export function mergeChannelsToMono(channels: Float32Array[]): Float32Array {
