@@ -18,3 +18,11 @@ export function createWaveformPeaks(samples: Float32Array, peakCount: number): W
 }
 
 export function mergeChannelsToMono(channels: Float32Array[]): Float32Array {
+  if (channels.length === 0) {
+    return new Float32Array();
+  }
+
+  const sampleCount = channels[0].length;
+  const merged = new Float32Array(sampleCount);
+
+  for (let sampleIndex = 0; sampleIndex < sampleCount; sampleIndex += 1) {
