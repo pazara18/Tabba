@@ -33,3 +33,11 @@ export function mergeChannelsToMono(channels: Float32Array[]): Float32Array {
     merged[sampleIndex] = total / channels.length;
   }
 
+  return merged;
+}
+
+export function getPeakHeightPercent(peak: WaveformPeak): number {
+  const amplitude = Math.max(Math.abs(peak.min), Math.abs(peak.max));
+  return Math.max(4, Math.min(100, amplitude * 100));
+}
+
