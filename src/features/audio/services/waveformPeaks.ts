@@ -26,3 +26,10 @@ export function mergeChannelsToMono(channels: Float32Array[]): Float32Array {
   const merged = new Float32Array(sampleCount);
 
   for (let sampleIndex = 0; sampleIndex < sampleCount; sampleIndex += 1) {
+    const total = channels.reduce(
+      (sum, channel) => sum + (channel[sampleIndex] ?? 0),
+      0
+    );
+    merged[sampleIndex] = total / channels.length;
+  }
+
