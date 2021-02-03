@@ -3,3 +3,5 @@ export interface AudioStemFile {
   type: string;
   size: number;
   lastModified?: number;
+}
+
