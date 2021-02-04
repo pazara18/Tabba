@@ -5,3 +5,4 @@ export interface AudioStemFile {
   lastModified?: number;
 }
 
+export interface RuntimeStemSource {
