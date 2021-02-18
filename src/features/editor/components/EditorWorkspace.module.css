@@ -2,3 +2,10 @@
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr;
+  color: #1b1f23;
+}
+
+.body {
+  display: grid;
+  min-height: 0;
+  grid-template-columns: 280px minmax(0, 1fr);
