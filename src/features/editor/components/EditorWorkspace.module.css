@@ -9,3 +9,9 @@
   display: grid;
   min-height: 0;
   grid-template-columns: 280px minmax(0, 1fr);
+  background: #f3f5f4;
+}
+
+.sidebar {
+  min-width: 0;
+  border-inline-end: 1px solid #d9dddc;
