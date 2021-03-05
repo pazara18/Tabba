@@ -22,3 +22,10 @@
   display: grid;
   min-width: 0;
   grid-template-rows: auto minmax(0, 1fr);
+  padding: 18px;
+  gap: 18px;
+}
+
+@media (max-width: 1060px) {
+  .body {
+    grid-template-columns: 240px minmax(0, 1fr);
