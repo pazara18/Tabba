@@ -15,3 +15,10 @@
 .sidebar {
   min-width: 0;
   border-inline-end: 1px solid #d9dddc;
+  background: #ffffff;
+}
+
+.mainColumn {
+  display: grid;
+  min-width: 0;
+  grid-template-rows: auto minmax(0, 1fr);
