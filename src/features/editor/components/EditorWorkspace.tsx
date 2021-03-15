@@ -44,3 +44,19 @@ interface EditorWorkspaceProps {
   projectNotice?: string;
   selectedEvent?: SelectedTabEvent;
   sources: RuntimeStemSource[];
+}
+
+export function EditorWorkspace({
+  activeSource,
+  activeStemId,
+  mixStates,
+  onActiveStemChange,
+  onAddManualEvent,
+  onAnalyzeTrack,
+  onClearSelectedEvent,
+  onCreateTrack,
+  onDeleteSelectedEvent,
+  onExportCloneHero,
+  onExportProject,
+  onExportRocksmith,
+  onImportProject,
