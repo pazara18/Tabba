@@ -13,3 +13,18 @@ import { TransportStrip } from "./TransportStrip";
 import styles from "./EditorWorkspace.module.css";
 import type { SelectedTabEvent } from "../types";
 import { createDefaultLoopRegion, normalizePlaybackRate } from "../services/practiceControls";
+
+interface EditorWorkspaceProps {
+  activeSource?: RuntimeStemSource;
+  activeStemId?: string;
+  mixStates: Record<string, StemMix>;
+  onActiveStemChange: (stemId: string) => void;
+  onAddManualEvent: (
+    trackId: string,
+    stringNumber: number,
+    fret: number,
+    startSeconds: number
+  ) => void;
+  onAnalyzeTrack: (trackId: string) => void;
+  onClearSelectedEvent: () => void;
+  onCreateTrack: (instrument: InstrumentKind) => void;
