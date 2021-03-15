@@ -60,3 +60,19 @@ export function EditorWorkspace({
   onExportProject,
   onExportRocksmith,
   onImportProject,
+  onSelectEvent,
+  onShiftSuggestions,
+  onUpdateSelectedEvent,
+  onImportFiles,
+  onStemDurationChange,
+  onToggleStemMute,
+  onToggleStemSolo,
+  project,
+  projectNotice,
+  selectedEvent,
+  sources,
+}: EditorWorkspaceProps) {
+  const [loopRegion, setLoopRegion] = useState(() => createDefaultLoopRegion(60));
+  const [playbackRate, setPlaybackRate] = useState(1);
+  const transport = useProjectTransport({
+    sources,
