@@ -91,3 +91,19 @@ export function EditorWorkspace({
   return (
     <div className={styles.workspace}>
       <TransportStrip
+        currentTime={transport.currentTime}
+        hasSource={transport.hasSource}
+        isPlaying={transport.isPlaying}
+        onExportProject={onExportProject}
+        onImportProject={onImportProject}
+        onPause={transport.pause}
+        onPlay={transport.play}
+        onStop={transport.stop}
+        projectName={project.name}
+      />
+      <div className={styles.body}>
+        <aside className={styles.sidebar}>
+          <StemLane
+            activeStemId={activeStemId}
+            mixStates={mixStates}
+            onImportFiles={onImportFiles}
