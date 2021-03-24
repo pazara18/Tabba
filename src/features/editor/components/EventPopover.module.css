@@ -19,3 +19,28 @@
   top: -8px;
   left: 50%;
   width: 14px;
+  height: 14px;
+  border: 1px solid #cfd6d8;
+  border-bottom: 0;
+  border-right: 0;
+  background: #ffffff;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header div {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kind {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #e8f4f2;
