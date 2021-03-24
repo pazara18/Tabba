@@ -76,3 +76,18 @@ export function EditorWorkspace({
   const [playbackRate, setPlaybackRate] = useState(1);
   const transport = useProjectTransport({
     sources,
+    mixStates,
+    loopRegion,
+    onStemDurationChange,
+    playbackRate,
+  });
+  const waveform = useDecodedWaveform(activeSource?.file);
+  const longestStemDuration = project.stems.reduce(
+    (max, stem) => Math.max(max, stem.durationSeconds ?? 0),
+    0
+  );
+  const timelineDuration = Math.max(longestStemDuration, transport.duration, 60);
+
+  return (
+    <div className={styles.workspace}>
+      <TransportStrip
