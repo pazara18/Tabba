@@ -44,3 +44,28 @@
   padding: 2px 8px;
   border-radius: 999px;
   background: #e8f4f2;
+  color: #1c4a47;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.texture {
+  color: #748088;
+  font-size: 0.78rem;
+}
+
+.closeButton {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ccd3d6;
+  border-radius: 6px;
+  color: #4b5961;
+  background: #f8faf9;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.closeButton:hover {
