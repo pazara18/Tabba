@@ -107,3 +107,19 @@ export function EditorWorkspace({
             activeStemId={activeStemId}
             mixStates={mixStates}
             onImportFiles={onImportFiles}
+            onSelectStem={onActiveStemChange}
+            onToggleMute={onToggleStemMute}
+            onToggleSolo={onToggleStemSolo}
+            projectNotice={projectNotice}
+            stems={project.stems}
+          />
+        </aside>
+        <div className={styles.mainColumn}>
+          <TimelinePanel
+            currentTime={transport.currentTime}
+            duration={timelineDuration}
+            loopRegion={loopRegion}
+            onLoopRegionChange={setLoopRegion}
+            onPlaybackRateChange={(rate) => setPlaybackRate(normalizePlaybackRate(rate))}
+            onSeek={transport.seek}
+            playbackRate={playbackRate}
