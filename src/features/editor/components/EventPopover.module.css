@@ -69,3 +69,28 @@
 }
 
 .closeButton:hover {
+  background: #eef5f3;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.metrics div {
+  display: grid;
+  gap: 2px;
+  padding: 8px;
+  border: 1px solid #e2e6e7;
+  border-radius: 6px;
+  background: #fbfcfb;
+}
+
+.metrics dt {
+  color: #748088;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
