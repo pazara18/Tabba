@@ -94,3 +94,28 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
+
+.metrics dd {
+  margin: 0;
+  color: #1f2930;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.85rem;
+}
+
+.editor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.editor label {
+  display: grid;
+  gap: 4px;
+  color: #4b5961;
+  font-size: 0.78rem;
+}
+
+.editor input,
+.editor select {
+  height: 32px;
+  border: 1px solid #ccd3d6;
