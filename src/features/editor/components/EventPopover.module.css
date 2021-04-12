@@ -119,3 +119,28 @@
 .editor select {
   height: 32px;
   border: 1px solid #ccd3d6;
+  border-radius: 6px;
+  padding: 0 8px;
+  color: #1b1f23;
+  background: #ffffff;
+  font-size: 0.85rem;
+}
+
+.chordSection h4,
+.candidates h4 {
+  margin: 0 0 6px;
+  color: #4b5961;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.chordList {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
