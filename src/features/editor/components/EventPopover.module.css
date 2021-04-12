@@ -144,3 +144,28 @@
   list-style: none;
 }
 
+.chordList li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 1px solid #e2e6e7;
+  border-radius: 6px;
+  background: #fbfcfb;
+  font-size: 0.82rem;
+}
+
+.chordList strong {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.92rem;
+  color: #1f2930;
+}
+
+.chordList small {
+  color: #748088;
+}
+
+.candidates {
+  display: grid;
+  gap: 6px;
