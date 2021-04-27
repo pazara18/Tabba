@@ -17,3 +17,23 @@ interface EventPopoverProps {
   onDelete: () => void;
   onUpdate: (patch: EventPopoverPatch) => void;
   track: TabTrack;
+}
+
+export function EventPopover({
+  anchorPercent,
+  event,
+  onClose,
+  onDelete,
+  onUpdate,
+  track,
+}: EventPopoverProps) {
+  const popoverRef = useRef<HTMLDivElement | null>(null);
+  const position = event.chosenPositions[0];
+
+  useEffect(() => {
+    function handleKey(downEvent: KeyboardEvent) {
+      if (downEvent.key === "Escape") {
+        onClose();
+      }
+    }
+
