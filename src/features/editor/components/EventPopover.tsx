@@ -37,3 +37,22 @@ export function EventPopover({
       }
     }
 
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
+  if (!position) {
+    return null;
+  }
+
+  const popoverStyle = { "--anchor-percent": `${anchorPercent}%` } as CSSProperties;
+  const chordPositions = event.chosenPositions;
+  const isChord = chordPositions.length > 1;
+
+  return (
+    <div
+      className={styles.popover}
+      onClick={(clickEvent) => clickEvent.stopPropagation()}
+      ref={popoverRef}
+      role="dialog"
+      style={popoverStyle}
