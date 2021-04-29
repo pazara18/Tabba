@@ -56,3 +56,23 @@ export function EventPopover({
       ref={popoverRef}
       role="dialog"
       style={popoverStyle}
+    >
+      <div className={styles.arrow} />
+      <header className={styles.header}>
+        <div>
+          <span className={styles.kind}>{event.kind}</span>
+          <span className={styles.texture}>{event.texture}</span>
+        </div>
+        <button
+          aria-label="Close inspector"
+          className={styles.closeButton}
+          onClick={onClose}
+          type="button"
+        >
+          ×
+        </button>
+      </header>
+      <dl className={styles.metrics}>
+        <div>
+          <dt>Start</dt>
+          <dd>{event.startSeconds.toFixed(3)}s</dd>
