@@ -96,3 +96,23 @@ export function EventPopover({
             value={position.stringNumber}
           >
             {track.tuning.strings.map((string) => (
+              <option key={string.stringNumber} value={string.stringNumber}>
+                {string.stringNumber} – {string.openPitch}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Fret
+          <input
+            min={0}
+            onChange={(changeEvent) =>
+              onUpdate({ fret: Number(changeEvent.currentTarget.value) })
+            }
+            type="number"
+            value={position.fret}
+          />
+        </label>
+        <label>
+          Start
+          <input
