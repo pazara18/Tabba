@@ -76,3 +76,23 @@ export function EventPopover({
         <div>
           <dt>Start</dt>
           <dd>{event.startSeconds.toFixed(3)}s</dd>
+        </div>
+        <div>
+          <dt>Duration</dt>
+          <dd>{event.durationSeconds.toFixed(3)}s</dd>
+        </div>
+        <div>
+          <dt>Confidence</dt>
+          <dd>{(event.confidence * 100).toFixed(0)}%</dd>
+        </div>
+      </dl>
+      <form className={styles.editor} onSubmit={(submitEvent) => submitEvent.preventDefault()}>
+        <label>
+          String
+          <select
+            onChange={(changeEvent) =>
+              onUpdate({ stringNumber: Number(changeEvent.currentTarget.value) })
+            }
+            value={position.stringNumber}
+          >
+            {track.tuning.strings.map((string) => (
