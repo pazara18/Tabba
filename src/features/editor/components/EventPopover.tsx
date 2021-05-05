@@ -135,3 +135,23 @@ export function EventPopover({
             step={0.05}
             type="number"
             value={event.durationSeconds}
+          />
+        </label>
+      </form>
+      {isChord && (
+        <section className={styles.chordSection}>
+          <h4>Chord</h4>
+          <ul className={styles.chordList}>
+            {chordPositions.map((chordPosition) => (
+              <li key={`${chordPosition.stringNumber}-${chordPosition.fret}`}>
+                <span>String {chordPosition.stringNumber}</span>
+                <strong>{chordPosition.fret}</strong>
+                <small>{chordPosition.pitch || "—"}</small>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {event.candidates.length > 0 && (
+        <section className={styles.candidates}>
+          <h4>Alternate positions</h4>
