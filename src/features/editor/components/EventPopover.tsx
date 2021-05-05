@@ -116,3 +116,22 @@ export function EventPopover({
         <label>
           Start
           <input
+            min={0}
+            onChange={(changeEvent) =>
+              onUpdate({ startSeconds: Number(changeEvent.currentTarget.value) })
+            }
+            step={0.05}
+            type="number"
+            value={event.startSeconds}
+          />
+        </label>
+        <label>
+          Duration
+          <input
+            min={0.05}
+            onChange={(changeEvent) =>
+              onUpdate({ durationSeconds: Number(changeEvent.currentTarget.value) })
+            }
+            step={0.05}
+            type="number"
+            value={event.durationSeconds}
