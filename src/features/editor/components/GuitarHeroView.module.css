@@ -10,3 +10,21 @@
   align-items: center;
   justify-content: space-between;
   color: #4b5961;
+  font-size: 0.82rem;
+}
+
+.header strong {
+  color: #1f2930;
+}
+
+.board {
+  position: relative;
+  height: 70vh;
+  min-height: 420px;
+  border: 1px solid #d9dddc;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0d1418 0%, #14242b 100%);
+  overflow: hidden;
+}
+
+.lanes {
