@@ -28,3 +28,20 @@
 }
 
 .lanes {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--lane-count, 5), 1fr);
+}
+
+.lane {
+  position: relative;
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.lane:last-child {
+  border-inline-end: 0;
+}
+
+.laneLabel {
+  position: absolute;
