@@ -80,3 +80,21 @@
 
 .noteChord {
   outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 2px;
+}
+
+.sustain {
+  position: absolute;
+  left: 45%;
+  right: 45%;
+  border-radius: 4px;
+  opacity: 0.75;
+}
+
+.empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.9rem;
