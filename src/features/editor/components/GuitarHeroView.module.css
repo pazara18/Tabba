@@ -45,3 +45,21 @@
 
 .laneLabel {
   position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.strikeLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 85%;
+  height: 2px;
