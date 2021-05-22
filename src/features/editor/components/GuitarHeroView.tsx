@@ -20,3 +20,16 @@ interface GuitarHeroViewProps {
 
 export function GuitarHeroView({ currentTime, track }: GuitarHeroViewProps) {
   const ghTrack = useMemo(() => eventsToGhTrack(track.events), [track.events]);
+
+  const visibleNotes = ghTrack.notes.filter((note) => {
+    const offset = note.startSeconds - currentTime;
+    return offset >= -LOOK_BEHIND_SECONDS && offset <= LOOK_AHEAD_SECONDS;
+  });
+
+  const notesByLane = groupByLane(visibleNotes);
+
+  return (
+    <section className={styles.view} aria-label="Guitar Hero view">
+      <div className={styles.header}>
+        <span>
+          <strong>{track.name}</strong> — {ghTrack.notes.length} notes
