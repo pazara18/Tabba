@@ -33,3 +33,15 @@ export function GuitarHeroView({ currentTime, track }: GuitarHeroViewProps) {
       <div className={styles.header}>
         <span>
           <strong>{track.name}</strong> — {ghTrack.notes.length} notes
+        </span>
+        {ghTrack.pitchRange && (
+          <span>
+            pitch range MIDI {ghTrack.pitchRange.min}–{ghTrack.pitchRange.max}
+          </span>
+        )}
+      </div>
+      <div
+        className={styles.board}
+        style={{ "--lane-count": GH_LANE_COUNT } as React.CSSProperties}
+      >
+        <div className={styles.lanes}>
