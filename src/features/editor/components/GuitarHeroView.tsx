@@ -45,3 +45,15 @@ export function GuitarHeroView({ currentTime, track }: GuitarHeroViewProps) {
         style={{ "--lane-count": GH_LANE_COUNT } as React.CSSProperties}
       >
         <div className={styles.lanes}>
+          {Array.from({ length: GH_LANE_COUNT }, (_, lane) => (
+            <div key={lane} className={`${styles.lane} ${styles[`lane${lane}`]}`}>
+              {notesByLane[lane]?.map((note) => renderNote(note, currentTime))}
+              <span className={styles.laneLabel}>{GH_LANE_NAMES[lane]}</span>
+            </div>
+          ))}
+        </div>
+        <div className={styles.strikeLine} aria-hidden="true" />
+        {ghTrack.notes.length === 0 && (
+          <p className={styles.empty}>
+            No notes in this track yet. Add notes or run analysis to populate the highway.
+          </p>
