@@ -57,3 +57,16 @@ export function GuitarHeroView({ currentTime, track }: GuitarHeroViewProps) {
           <p className={styles.empty}>
             No notes in this track yet. Add notes or run analysis to populate the highway.
           </p>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function renderNote(note: GhNote, currentTime: number) {
+  const offset = note.startSeconds - currentTime;
+  const topPercent = STRIKE_PERCENT - (offset / LOOK_AHEAD_SECONDS) * STRIKE_PERCENT;
+  const sustainSeconds = Math.max(0, note.sustainSeconds);
+  const showSustain = sustainSeconds >= SUSTAIN_MIN_SECONDS;
+  const sustainHeightPercent = showSustain
+    ? (sustainSeconds / LOOK_AHEAD_SECONDS) * STRIKE_PERCENT
