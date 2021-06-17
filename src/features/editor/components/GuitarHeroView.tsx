@@ -70,3 +70,15 @@ function renderNote(note: GhNote, currentTime: number) {
   const showSustain = sustainSeconds >= SUSTAIN_MIN_SECONDS;
   const sustainHeightPercent = showSustain
     ? (sustainSeconds / LOOK_AHEAD_SECONDS) * STRIKE_PERCENT
+    : 0;
+  const sustainTopPercent = topPercent - sustainHeightPercent;
+
+  return (
+    <div key={note.id}>
+      {showSustain && (
+        <div
+          aria-hidden="true"
+          className={styles.sustain}
+          style={{
+            top: `${sustainTopPercent}%`,
+            height: `${sustainHeightPercent}%`,
