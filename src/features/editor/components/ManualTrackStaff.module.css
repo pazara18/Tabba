@@ -1,0 +1,17 @@
+.trackStaff {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid #d9dddc;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.trackHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.trackHeader div {
