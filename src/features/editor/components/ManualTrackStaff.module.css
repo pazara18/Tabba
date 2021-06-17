@@ -15,3 +15,23 @@
 }
 
 .trackHeader div {
+  display: grid;
+  gap: 3px;
+}
+
+.trackHeader h3 {
+  margin: 0;
+  color: #1f2930;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.trackHeader span {
+  color: #748088;
+  font-size: 0.8rem;
+}
+
+.trackActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
