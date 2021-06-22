@@ -75,3 +75,23 @@
   background: #fbfcfb;
   transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
 }
+
+.tabLineActive {
+  border-color: #d64d45;
+  background: #fff7f5;
+  box-shadow: 0 0 0 1px rgba(214, 77, 69, 0.18);
+}
+
+.lineMeta {
+  display: grid;
+  gap: 4px;
+  padding-block-start: 6px;
+  color: #748088;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+}
+
+.lineTime {
+  font-weight: 650;
+  color: #4b5961;
+}
