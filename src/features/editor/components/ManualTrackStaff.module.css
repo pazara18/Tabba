@@ -55,3 +55,23 @@
 }
 
 .linesScroller {
+  display: grid;
+  gap: 16px;
+  max-height: 62vh;
+  overflow-y: auto;
+  padding: 6px 4px;
+  scroll-behavior: smooth;
+}
+
+.tabLine,
+.tabLineActive {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #e2e6e7;
+  border-radius: 8px;
+  background: #fbfcfb;
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
