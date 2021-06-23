@@ -95,3 +95,23 @@
   font-weight: 650;
   color: #4b5961;
 }
+
+.staffRows {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.stringRow {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  color: #4b5961;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.stringLabel {
+  color: #5f6c73;
+  font-size: 0.78rem;
+  font-weight: 650;
