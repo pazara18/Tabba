@@ -115,3 +115,24 @@
   color: #5f6c73;
   font-size: 0.78rem;
   font-weight: 650;
+}
+
+.stringLine {
+  position: relative;
+  min-height: 30px;
+  border: 1px solid #cfd6d8;
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, transparent 0 47%, #6a7479 47% 53%, transparent 53%),
+    #fbfcfb;
+  cursor: crosshair;
+}
+
+.tabLineActive .stringLine {
+  background:
+    linear-gradient(180deg, transparent 0 47%, #6a7479 47% 53%, transparent 53%),
+    #ffffff;
+}
+
+.note,
+.selectedNote {
