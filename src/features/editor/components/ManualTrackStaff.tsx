@@ -70,3 +70,25 @@ export function ManualTrackStaff({
     const viewportBottom = viewportTop + scroller.clientHeight;
     const padding = scroller.clientHeight * 0.18;
 
+    if (lineTop < viewportTop + padding) {
+      scroller.scrollTo({ top: Math.max(0, lineTop - padding), behavior: "smooth" });
+    } else if (lineBottom > viewportBottom - padding) {
+      scroller.scrollTo({
+        top: Math.max(0, lineBottom - scroller.clientHeight + padding),
+        behavior: "smooth",
+      });
+    }
+  }, [activeLineIndex]);
+
+  return (
+    <article className={styles.trackStaff} aria-label={`${track.name} staff`}>
+      <div className={styles.trackHeader}>
+        <div>
+          <h3>{track.name}</h3>
+          <span>{track.events.length} events</span>
+        </div>
+        <div className={styles.trackActions}>
+          <button type="button" onClick={() => onShiftSuggestions(track.id, -0.025)}>
+            -25ms
+          </button>
+          <button type="button" onClick={() => onShiftSuggestions(track.id, 0.025)}>
