@@ -25,3 +25,25 @@ interface ManualTrackStaffProps {
   selectedEvent?: SelectedTabEvent;
   track: TabTrack;
 }
+
+export function ManualTrackStaff({
+  currentTime,
+  duration,
+  onAddNote,
+  onAnalyzeTrack,
+  onClearSelectedEvent,
+  onDeleteSelectedEvent,
+  onSelectEvent,
+  onShiftSuggestions,
+  onUpdateSelectedEvent,
+  selectedEvent,
+  track,
+}: ManualTrackStaffProps) {
+  const linesScrollerRef = useRef<HTMLDivElement | null>(null);
+  const activeLineRef = useRef<HTMLDivElement | null>(null);
+  const lines = createTabLines(duration);
+  const activeLineIndex = getActiveLineIndex(currentTime, lines);
+
+  const selectedEventForTrack =
+    selectedEvent && selectedEvent.trackId === track.id
+      ? track.events.find((event) => event.id === selectedEvent.eventId)
