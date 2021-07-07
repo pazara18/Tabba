@@ -92,3 +92,25 @@ export function ManualTrackStaff({
             -25ms
           </button>
           <button type="button" onClick={() => onShiftSuggestions(track.id, 0.025)}>
+            +25ms
+          </button>
+          <button type="button" onClick={() => onAnalyzeTrack(track.id)}>
+            Analyze
+          </button>
+        </div>
+      </div>
+      <div
+        className={styles.linesScroller}
+        ref={linesScrollerRef}
+        onClick={() => onClearSelectedEvent()}
+      >
+        {lines.map((line) => {
+          const isActive = line.lineIndex === activeLineIndex;
+          const lineEvents = getEventsForLine(track.events, line);
+          const popoverEvent =
+            selectedEventForTrack && selectedLineIndex === line.lineIndex
+              ? selectedEventForTrack
+              : undefined;
+
+          return (
+            <TabStaffLine
