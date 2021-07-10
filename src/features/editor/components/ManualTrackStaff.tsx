@@ -114,3 +114,26 @@ export function ManualTrackStaff({
 
           return (
             <TabStaffLine
+              key={line.lineIndex}
+              isActive={isActive}
+              lineRef={isActive ? activeLineRef : undefined}
+              currentTime={currentTime}
+              line={line}
+              lineEvents={lineEvents}
+              onAddNote={onAddNote}
+              onClearSelectedEvent={onClearSelectedEvent}
+              onDeleteSelectedEvent={onDeleteSelectedEvent}
+              onSelectEvent={onSelectEvent}
+              onUpdateSelectedEvent={onUpdateSelectedEvent}
+              popoverEvent={popoverEvent}
+              selectedEvent={selectedEvent}
+              track={track}
+            />
+          );
+        })}
+      </div>
+    </article>
+  );
+}
+
+interface TabStaffLineProps {
