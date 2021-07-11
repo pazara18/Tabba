@@ -137,3 +137,25 @@ export function ManualTrackStaff({
 }
 
 interface TabStaffLineProps {
+  currentTime: number;
+  isActive: boolean;
+  line: TabLine;
+  lineEvents: TabEvent[];
+  lineRef?: React.Ref<HTMLDivElement>;
+  onAddNote: (trackId: string, stringNumber: number, startSeconds: number) => void;
+  onClearSelectedEvent: () => void;
+  onDeleteSelectedEvent: () => void;
+  onSelectEvent: (selection: SelectedTabEvent) => void;
+  onUpdateSelectedEvent: (patch: EventPopoverPatch) => void;
+  popoverEvent?: TabEvent;
+  selectedEvent?: SelectedTabEvent;
+  track: TabTrack;
+}
+
+function TabStaffLine({
+  currentTime,
+  isActive,
+  line,
+  lineEvents,
+  lineRef,
+  onAddNote,
