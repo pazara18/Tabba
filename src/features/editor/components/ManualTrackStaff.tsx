@@ -159,3 +159,26 @@ function TabStaffLine({
   lineEvents,
   lineRef,
   onAddNote,
+  onClearSelectedEvent,
+  onDeleteSelectedEvent,
+  onSelectEvent,
+  onUpdateSelectedEvent,
+  popoverEvent,
+  selectedEvent,
+  track,
+}: TabStaffLineProps) {
+  const playheadPercent = getLineRelativePercent(currentTime, line);
+  const popoverAnchorPercent = popoverEvent
+    ? getLineRelativePercent(popoverEvent.startSeconds, line)
+    : 50;
+
+  return (
+    <div
+      className={isActive ? styles.tabLineActive : styles.tabLine}
+      data-line-index={line.lineIndex}
+      onClick={(clickEvent) => clickEvent.stopPropagation()}
+      ref={lineRef}
+    >
+      <div className={styles.lineMeta}>
+        <span className={styles.lineTime}>{formatLineTime(line.startSeconds)}</span>
+      </div>
