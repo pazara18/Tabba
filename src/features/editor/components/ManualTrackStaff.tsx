@@ -204,3 +204,25 @@ function TabStaffLine({
                           1,
                           Math.max(0, (clickEvent.clientX - rect.left) / rect.width)
                         )
+                      : 0;
+                  const startSeconds = line.startSeconds + ratio * line.durationSeconds;
+                  onAddNote(track.id, string.stringNumber, startSeconds);
+                }}
+              >
+                {isActive && (
+                  <i className={styles.playhead} style={{ left: `${playheadPercent}%` }} />
+                )}
+                {eventsForString.map((event) => {
+                  const position = event.chosenPositions.find(
+                    (entry) => entry.stringNumber === string.stringNumber
+                  );
+
+                  if (!position) {
+                    return null;
+                  }
+
+                  const isSelected = selectedEvent?.eventId === event.id;
+                  return (
+                    <button
+                      className={isSelected ? styles.selectedNote : styles.note}
+                      key={`${event.id}-${position.stringNumber}`}
