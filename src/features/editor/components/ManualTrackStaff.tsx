@@ -182,3 +182,25 @@ function TabStaffLine({
       <div className={styles.lineMeta}>
         <span className={styles.lineTime}>{formatLineTime(line.startSeconds)}</span>
       </div>
+      <div className={styles.staffRows}>
+        {track.tuning.strings.map((string, stringIndex) => {
+          const isLastString = stringIndex === track.tuning.strings.length - 1;
+          const eventsForString = lineEvents.filter((event) =>
+            event.chosenPositions.some((position) => position.stringNumber === string.stringNumber)
+          );
+
+          return (
+            <div className={styles.stringRow} key={string.stringNumber}>
+              <span className={styles.stringLabel}>{string.openPitch}</span>
+              <div
+                className={styles.stringLine}
+                data-tab-line="true"
+                onClick={(clickEvent) => {
+                  const target = clickEvent.currentTarget as HTMLDivElement;
+                  const rect = target.getBoundingClientRect();
+                  const ratio =
+                    rect.width > 0
+                      ? Math.min(
+                          1,
+                          Math.max(0, (clickEvent.clientX - rect.left) / rect.width)
+                        )
