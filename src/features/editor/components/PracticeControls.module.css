@@ -6,3 +6,8 @@
 }
 
 .practiceControls label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #4b5961;
+  font-size: 0.82rem;
