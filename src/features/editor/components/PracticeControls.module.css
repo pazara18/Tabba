@@ -16,3 +16,8 @@
 .practiceControls input[type="number"],
 .practiceControls select {
   height: 32px;
+  border: 1px solid #ccd3d6;
+  border-radius: 6px;
+  padding: 0 8px;
+  color: #1b1f23;
+  background: #ffffff;
