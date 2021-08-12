@@ -6,3 +6,14 @@ interface PracticeControlsProps {
   duration: number;
   loopRegion: LoopRegion;
   onLoopRegionChange: (loopRegion: LoopRegion) => void;
+  onPlaybackRateChange: (playbackRate: number) => void;
+  playbackRate: number;
+}
+
+export function PracticeControls({
+  duration,
+  loopRegion,
+  onLoopRegionChange,
+  onPlaybackRateChange,
+  playbackRate,
+}: PracticeControlsProps) {
