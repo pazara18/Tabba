@@ -17,3 +17,15 @@ export function PracticeControls({
   onPlaybackRateChange,
   playbackRate,
 }: PracticeControlsProps) {
+  const normalizedLoop = normalizeLoopRegion(loopRegion, duration);
+
+  return (
+    <div className={styles.practiceControls}>
+      <label>
+        Speed
+        <select
+          onChange={(event) => onPlaybackRateChange(Number(event.currentTarget.value))}
+          value={playbackRate}
+        >
+          {playbackRates.map((rate) => (
+            <option key={rate} value={rate}>
