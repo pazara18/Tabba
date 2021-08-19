@@ -29,3 +29,14 @@ export function PracticeControls({
         >
           {playbackRates.map((rate) => (
             <option key={rate} value={rate}>
+              {rate}x
+            </option>
+          ))}
+        </select>
+      </label>
+      <label className={styles.loopToggle}>
+        <input
+          checked={loopRegion.enabled}
+          onChange={(event) =>
+            onLoopRegionChange({ ...loopRegion, enabled: event.currentTarget.checked })
+          }
