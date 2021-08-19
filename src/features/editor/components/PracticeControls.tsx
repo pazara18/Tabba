@@ -40,3 +40,15 @@ export function PracticeControls({
           onChange={(event) =>
             onLoopRegionChange({ ...loopRegion, enabled: event.currentTarget.checked })
           }
+          type="checkbox"
+        />
+        Loop
+      </label>
+      <LoopTimeInput
+        label="Start"
+        onChange={(startSeconds) =>
+          onLoopRegionChange(normalizeLoopRegion({ ...loopRegion, startSeconds }, duration))
+        }
+        value={normalizedLoop.startSeconds}
+      />
+      <LoopTimeInput
