@@ -1,3 +1,7 @@
 .actions {
   display: flex;
   gap: 8px;
+}
+
+.actions button,
+.actions label {
