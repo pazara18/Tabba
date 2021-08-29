@@ -52,3 +52,14 @@ export function PracticeControls({
         value={normalizedLoop.startSeconds}
       />
       <LoopTimeInput
+        label="End"
+        onChange={(endSeconds) =>
+          onLoopRegionChange(normalizeLoopRegion({ ...loopRegion, endSeconds }, duration))
+        }
+        value={normalizedLoop.endSeconds}
+      />
+    </div>
+  );
+}
+
+interface LoopTimeInputProps {
