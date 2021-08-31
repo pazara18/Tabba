@@ -10,3 +10,7 @@
   height: 36px;
   place-items: center;
   border: 1px solid #34424a;
+  border-radius: 6px;
+  color: #dce5e7;
+  background: #20262b;
+  cursor: pointer;
