@@ -14,3 +14,8 @@
   color: #dce5e7;
   background: #20262b;
   cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.actions button:hover,
