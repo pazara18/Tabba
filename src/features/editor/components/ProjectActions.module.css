@@ -19,3 +19,7 @@
 }
 
 .actions button:hover,
+.actions label:hover {
+  background: #2a3339;
+}
+
