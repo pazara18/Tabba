@@ -6,3 +6,7 @@ interface ProjectActionsProps {
   onImportProject: (file: File) => void;
 }
 
+export function ProjectActions({ onExportProject, onImportProject }: ProjectActionsProps) {
+  const inputId = useId();
+
+  return (
