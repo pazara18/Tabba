@@ -10,3 +10,8 @@ export function ProjectActions({ onExportProject, onImportProject }: ProjectActi
   const inputId = useId();
 
   return (
+    <div className={styles.actions} aria-label="Project actions">
+      <button type="button" onClick={onExportProject}>
+        Export
+      </button>
+      <label htmlFor={inputId}>Import</label>
