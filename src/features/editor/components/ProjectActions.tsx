@@ -15,3 +15,7 @@ export function ProjectActions({ onExportProject, onImportProject }: ProjectActi
         Export
       </button>
       <label htmlFor={inputId}>Import</label>
+      <input
+        accept=".tabba.json,application/json"
+        id={inputId}
+        onChange={(event) => {
