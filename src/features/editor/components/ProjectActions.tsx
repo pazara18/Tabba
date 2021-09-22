@@ -19,3 +19,8 @@ export function ProjectActions({ onExportProject, onImportProject }: ProjectActi
         accept=".tabba.json,application/json"
         id={inputId}
         onChange={(event) => {
+          const file = event.currentTarget.files?.[0];
+
+          if (file) {
+            onImportProject(file);
+          }
