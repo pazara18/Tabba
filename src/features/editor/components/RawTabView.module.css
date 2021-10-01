@@ -13,3 +13,11 @@
   justify-content: space-between;
   gap: 16px;
 }
+
+.header div {
+  display: grid;
+  gap: 3px;
+}
+
+.header h3 {
+  margin: 0;
