@@ -4,3 +4,12 @@
   padding: 14px;
   border: 1px solid #d9dddc;
   border-radius: 8px;
+  background: #ffffff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
