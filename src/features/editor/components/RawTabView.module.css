@@ -39,3 +39,12 @@
   border-radius: 6px;
   color: #ffffff;
   background: #2f716c;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.copyButton:hover {
+  background: #3e8b84;
+}
+
