@@ -7,3 +7,8 @@ interface RawTabViewProps {
   duration: number;
   track: TabTrack;
 }
+
+export function RawTabView({ duration, track }: RawTabViewProps) {
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "error">("idle");
+  const ascii = useMemo(() => trackToAsciiTab(track, duration), [duration, track]);
+
