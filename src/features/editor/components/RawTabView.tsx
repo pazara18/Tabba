@@ -12,3 +12,8 @@ export function RawTabView({ duration, track }: RawTabViewProps) {
   const [copyState, setCopyState] = useState<"idle" | "copied" | "error">("idle");
   const ascii = useMemo(() => trackToAsciiTab(track, duration), [duration, track]);
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(ascii);
+      setCopyState("copied");
+    } catch {
