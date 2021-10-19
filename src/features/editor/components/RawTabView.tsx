@@ -17,3 +17,9 @@ export function RawTabView({ duration, track }: RawTabViewProps) {
       await navigator.clipboard.writeText(ascii);
       setCopyState("copied");
     } catch {
+      setCopyState("error");
+    }
+    window.setTimeout(() => setCopyState("idle"), 1600);
+  };
+
+  return (
