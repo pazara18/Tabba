@@ -23,3 +23,8 @@ export function RawTabView({ duration, track }: RawTabViewProps) {
   };
 
   return (
+    <article className={styles.rawView} aria-label={`${track.name} raw tab`}>
+      <div className={styles.header}>
+        <div>
+          <h3>{track.name}</h3>
+          <span>{track.events.length} events</span>
