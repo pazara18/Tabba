@@ -70,3 +70,23 @@
   min-width: 160px;
 }
 
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.viewToggle {
+  display: inline-flex;
+  border: 1px solid #ccd3d6;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.viewToggleButton,
+.viewToggleActive {
+  min-width: 56px;
+  height: 32px;
+  padding: 0 12px;
+  border: 0;
