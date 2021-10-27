@@ -90,3 +90,23 @@
   height: 32px;
   padding: 0 12px;
   border: 0;
+  border-radius: 0;
+  color: #4b5961;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.viewToggleButton:hover {
+  background: #eef5f3;
+}
+
+.viewToggleActive {
+  color: #ffffff;
+  background: #2f716c;
+}
+
+.exportButtons {
+  display: inline-flex;
+  gap: 6px;
