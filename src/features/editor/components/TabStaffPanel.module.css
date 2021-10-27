@@ -31,3 +31,23 @@
 }
 
 .header span {
+  color: #748088;
+  font-size: 0.875rem;
+}
+
+.tools {
+  padding: 12px 14px;
+  border: 1px solid #d9dddc;
+  border-radius: 8px;
+  background: #ffffff;
+  justify-content: flex-start;
+}
+
+.tools label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4b5961;
+  font-size: 0.875rem;
+}
+
