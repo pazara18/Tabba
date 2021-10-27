@@ -51,3 +51,22 @@
   font-size: 0.875rem;
 }
 
+.tools input,
+.tools select {
+  height: 34px;
+  border: 1px solid #ccd3d6;
+  border-radius: 6px;
+  padding: 0 8px;
+  background: #ffffff;
+  color: #1f2930;
+  font-size: 0.9rem;
+}
+
+.tools input {
+  width: 72px;
+}
+
+.tools select {
+  min-width: 160px;
+}
+
