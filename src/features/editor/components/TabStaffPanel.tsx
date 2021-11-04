@@ -56,3 +56,23 @@ export function TabStaffPanel({
   const [viewMode, setViewMode] = useState<TabViewMode>("staff");
   const activeTracks = tracks.filter((track) => track.stemId === activeStemId);
   const selectedTrack =
+    activeTracks.find((track) => track.id === selectedTrackId) ?? activeTracks[0];
+
+  useEffect(() => {
+    if (selectedEvent && selectedEvent.trackId !== selectedTrackId) {
+      const matchingTrack = activeTracks.find((track) => track.id === selectedEvent.trackId);
+      if (matchingTrack) {
+        setSelectedTrackId(matchingTrack.id);
+      }
+    }
+  }, [activeTracks, selectedEvent, selectedTrackId]);
+
+  useEffect(() => {
+    if (!selectedTrack && activeTracks.length > 0) {
+      setSelectedTrackId(activeTracks[0].id);
+    }
+    if (selectedTrack && selectedTrackId !== selectedTrack.id) {
+      setSelectedTrackId(selectedTrack.id);
+    }
+  }, [activeTracks, selectedTrack, selectedTrackId]);
+
