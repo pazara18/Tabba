@@ -17,3 +17,22 @@ interface TabStaffPanelProps {
   duration: number;
   onAddNote: (
     trackId: string,
+    stringNumber: number,
+    fret: number,
+    startSeconds: number
+  ) => void;
+  onAnalyzeTrack: (trackId: string) => void;
+  onClearSelectedEvent: () => void;
+  onCreateTrack: (instrument: InstrumentKind) => void;
+  onDeleteSelectedEvent: () => void;
+  onExportCloneHero: (trackId: string) => void;
+  onExportRocksmith: (trackId: string) => void;
+  onSelectEvent: (selection: SelectedTabEvent) => void;
+  onShiftSuggestions: (trackId: string, deltaSeconds: number) => void;
+  onUpdateSelectedEvent: (patch: EventPopoverPatch) => void;
+  selectedEvent?: SelectedTabEvent;
+  tracks: TabTrack[];
+}
+
+export function TabStaffPanel({
+  activeStemId,
