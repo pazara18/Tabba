@@ -36,3 +36,23 @@ interface TabStaffPanelProps {
 
 export function TabStaffPanel({
   activeStemId,
+  currentTime,
+  duration,
+  onAddNote,
+  onAnalyzeTrack,
+  onClearSelectedEvent,
+  onCreateTrack,
+  onDeleteSelectedEvent,
+  onExportCloneHero,
+  onExportRocksmith,
+  onSelectEvent,
+  onShiftSuggestions,
+  onUpdateSelectedEvent,
+  selectedEvent,
+  tracks,
+}: TabStaffPanelProps) {
+  const [selectedFret, setSelectedFret] = useState(0);
+  const [selectedTrackId, setSelectedTrackId] = useState<string | undefined>(undefined);
+  const [viewMode, setViewMode] = useState<TabViewMode>("staff");
+  const activeTracks = tracks.filter((track) => track.stemId === activeStemId);
+  const selectedTrack =
