@@ -76,3 +76,22 @@ export function TabStaffPanel({
     }
   }, [activeTracks, selectedTrack, selectedTrackId]);
 
+  return (
+    <section className={styles.panel} aria-label="Tab staff">
+      <div className={styles.header}>
+        <div>
+          <h2>Tab Staff</h2>
+          <span>{activeTracks.length} active tracks</span>
+        </div>
+        <div className={styles.headerControls}>
+          <div className={styles.viewToggle} role="tablist" aria-label="Tab view mode">
+            <button
+              aria-pressed={viewMode === "staff"}
+              className={viewMode === "staff" ? styles.viewToggleActive : styles.viewToggleButton}
+              onClick={() => setViewMode("staff")}
+              type="button"
+            >
+              Staff
+            </button>
+            <button
+              aria-pressed={viewMode === "raw"}
