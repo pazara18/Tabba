@@ -95,3 +95,23 @@ export function TabStaffPanel({
             </button>
             <button
               aria-pressed={viewMode === "raw"}
+              className={viewMode === "raw" ? styles.viewToggleActive : styles.viewToggleButton}
+              onClick={() => setViewMode("raw")}
+              type="button"
+            >
+              Raw
+            </button>
+            <button
+              aria-label="Guitar Hero view"
+              aria-pressed={viewMode === "gh"}
+              className={viewMode === "gh" ? styles.viewToggleActive : styles.viewToggleButton}
+              onClick={() => setViewMode("gh")}
+              type="button"
+            >
+              Guitar Hero
+            </button>
+          </div>
+          {selectedTrack && (
+            <div className={styles.exportButtons}>
+              <button
+                aria-label="Export Clone Hero chart"
