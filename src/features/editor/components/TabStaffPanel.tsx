@@ -115,3 +115,23 @@ export function TabStaffPanel({
             <div className={styles.exportButtons}>
               <button
                 aria-label="Export Clone Hero chart"
+                onClick={() => onExportCloneHero(selectedTrack.id)}
+                type="button"
+              >
+                Export .chart
+              </button>
+              <button
+                aria-label="Export Rocksmith XML"
+                onClick={() => onExportRocksmith(selectedTrack.id)}
+                type="button"
+              >
+                Export .xml
+              </button>
+            </div>
+          )}
+          {activeStemId && <TrackCreationPanel onCreateTrack={onCreateTrack} />}
+        </div>
+      </div>
+      <div className={styles.tools}>
+        <label>
+          Fret
