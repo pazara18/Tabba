@@ -135,3 +135,22 @@ export function TabStaffPanel({
       <div className={styles.tools}>
         <label>
           Fret
+          <input
+            min={0}
+            onChange={(event) => setSelectedFret(Number(event.currentTarget.value))}
+            type="number"
+            value={selectedFret}
+          />
+        </label>
+        {activeTracks.length > 1 && (
+          <label>
+            Track
+            <select
+              onChange={(event) => setSelectedTrackId(event.currentTarget.value)}
+              value={selectedTrack?.id ?? ""}
+            >
+              {activeTracks.map((track) => (
+                <option key={track.id} value={track.id}>
+                  {track.name}
+                </option>
+              ))}
