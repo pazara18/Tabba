@@ -4,3 +4,11 @@
   gap: 14px;
   padding: 16px;
   border: 1px solid #d9dddc;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.markerRow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(44px, 1fr));
+  color: #748088;
