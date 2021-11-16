@@ -1,0 +1,6 @@
+.timeline {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid #d9dddc;
