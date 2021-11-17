@@ -12,3 +12,12 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(44px, 1fr));
   color: #748088;
+  font-size: 0.75rem;
+}
+
+.waveform {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 104px;
