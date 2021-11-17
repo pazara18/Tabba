@@ -21,3 +21,11 @@
   align-items: center;
   gap: 3px;
   min-height: 104px;
+  overflow: hidden;
+  border: 1px solid #ccd3d6;
+  border-radius: 8px;
+  padding: 14px;
+  background: #101417;
+  cursor: pointer;
+}
+
