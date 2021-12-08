@@ -38,3 +38,11 @@
 .waveform i {
   display: block;
   flex: 1;
+  min-width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #e3c171, #4fb5ad);
+}
+
+.playhead {
+  position: absolute;
+  inset-block: 8px;
