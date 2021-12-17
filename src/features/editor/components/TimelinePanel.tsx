@@ -19,3 +19,15 @@ interface TimelinePanelProps {
   onSeek: (timeSeconds: number) => void;
   playbackRate: number;
   waveformError?: string;
+  waveformLoading: boolean;
+  waveformPeaks: WaveformPeak[];
+}
+
+export function TimelinePanel({
+  currentTime,
+  duration,
+  loopRegion,
+  onLoopRegionChange,
+  onPlaybackRateChange,
+  onSeek,
+  playbackRate,
