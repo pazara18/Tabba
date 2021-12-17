@@ -7,3 +7,15 @@ import {
   createTimelineMarkers,
   formatTimelineMarker,
   getTimelinePercent,
+} from "../services/timelineLayout";
+import { PracticeControls } from "./PracticeControls";
+
+interface TimelinePanelProps {
+  currentTime: number;
+  duration: number;
+  loopRegion: LoopRegion;
+  onLoopRegionChange: (loopRegion: LoopRegion) => void;
+  onPlaybackRateChange: (playbackRate: number) => void;
+  onSeek: (timeSeconds: number) => void;
+  playbackRate: number;
+  waveformError?: string;
