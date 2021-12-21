@@ -42,3 +42,15 @@ export function TimelinePanel({
   const loopWidthPercent =
     getTimelinePercent(normalizedLoop.endSeconds, duration) - loopStartPercent;
 
+  return (
+    <section className={styles.timeline} aria-label="Timeline">
+      <div className={styles.markerRow}>
+        {markers.map((marker) => (
+          <span key={marker.time}>{formatTimelineMarker(marker.time)}</span>
+        ))}
+      </div>
+      <button
+        className={styles.waveform}
+        onClick={(event) => {
+          const bounds = event.currentTarget.getBoundingClientRect();
+          const ratio = (event.clientX - bounds.left) / bounds.width;
