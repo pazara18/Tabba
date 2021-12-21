@@ -31,3 +31,14 @@ export function TimelinePanel({
   onPlaybackRateChange,
   onSeek,
   playbackRate,
+  waveformError,
+  waveformLoading,
+  waveformPeaks,
+}: TimelinePanelProps) {
+  const markers = createMarkers(duration);
+  const playheadPercent = getTimelinePercent(currentTime, duration);
+  const normalizedLoop = normalizeLoopRegion(loopRegion, duration);
+  const loopStartPercent = getTimelinePercent(normalizedLoop.startSeconds, duration);
+  const loopWidthPercent =
+    getTimelinePercent(normalizedLoop.endSeconds, duration) - loopStartPercent;
+
