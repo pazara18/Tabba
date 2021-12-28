@@ -54,3 +54,14 @@ export function TimelinePanel({
         onClick={(event) => {
           const bounds = event.currentTarget.getBoundingClientRect();
           const ratio = (event.clientX - bounds.left) / bounds.width;
+          onSeek(ratio * duration);
+        }}
+        type="button"
+      >
+        {normalizedLoop.enabled && (
+          <span
+            className={styles.loopRegion}
+            style={{ left: `${loopStartPercent}%`, width: `${loopWidthPercent}%` }}
+          />
+        )}
+        <span className={styles.playhead} style={{ left: `${playheadPercent}%` }} />
