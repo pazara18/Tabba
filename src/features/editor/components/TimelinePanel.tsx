@@ -65,3 +65,15 @@ export function TimelinePanel({
           />
         )}
         <span className={styles.playhead} style={{ left: `${playheadPercent}%` }} />
+        {getDisplayPeaks(waveformPeaks).map((peak, index) => (
+          <i key={index} style={{ height: `${getPeakHeightPercent(peak)}%` }} />
+        ))}
+      </button>
+      {(waveformLoading || waveformError) && (
+        <p className={styles.waveformStatus}>
+          {waveformLoading ? "Decoding waveform..." : waveformError}
+        </p>
+      )}
+      <PracticeControls
+        duration={duration}
+        loopRegion={loopRegion}
