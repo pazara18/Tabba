@@ -1,1 +1,4 @@
 import type { InstrumentKind } from "../../../domain/instruments/types";
+import styles from "./TrackCreationPanel.module.css";
+
+interface TrackCreationPanelProps {
