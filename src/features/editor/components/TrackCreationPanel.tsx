@@ -5,3 +5,5 @@ interface TrackCreationPanelProps {
   onCreateTrack: (instrument: InstrumentKind) => void;
 }
 
+export function TrackCreationPanel({ onCreateTrack }: TrackCreationPanelProps) {
+  return (
