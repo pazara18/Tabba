@@ -7,3 +7,6 @@ interface TrackCreationPanelProps {
 
 export function TrackCreationPanel({ onCreateTrack }: TrackCreationPanelProps) {
   return (
+    <div className={styles.creationPanel}>
+      <button type="button" onClick={() => onCreateTrack("guitar")}>
+        + Guitar
