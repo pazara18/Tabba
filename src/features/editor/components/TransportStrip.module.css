@@ -6,3 +6,15 @@
   padding: 16px 20px;
   border-block-end: 1px solid #263238;
   background: #15191d;
+  color: #ffffff;
+}
+
+.identity {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.identity p,
+.identity h1 {
+  margin: 0;
