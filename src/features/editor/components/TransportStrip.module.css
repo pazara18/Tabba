@@ -1,0 +1,8 @@
+.transport {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto auto auto;
+  align-items: center;
+  gap: 22px;
+  padding: 16px 20px;
+  border-block-end: 1px solid #263238;
+  background: #15191d;
