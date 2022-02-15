@@ -29,3 +29,15 @@
 
 .identity h1 {
   overflow: hidden;
+  font-size: 1.08rem;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.controls {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid #2b343a;
+  border-radius: 8px;
