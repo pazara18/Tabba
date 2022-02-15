@@ -41,3 +41,14 @@
   padding: 4px;
   border: 1px solid #2b343a;
   border-radius: 8px;
+  background: #20262b;
+}
+
+.controls button {
+  display: grid;
+  width: 40px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #ffffff;
