@@ -18,3 +18,14 @@
 .identity p,
 .identity h1 {
   margin: 0;
+}
+
+.identity p {
+  color: #8ea0a9;
+  font-size: 0.72rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.identity h1 {
+  overflow: hidden;
