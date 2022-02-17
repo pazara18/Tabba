@@ -52,3 +52,15 @@
   border: 1px solid transparent;
   border-radius: 6px;
   color: #ffffff;
+  background: #2f716c;
+  cursor: pointer;
+}
+
+.controls button:hover:not(:disabled) {
+  background: #3e8b84;
+}
+
+.controls button:disabled {
+  color: #6f7d84;
+  background: transparent;
+  cursor: not-allowed;
