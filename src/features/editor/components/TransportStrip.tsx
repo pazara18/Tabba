@@ -3,3 +3,10 @@ import { ProjectActions } from "./ProjectActions";
 import styles from "./TransportStrip.module.css";
 
 interface TransportStripProps {
+  currentTime: number;
+  hasSource: boolean;
+  isPlaying: boolean;
+  onPause: () => void;
+  onPlay: () => void;
+  onExportProject: () => void;
+  onImportProject: (file: File) => void;
