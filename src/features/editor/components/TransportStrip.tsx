@@ -18,3 +18,10 @@ export function TransportStrip({
   currentTime,
   hasSource,
   isPlaying,
+  onExportProject,
+  onImportProject,
+  onPause,
+  onPlay,
+  onStop,
+  projectName,
+}: TransportStripProps) {
