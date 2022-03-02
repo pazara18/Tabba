@@ -10,3 +10,11 @@ interface TransportStripProps {
   onPlay: () => void;
   onExportProject: () => void;
   onImportProject: (file: File) => void;
+  onStop: () => void;
+  projectName: string;
+}
+
+export function TransportStrip({
+  currentTime,
+  hasSource,
+  isPlaying,
