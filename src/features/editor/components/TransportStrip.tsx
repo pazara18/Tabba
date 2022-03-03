@@ -25,3 +25,10 @@ export function TransportStrip({
   onStop,
   projectName,
 }: TransportStripProps) {
+  return (
+    <header className={styles.transport}>
+      <div className={styles.identity}>
+        <p>Tabba</p>
+        <h1>{projectName}</h1>
+      </div>
+      <ProjectActions onExportProject={onExportProject} onImportProject={onImportProject} />
