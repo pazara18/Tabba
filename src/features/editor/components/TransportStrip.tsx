@@ -32,3 +32,11 @@ export function TransportStrip({
         <h1>{projectName}</h1>
       </div>
       <ProjectActions onExportProject={onExportProject} onImportProject={onImportProject} />
+      <div className={styles.controls} aria-label="Transport controls">
+        <button disabled={!hasSource} onClick={onStop} type="button" aria-label="Jump to start">
+          <span>|◀</span>
+        </button>
+        <button
+          disabled={!hasSource}
+          onClick={isPlaying ? onPause : onPlay}
+          type="button"
