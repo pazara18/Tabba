@@ -11,3 +11,12 @@ describe("followPlayheadScroll", () => {
         viewportWidth: 800,
       })
     ).toBe(500);
+  });
+
+  it("scrolls forward before the playhead leaves the viewport", () => {
+    expect(
+      getFollowPlayheadScrollLeft({
+        contentWidth: 2_000,
+        currentScrollLeft: 0,
+        playheadX: 700,
+        viewportWidth: 800,
