@@ -20,3 +20,11 @@ describe("followPlayheadScroll", () => {
         currentScrollLeft: 0,
         playheadX: 700,
         viewportWidth: 800,
+      })
+    ).toBe(420);
+  });
+
+  it("scrolls backward when seeking behind the visible area", () => {
+    expect(
+      getFollowPlayheadScrollLeft({
+        contentWidth: 2_000,
