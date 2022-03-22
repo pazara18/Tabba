@@ -36,3 +36,11 @@ describe("followPlayheadScroll", () => {
   });
 
   it("clamps to the available scroll range", () => {
+    expect(
+      getFollowPlayheadScrollLeft({
+        contentWidth: 1_000,
+        currentScrollLeft: 0,
+        playheadX: 980,
+        viewportWidth: 800,
+      })
+    ).toBe(200);
