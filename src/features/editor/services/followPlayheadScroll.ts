@@ -7,3 +7,9 @@ interface FollowPlayheadScrollOptions {
   visibilityPaddingRatio?: number;
 }
 
+const defaultTargetRatio = 0.35;
+const defaultVisibilityPaddingRatio = 0.22;
+
+export function getFollowPlayheadScrollLeft({
+  contentWidth,
+  currentScrollLeft,
