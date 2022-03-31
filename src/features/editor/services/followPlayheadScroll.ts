@@ -18,3 +18,9 @@ export function getFollowPlayheadScrollLeft({
   viewportWidth,
   visibilityPaddingRatio = defaultVisibilityPaddingRatio,
 }: FollowPlayheadScrollOptions): number {
+  if (contentWidth <= viewportWidth || viewportWidth <= 0) {
+    return 0;
+  }
+
+  const leftBoundary = currentScrollLeft + viewportWidth * visibilityPaddingRatio;
+  const rightBoundary = currentScrollLeft + viewportWidth * (1 - visibilityPaddingRatio);
