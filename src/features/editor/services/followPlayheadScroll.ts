@@ -13,3 +13,8 @@ const defaultVisibilityPaddingRatio = 0.22;
 export function getFollowPlayheadScrollLeft({
   contentWidth,
   currentScrollLeft,
+  playheadX,
+  targetRatio = defaultTargetRatio,
+  viewportWidth,
+  visibilityPaddingRatio = defaultVisibilityPaddingRatio,
+}: FollowPlayheadScrollOptions): number {
