@@ -24,3 +24,9 @@ export function getFollowPlayheadScrollLeft({
 
   const leftBoundary = currentScrollLeft + viewportWidth * visibilityPaddingRatio;
   const rightBoundary = currentScrollLeft + viewportWidth * (1 - visibilityPaddingRatio);
+
+  if (playheadX >= leftBoundary && playheadX <= rightBoundary) {
+    return currentScrollLeft;
+  }
+
+  return clampScrollLeft(playheadX - viewportWidth * targetRatio, contentWidth, viewportWidth);
