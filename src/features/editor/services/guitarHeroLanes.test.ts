@@ -20,3 +20,15 @@ function makeEvent(
       fret: position.fret ?? 0,
       pitch: position.pitch,
     })),
+    candidates: [],
+    confidence: 1,
+    locked: false,
+  };
+}
+
+describe("bucketMidiToLane", () => {
+  it("returns the middle lane when min equals max", () => {
+    expect(bucketMidiToLane(60, 60, 60)).toBe(2);
+  });
+
+  it("maps the minimum pitch to lane 0 and the maximum to lane 4", () => {
