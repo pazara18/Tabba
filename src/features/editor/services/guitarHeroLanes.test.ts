@@ -44,3 +44,14 @@ describe("bucketMidiToLane", () => {
 
 describe("eventsToGhTrack", () => {
   it("returns an empty track when there are no events with pitches", () => {
+    const track = eventsToGhTrack([]);
+    expect(track.notes).toHaveLength(0);
+    expect(track.pitchRange).toBeUndefined();
+  });
+
+  it("assigns lane 0 to the lowest pitch and lane 4 to the highest", () => {
+    const events = [
+      makeEvent("a", 0, [{ pitch: "E2" }]),
+      makeEvent("b", 1, [{ pitch: "E4" }]),
+      makeEvent("c", 2, [{ pitch: "A3" }]),
+    ];
