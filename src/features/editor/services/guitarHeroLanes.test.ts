@@ -32,3 +32,15 @@ describe("bucketMidiToLane", () => {
   });
 
   it("maps the minimum pitch to lane 0 and the maximum to lane 4", () => {
+    expect(bucketMidiToLane(40, 40, 80)).toBe(0);
+    expect(bucketMidiToLane(80, 40, 80)).toBe(GH_LANE_COUNT - 1);
+  });
+
+  it("distributes evenly across lanes", () => {
+    const buckets = [40, 48, 56, 64, 72, 80].map((pitch) => bucketMidiToLane(pitch, 40, 80));
+    expect(buckets).toEqual([0, 1, 2, 3, 4, 4]);
+  });
+});
+
+describe("eventsToGhTrack", () => {
+  it("returns an empty track when there are no events with pitches", () => {
