@@ -55,3 +55,15 @@ describe("eventsToGhTrack", () => {
       makeEvent("b", 1, [{ pitch: "E4" }]),
       makeEvent("c", 2, [{ pitch: "A3" }]),
     ];
+
+    const track = eventsToGhTrack(events);
+    const laneByEvent = new Map(track.notes.map((note) => [note.eventId, note.lane]));
+
+    expect(laneByEvent.get("a")).toBe(0);
+    expect(laneByEvent.get("b")).toBe(GH_LANE_COUNT - 1);
+    expect(laneByEvent.get("c")).toBeGreaterThan(0);
+    expect(laneByEvent.get("c")).toBeLessThan(GH_LANE_COUNT - 1);
+  });
+
+  it("emits one note per distinct lane for a chord event", () => {
+    const events = [
