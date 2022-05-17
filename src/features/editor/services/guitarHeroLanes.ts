@@ -8,3 +8,16 @@ export interface GhNote {
   eventId: string;
   lane: number;
   startSeconds: number;
+  sustainSeconds: number;
+  isChord: boolean;
+}
+
+export interface GhTrack {
+  notes: GhNote[];
+  laneCount: number;
+  pitchRange: { min: number; max: number } | undefined;
+}
+
+export const GH_LANE_NAMES = ["Green", "Red", "Yellow", "Blue", "Orange"] as const;
+
+export function eventsToGhTrack(events: TabEvent[]): GhTrack {
