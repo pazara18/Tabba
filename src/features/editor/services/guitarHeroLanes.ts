@@ -21,3 +21,16 @@ export interface GhTrack {
 export const GH_LANE_NAMES = ["Green", "Red", "Yellow", "Blue", "Orange"] as const;
 
 export function eventsToGhTrack(events: TabEvent[]): GhTrack {
+  const midiList = collectMidiPitches(events);
+
+  if (midiList.length === 0) {
+    return { notes: [], laneCount: GH_LANE_COUNT, pitchRange: undefined };
+  }
+
+  const min = Math.min(...midiList);
+  const max = Math.max(...midiList);
+  const notes: GhNote[] = [];
+
+  for (const event of events) {
+    const isChord = event.chosenPositions.length > 1;
+    const lanesUsed = new Set<number>();
