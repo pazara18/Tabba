@@ -34,3 +34,16 @@ export function eventsToGhTrack(events: TabEvent[]): GhTrack {
   for (const event of events) {
     const isChord = event.chosenPositions.length > 1;
     const lanesUsed = new Set<number>();
+
+    for (const position of event.chosenPositions) {
+      const midi = safePitchToMidi(position.pitch);
+
+      if (midi === undefined) {
+        continue;
+      }
+
+      const lane = bucketMidiToLane(midi, min, max);
+
+      if (lanesUsed.has(lane)) {
+        continue;
+      }
