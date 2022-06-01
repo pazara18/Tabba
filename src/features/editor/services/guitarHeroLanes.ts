@@ -47,3 +47,15 @@ export function eventsToGhTrack(events: TabEvent[]): GhTrack {
       if (lanesUsed.has(lane)) {
         continue;
       }
+
+      lanesUsed.add(lane);
+      notes.push({
+        id: `${event.id}-${lane}`,
+        eventId: event.id,
+        lane,
+        startSeconds: event.startSeconds,
+        sustainSeconds: event.durationSeconds,
+        isChord,
+      });
+    }
+  }
