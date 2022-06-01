@@ -59,3 +59,16 @@ export function eventsToGhTrack(events: TabEvent[]): GhTrack {
       });
     }
   }
+
+  notes.sort((a, b) => a.startSeconds - b.startSeconds || a.lane - b.lane);
+
+  return {
+    notes,
+    laneCount: GH_LANE_COUNT,
+    pitchRange: { min, max },
+  };
+}
+
+export function bucketMidiToLane(midi: number, min: number, max: number): number {
+  if (max <= min) {
+    return Math.floor(GH_LANE_COUNT / 2);
