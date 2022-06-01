@@ -72,3 +72,16 @@ export function eventsToGhTrack(events: TabEvent[]): GhTrack {
 export function bucketMidiToLane(midi: number, min: number, max: number): number {
   if (max <= min) {
     return Math.floor(GH_LANE_COUNT / 2);
+  }
+
+  const ratio = (midi - min) / (max - min);
+  const raw = Math.floor(ratio * GH_LANE_COUNT);
+
+  return Math.min(GH_LANE_COUNT - 1, Math.max(0, raw));
+}
+
+function collectMidiPitches(events: TabEvent[]): number[] {
+  const midi: number[] = [];
+
+  for (const event of events) {
+    for (const position of event.chosenPositions) {
