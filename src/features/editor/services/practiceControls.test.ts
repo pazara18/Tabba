@@ -32,3 +32,11 @@ describe("practiceControls", () => {
     });
   });
 
+  it("disables invalid loops after clamping", () => {
+    expect(
+      normalizeLoopRegion(
+        { enabled: true, startSeconds: 20, endSeconds: 10 },
+        20
+      )
+    ).toEqual({
+      enabled: false,
