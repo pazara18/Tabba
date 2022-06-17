@@ -25,3 +25,10 @@ describe("practiceControls", () => {
         { enabled: true, startSeconds: -1, endSeconds: 100 },
         30
       )
+    ).toEqual({
+      enabled: true,
+      startSeconds: 0,
+      endSeconds: 30,
+    });
+  });
+
