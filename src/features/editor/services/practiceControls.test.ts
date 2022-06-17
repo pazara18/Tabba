@@ -18,3 +18,10 @@ describe("practiceControls", () => {
     expect(createDefaultLoopRegion(4).endSeconds).toBe(4);
     expect(createDefaultLoopRegion(0).endSeconds).toBe(1);
   });
+
+  it("normalizes loop bounds to the available duration", () => {
+    expect(
+      normalizeLoopRegion(
+        { enabled: true, startSeconds: -1, endSeconds: 100 },
+        30
+      )
