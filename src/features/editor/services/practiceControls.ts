@@ -14,3 +14,9 @@ export function createDefaultLoopRegion(durationSeconds: number): LoopRegion {
     startSeconds: 0,
     endSeconds,
   };
+}
+
+export function normalizeLoopRegion(
+  region: LoopRegion,
+  durationSeconds: number
+): LoopRegion {
