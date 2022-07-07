@@ -20,3 +20,10 @@ export function normalizeLoopRegion(
   region: LoopRegion,
   durationSeconds: number
 ): LoopRegion {
+  const safeDuration = Math.max(0, durationSeconds);
+  const startSeconds = clamp(region.startSeconds, 0, safeDuration);
+  const minimumEnd = Math.min(safeDuration, startSeconds + 0.05);
+  const endSeconds = clamp(region.endSeconds, minimumEnd, safeDuration);
+
+  return {
+    enabled: region.enabled && endSeconds > startSeconds,
