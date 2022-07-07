@@ -27,3 +27,9 @@ export function normalizeLoopRegion(
 
   return {
     enabled: region.enabled && endSeconds > startSeconds,
+    startSeconds,
+    endSeconds,
+  };
+}
+
+export function normalizePlaybackRate(rate: number): number {
