@@ -27,3 +27,19 @@ describe("tabGridLayout", () => {
     ]);
   });
 
+  it("converts a cell index back into a start time", () => {
+    expect(getTabGridCellStartSeconds(2, 8, 4)).toBe(4);
+    expect(getTabGridCellStartSeconds(-1, 8, 4)).toBe(0);
+    expect(getTabGridCellStartSeconds(10, 8, 4)).toBe(8);
+  });
+
+  it("maps time into clamped zero-based cell indexes", () => {
+    expect(getTabGridColumnIndex(0, 8, 4)).toBe(0);
+    expect(getTabGridColumnIndex(1.99, 8, 4)).toBe(0);
+    expect(getTabGridColumnIndex(2, 8, 4)).toBe(1);
+    expect(getTabGridColumnIndex(8, 8, 4)).toBe(3);
+    expect(getTabGridColumnIndex(-1, 8, 4)).toBe(0);
+    expect(getTabGridColumnIndex(12, 8, 4)).toBe(3);
+    expect(getTabGridColumnIndex(2, 0, 4)).toBe(0);
+  });
+
