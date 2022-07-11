@@ -43,3 +43,19 @@ describe("tabGridLayout", () => {
     expect(getTabGridColumnIndex(2, 0, 4)).toBe(0);
   });
 
+  it("maps time into a sub-cell offset", () => {
+    expect(getTabGridCellOffsetPercent(1, 8, 4)).toBe(50);
+    expect(getTabGridCellOffsetPercent(1.5, 8, 4)).toBe(75);
+    expect(getTabGridCellOffsetPercent(-1, 8, 4)).toBe(0);
+    expect(getTabGridCellOffsetPercent(8, 8, 4)).toBe(99);
+    expect(getTabGridCellOffsetPercent(1, 0, 4)).toBe(0);
+  });
+
+  it("rejects invalid cell and column settings", () => {
+    expect(() => getTabGridColumnCount(4, 0)).toThrow(
+      "Tab grid cell seconds must be greater than zero."
+    );
+    expect(() => createTabGridCells(4, 0)).toThrow(
+      "Tab grid column count must be a positive integer."
+    );
+    expect(() => getTabGridColumnIndex(1, 4, 1.5)).toThrow(
