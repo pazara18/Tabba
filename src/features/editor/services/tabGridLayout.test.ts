@@ -59,3 +59,19 @@ describe("tabGridLayout", () => {
       "Tab grid column count must be a positive integer."
     );
     expect(() => getTabGridColumnIndex(1, 4, 1.5)).toThrow(
+      "Tab grid column count must be a positive integer."
+    );
+  });
+
+  it("positions tab events by string and grid cell", () => {
+    const events: TabEvent[] = [
+      createEvent("event-1", 1, 4, 2),
+      createEvent("event-2", 3, 5, 7),
+      createEvent("event-3", 7, 4, 5),
+    ];
+
+    expect(getTabEventsForString(events, 4, 8, 4)).toEqual([
+      {
+        cellOffsetPercent: 50,
+        columnIndex: 0,
+        event: events[0],
