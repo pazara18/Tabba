@@ -91,3 +91,19 @@ describe("tabGridLayout", () => {
       createEvent("event-1", 1, 3, 1),
       createEvent("event-2", 1.15, 3, 2),
       createEvent("event-3", 1.31, 3, 3),
+    ];
+    const columnCount = getTabGridColumnCount(8);
+
+    expect(
+      getTabEventsForString(events, 3, 8, columnCount).map((event) => event.columnIndex)
+    ).toEqual([8, 9, 10]);
+  });
+
+  it("preserves calibration shifts inside a grid cell", () => {
+    const events: TabEvent[] = [
+      createEvent("event-1", 1.025, 3, 1),
+    ];
+    const [event] = getTabEventsForString(events, 3, 8, getTabGridColumnCount(8));
+
+    expect(event.columnIndex).toBe(8);
+    expect(event.cellOffsetPercent).toBeCloseTo(20);
