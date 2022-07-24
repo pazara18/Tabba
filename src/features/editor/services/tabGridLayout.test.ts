@@ -75,3 +75,19 @@ describe("tabGridLayout", () => {
         cellOffsetPercent: 50,
         columnIndex: 0,
         event: events[0],
+        position: { stringNumber: 4, fret: 2, pitch: "E3" },
+      },
+      {
+        cellOffsetPercent: 50,
+        columnIndex: 3,
+        event: events[2],
+        position: { stringNumber: 4, fret: 5, pitch: "G3" },
+      },
+    ]);
+  });
+
+  it("keeps rapid bass notes in separate timeline cells", () => {
+    const events: TabEvent[] = [
+      createEvent("event-1", 1, 3, 1),
+      createEvent("event-2", 1.15, 3, 2),
+      createEvent("event-3", 1.31, 3, 3),
