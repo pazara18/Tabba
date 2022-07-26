@@ -12,3 +12,19 @@ export interface TabGridCell {
 
 export interface PositionedTabGridEvent {
   cellOffsetPercent: number;
+  columnIndex: number;
+  event: TabEvent;
+  position: TabPosition;
+}
+
+export function getTabGridColumnCount(
+  durationSeconds: number,
+  cellSeconds = DEFAULT_TAB_CELL_SECONDS
+): number {
+  if (cellSeconds <= 0) {
+    throw new Error("Tab grid cell seconds must be greater than zero.");
+  }
+
+  const estimatedColumns = Math.ceil(Math.max(0, durationSeconds) / cellSeconds);
+
+  return Math.min(MAX_TAB_GRID_COLUMNS, Math.max(MIN_TAB_GRID_COLUMNS, estimatedColumns));
