@@ -28,3 +28,19 @@ export function getTabGridColumnCount(
   const estimatedColumns = Math.ceil(Math.max(0, durationSeconds) / cellSeconds);
 
   return Math.min(MAX_TAB_GRID_COLUMNS, Math.max(MIN_TAB_GRID_COLUMNS, estimatedColumns));
+}
+
+export function createTabGridCells(
+  durationSeconds: number,
+  columnCount = getTabGridColumnCount(durationSeconds)
+): TabGridCell[] {
+  assertPositiveColumnCount(columnCount);
+
+  return Array.from({ length: columnCount }, (_, columnIndex) => ({
+    columnIndex,
+    startSeconds: getTabGridCellStartSeconds(columnIndex, durationSeconds, columnCount),
+    endSeconds: getTabGridCellStartSeconds(columnIndex + 1, durationSeconds, columnCount),
+  }));
+}
+
+export function getTabGridCellStartSeconds(
