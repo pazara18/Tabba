@@ -44,3 +44,20 @@ export function createTabGridCells(
 }
 
 export function getTabGridCellStartSeconds(
+  columnIndex: number,
+  durationSeconds: number,
+  columnCount: number
+): number {
+  assertPositiveColumnCount(columnCount);
+
+  const clampedColumn = Math.min(columnCount, Math.max(0, columnIndex));
+  const safeDuration = Math.max(0, durationSeconds);
+
+  return (safeDuration / columnCount) * clampedColumn;
+}
+
+export function getTabGridColumnIndex(
+  timeSeconds: number,
+  durationSeconds: number,
+  columnCount: number
+): number {
