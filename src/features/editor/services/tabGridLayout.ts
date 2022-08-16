@@ -61,3 +61,19 @@ export function getTabGridColumnIndex(
   durationSeconds: number,
   columnCount: number
 ): number {
+  assertPositiveColumnCount(columnCount);
+
+  if (durationSeconds <= 0) {
+    return 0;
+  }
+
+  const clampedTime = Math.min(durationSeconds, Math.max(0, timeSeconds));
+
+  if (clampedTime === durationSeconds) {
+    return columnCount - 1;
+  }
+
+  return Math.floor((clampedTime / durationSeconds) * columnCount);
+}
+
+export function getTabGridCellOffsetPercent(
