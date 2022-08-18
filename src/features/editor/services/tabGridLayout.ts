@@ -77,3 +77,20 @@ export function getTabGridColumnIndex(
 }
 
 export function getTabGridCellOffsetPercent(
+  timeSeconds: number,
+  durationSeconds: number,
+  columnCount: number
+): number {
+  assertPositiveColumnCount(columnCount);
+
+  if (durationSeconds <= 0) {
+    return 0;
+  }
+
+  const columnIndex = getTabGridColumnIndex(timeSeconds, durationSeconds, columnCount);
+  const cellStartSeconds = getTabGridCellStartSeconds(
+    columnIndex,
+    durationSeconds,
+    columnCount
+  );
+  const cellEndSeconds = getTabGridCellStartSeconds(
