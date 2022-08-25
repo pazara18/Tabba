@@ -94,3 +94,19 @@ export function getTabGridCellOffsetPercent(
     columnCount
   );
   const cellEndSeconds = getTabGridCellStartSeconds(
+    columnIndex + 1,
+    durationSeconds,
+    columnCount
+  );
+  const cellDuration = cellEndSeconds - cellStartSeconds;
+
+  if (cellDuration <= 0) {
+    return 0;
+  }
+
+  const clampedTime = Math.min(durationSeconds, Math.max(0, timeSeconds));
+
+  return Math.min(99, Math.max(0, ((clampedTime - cellStartSeconds) / cellDuration) * 100));
+}
+
+export function getTabEventsForString(
