@@ -27,3 +27,13 @@ describe("createTabLines", () => {
     const lines = createTabLines(20, 8);
 
     expect(lines).toHaveLength(3);
+    expect(lines[0]).toMatchObject({ startSeconds: 0, endSeconds: 8 });
+    expect(lines[1]).toMatchObject({ startSeconds: 8, endSeconds: 16 });
+    expect(lines[2]).toMatchObject({ startSeconds: 16, endSeconds: 20 });
+  });
+
+  it("produces a single empty line when total duration is zero", () => {
+    const lines = createTabLines(0, 8);
+    expect(lines).toHaveLength(1);
+    expect(lines[0].startSeconds).toBe(0);
+  });
