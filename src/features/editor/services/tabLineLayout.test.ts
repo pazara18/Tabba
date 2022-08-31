@@ -37,3 +37,13 @@ describe("createTabLines", () => {
     expect(lines).toHaveLength(1);
     expect(lines[0].startSeconds).toBe(0);
   });
+
+  it("throws when line duration is below the minimum", () => {
+    expect(() => createTabLines(20, 0.5)).toThrow();
+  });
+});
+
+describe("getActiveLineIndex", () => {
+  const lines = createTabLines(20, 8);
+
+  it("returns the line that contains the current time", () => {
