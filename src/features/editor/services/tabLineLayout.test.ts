@@ -47,3 +47,13 @@ describe("getActiveLineIndex", () => {
   const lines = createTabLines(20, 8);
 
   it("returns the line that contains the current time", () => {
+    expect(getActiveLineIndex(0, lines)).toBe(0);
+    expect(getActiveLineIndex(7.99, lines)).toBe(0);
+    expect(getActiveLineIndex(8, lines)).toBe(1);
+    expect(getActiveLineIndex(16, lines)).toBe(2);
+    expect(getActiveLineIndex(19.5, lines)).toBe(2);
+  });
+
+  it("returns the last line when current time exceeds total duration", () => {
+    expect(getActiveLineIndex(999, lines)).toBe(2);
+  });
