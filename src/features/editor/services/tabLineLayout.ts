@@ -41,3 +41,14 @@ export function createTabLines(
 
     return {
       lineIndex,
+      startSeconds,
+      endSeconds,
+      durationSeconds: Math.max(MIN_TAB_LINE_SECONDS, endSeconds - startSeconds),
+    };
+  });
+}
+
+export function getActiveLineIndex(currentTime: number, lines: TabLine[]): number {
+  if (lines.length === 0) {
+    return -1;
+  }
