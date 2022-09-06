@@ -18,3 +18,14 @@ export function createTabLines(
     throw new Error(
       `Tab line duration must be at least ${MIN_TAB_LINE_SECONDS} second.`
     );
+  }
+
+  const safeTotal = Math.max(0, totalDurationSeconds);
+
+  if (safeTotal === 0) {
+    return [
+      {
+        lineIndex: 0,
+        startSeconds: 0,
+        endSeconds: lineDurationSeconds,
+        durationSeconds: lineDurationSeconds,
