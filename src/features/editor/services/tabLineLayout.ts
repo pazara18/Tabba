@@ -52,3 +52,15 @@ export function getActiveLineIndex(currentTime: number, lines: TabLine[]): numbe
   if (lines.length === 0) {
     return -1;
   }
+
+  const safeTime = Math.max(0, currentTime);
+
+  for (const line of lines) {
+    if (safeTime >= line.startSeconds && safeTime < line.endSeconds) {
+      return line.lineIndex;
+    }
+  }
+
+  return lines[lines.length - 1].lineIndex;
+}
+
