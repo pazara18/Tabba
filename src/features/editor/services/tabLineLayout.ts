@@ -29,3 +29,15 @@ export function createTabLines(
         startSeconds: 0,
         endSeconds: lineDurationSeconds,
         durationSeconds: lineDurationSeconds,
+      },
+    ];
+  }
+
+  const lineCount = Math.max(1, Math.ceil(safeTotal / lineDurationSeconds));
+
+  return Array.from({ length: lineCount }, (_, lineIndex) => {
+    const startSeconds = lineIndex * lineDurationSeconds;
+    const endSeconds = Math.min(safeTotal, startSeconds + lineDurationSeconds);
+
+    return {
+      lineIndex,
