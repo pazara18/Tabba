@@ -57,3 +57,13 @@ describe("getActiveLineIndex", () => {
   it("returns the last line when current time exceeds total duration", () => {
     expect(getActiveLineIndex(999, lines)).toBe(2);
   });
+});
+
+describe("getEventsForLine", () => {
+  it("includes events whose start time falls inside the line", () => {
+    const lines = createTabLines(20, 8);
+    const events = [
+      makeEvent("a", 0),
+      makeEvent("b", 7.999),
+      makeEvent("c", 8),
+      makeEvent("d", 15),
