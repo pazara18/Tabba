@@ -16,3 +16,8 @@ describe("timelineLayout", () => {
     ]);
   });
 
+  it("requires at least two markers", () => {
+    expect(() => createTimelineMarkers(60, 1)).toThrow(
+      "Timeline marker count must be at least 2."
+    );
+  });
