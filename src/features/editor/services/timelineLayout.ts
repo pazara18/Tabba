@@ -8,3 +8,7 @@ export function createTimelineMarkers(duration: number, markerCount = 5): Timeli
   }
 
   return Array.from({ length: markerCount }, (_, index) => ({
+    time: (duration / (markerCount - 1)) * index,
+  }));
+}
+
