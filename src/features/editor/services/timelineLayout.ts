@@ -16,3 +16,7 @@ export function getTimelinePercent(timeSeconds: number, durationSeconds: number)
   if (durationSeconds <= 0) {
     return 0;
   }
+
+  return Math.min(100, Math.max(0, (timeSeconds / durationSeconds) * 100));
+}
+
