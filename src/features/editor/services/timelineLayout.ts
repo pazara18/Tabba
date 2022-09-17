@@ -12,3 +12,7 @@ export function createTimelineMarkers(duration: number, markerCount = 5): Timeli
   }));
 }
 
+export function getTimelinePercent(timeSeconds: number, durationSeconds: number): number {
+  if (durationSeconds <= 0) {
+    return 0;
+  }
