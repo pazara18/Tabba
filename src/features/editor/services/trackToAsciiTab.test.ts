@@ -8,3 +8,16 @@ function makeEvent(
   id: string,
   startSeconds: number,
   positions: { stringNumber: number; fret: number }[]
+): TabEvent {
+  return {
+    id,
+    startSeconds,
+    durationSeconds: 0.25,
+    kind: "single",
+    texture: "mono",
+    detectedPitches: [],
+    chosenPositions: positions.map((position) => ({
+      stringNumber: position.stringNumber,
+      fret: position.fret,
+      pitch: "",
+    })),
