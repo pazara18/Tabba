@@ -34,3 +34,16 @@ function makeBassTrack(events: TabEvent[]): TabTrack {
     name: "Bass",
     instrument: "bass",
     tuning: standardBassTuning,
+    events,
+  };
+}
+
+function makeGuitarTrack(events: TabEvent[]): TabTrack {
+  return {
+    id: "track-1",
+    stemId: "stem-1",
+    name: "Guitar",
+    instrument: "guitar",
+    tuning: standardGuitarTuning,
+    events,
+  };
