@@ -21,3 +21,16 @@ function makeEvent(
       fret: position.fret,
       pitch: "",
     })),
+    candidates: [],
+    confidence: 1,
+    locked: false,
+  };
+}
+
+function makeBassTrack(events: TabEvent[]): TabTrack {
+  return {
+    id: "track-1",
+    stemId: "stem-1",
+    name: "Bass",
+    instrument: "bass",
+    tuning: standardBassTuning,
