@@ -47,3 +47,15 @@ function makeGuitarTrack(events: TabEvent[]): TabTrack {
     tuning: standardGuitarTuning,
     events,
   };
+}
+
+describe("trackToAsciiTab", () => {
+  it("renders the highest string at the top", () => {
+    const track = makeBassTrack([]);
+    const ascii = trackToAsciiTab(track, 8, { lineDurationSeconds: 8, columnsPerLine: 16 });
+
+    const rows = ascii.split("\n");
+    expect(rows[0]).toBe("0:00");
+    expect(rows[1].startsWith("G|")).toBe(true);
+    expect(rows[2].startsWith("D|")).toBe(true);
+    expect(rows[3].startsWith("A|")).toBe(true);
