@@ -59,3 +59,16 @@ describe("trackToAsciiTab", () => {
     expect(rows[1].startsWith("G|")).toBe(true);
     expect(rows[2].startsWith("D|")).toBe(true);
     expect(rows[3].startsWith("A|")).toBe(true);
+    expect(rows[4].startsWith("E|")).toBe(true);
+  });
+
+  it("places fret digits at the correct column for the line", () => {
+    const events = [
+      makeEvent("a", 0, [{ stringNumber: 4, fret: 3 }]),
+      makeEvent("b", 4, [{ stringNumber: 2, fret: 5 }]),
+    ];
+    const track = makeBassTrack(events);
+    const ascii = trackToAsciiTab(track, 8, { lineDurationSeconds: 8, columnsPerLine: 16 });
+
+    const rows = ascii.split("\n");
+    const eRow = rows.find((row) => row.startsWith("E|")) ?? "";
