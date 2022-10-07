@@ -72,3 +72,16 @@ describe("trackToAsciiTab", () => {
 
     const rows = ascii.split("\n");
     const eRow = rows.find((row) => row.startsWith("E|")) ?? "";
+    const dRow = rows.find((row) => row.startsWith("D|")) ?? "";
+
+    // Column 0 of the dashed body should be "3" on the E string.
+    expect(eRow[2]).toBe("3");
+    // Event at t=4s with 16 columns and duration 8s → column 8 (round((4/8) * 15) = 8).
+    expect(dRow[2 + 8]).toBe("5");
+  });
+
+  it("creates one stanza per line, separated by a blank line", () => {
+    const events = [
+      makeEvent("a", 0, [{ stringNumber: 4, fret: 0 }]),
+      makeEvent("b", 9, [{ stringNumber: 4, fret: 5 }]),
+    ];
