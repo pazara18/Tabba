@@ -25,3 +25,18 @@ export function trackToAsciiTab(
     MIN_COLUMNS_PER_LINE,
     options.columnsPerLine ?? DEFAULT_COLUMNS_PER_LINE
   );
+  const lines = createTabLines(totalDurationSeconds, lineDurationSeconds);
+  const stringRows = [...track.tuning.strings].sort(
+    (a, b) => a.stringNumber - b.stringNumber
+  );
+  const stemLabels = stringRows.map((string) => formatStringLabel(string.openPitch));
+  const labelWidth = Math.max(...stemLabels.map((label) => label.length));
+
+  return lines
+    .map((line) => buildStanza(line, track.events, stringRows, stemLabels, labelWidth, columnsPerLine))
+    .join("\n\n");
+}
+
+interface StringRow {
+  stringNumber: number;
+  openPitch: string;
