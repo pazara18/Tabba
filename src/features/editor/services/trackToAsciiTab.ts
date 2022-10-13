@@ -40,3 +40,18 @@ export function trackToAsciiTab(
 interface StringRow {
   stringNumber: number;
   openPitch: string;
+}
+
+function buildStanza(
+  line: TabLine,
+  allEvents: TabEvent[],
+  stringRows: StringRow[],
+  stemLabels: string[],
+  labelWidth: number,
+  columnsPerLine: number
+): string {
+  const lineEvents = getEventsForLine(allEvents, line);
+  const rows = stringRows.map((string, rowIndex) => {
+    const cells = createDashedCells(columnsPerLine);
+    const positions = collectPositionsOnString(lineEvents, string.stringNumber);
+
