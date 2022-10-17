@@ -55,3 +55,18 @@ function buildStanza(
     const cells = createDashedCells(columnsPerLine);
     const positions = collectPositionsOnString(lineEvents, string.stringNumber);
 
+    for (const { event, position } of positions) {
+      const ratio =
+        line.durationSeconds > 0
+          ? (event.startSeconds - line.startSeconds) / line.durationSeconds
+          : 0;
+      const startColumn = Math.min(
+        columnsPerLine - 1,
+        Math.max(0, Math.round(ratio * (columnsPerLine - 1)))
+      );
+      writeFretAt(cells, startColumn, position.fret);
+    }
+
+    const label = padLabel(stemLabels[rowIndex], labelWidth);
+    return `${label}|${cells.join("")}|`;
+  });
