@@ -70,3 +70,18 @@ function buildStanza(
     const label = padLabel(stemLabels[rowIndex], labelWidth);
     return `${label}|${cells.join("")}|`;
   });
+
+  return [`${formatTimeLabel(line.startSeconds)}`, ...rows].join("\n");
+}
+
+function collectPositionsOnString(
+  events: TabEvent[],
+  stringNumber: number
+): { event: TabEvent; position: TabPosition }[] {
+  const matches: { event: TabEvent; position: TabPosition }[] = [];
+
+  for (const event of events) {
+    for (const position of event.chosenPositions) {
+      if (position.stringNumber === stringNumber) {
+        matches.push({ event, position });
+      }
