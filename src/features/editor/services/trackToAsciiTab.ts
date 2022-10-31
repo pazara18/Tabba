@@ -85,3 +85,17 @@ function collectPositionsOnString(
       if (position.stringNumber === stringNumber) {
         matches.push({ event, position });
       }
+    }
+  }
+
+  return matches.sort((a, b) => a.event.startSeconds - b.event.startSeconds);
+}
+
+function createDashedCells(columnsPerLine: number): string[] {
+  return Array.from({ length: columnsPerLine }, () => "-");
+}
+
+function writeFretAt(cells: string[], startColumn: number, fret: number): void {
+  const text = String(Math.max(0, Math.floor(fret)));
+
+  for (let index = 0; index < text.length; index += 1) {
