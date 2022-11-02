@@ -7,3 +7,15 @@ import { inferBpmForTrack, trackToCloneHeroChart } from "./cloneHeroChart";
 function makeEvent(
   id: string,
   startSeconds: number,
+  pitch: string,
+  durationSeconds = 0.25
+): TabEvent {
+  return {
+    id,
+    startSeconds,
+    durationSeconds,
+    kind: "single",
+    texture: "mono",
+    detectedPitches: [],
+    chosenPositions: [{ stringNumber: 1, fret: 0, pitch }],
+    candidates: [],
