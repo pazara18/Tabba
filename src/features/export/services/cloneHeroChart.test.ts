@@ -19,3 +19,15 @@ function makeEvent(
     detectedPitches: [],
     chosenPositions: [{ stringNumber: 1, fret: 0, pitch }],
     candidates: [],
+    confidence: 1,
+    locked: false,
+  };
+}
+
+function makeTrack(events: TabEvent[]): TabTrack {
+  return {
+    id: "track-1",
+    stemId: "stem-1",
+    name: "Lead",
+    instrument: "guitar",
+    tuning: standardGuitarTuning,
