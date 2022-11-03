@@ -31,3 +31,14 @@ function makeTrack(events: TabEvent[]): TabTrack {
     name: "Lead",
     instrument: "guitar",
     tuning: standardGuitarTuning,
+    events,
+  };
+}
+
+describe("trackToCloneHeroChart", () => {
+  it("emits the required chart sections", () => {
+    const track = makeTrack([
+      makeEvent("a", 0, "E2"),
+      makeEvent("b", 0.5, "A3"),
+      makeEvent("c", 1, "E4"),
+      makeEvent("d", 1.5, "B3"),
