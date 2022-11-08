@@ -54,3 +54,14 @@ describe("trackToCloneHeroChart", () => {
     expect(chart).toMatch(/B 120000/);
   });
 
+  it("converts seconds to ticks using bpm and resolution", () => {
+    const track = makeTrack([
+      makeEvent("a", 0, "E2"),
+      makeEvent("b", 0.5, "A3"),
+      makeEvent("c", 1, "E4"),
+      makeEvent("d", 1.5, "B3"),
+    ]);
+
+    // At 120 BPM and resolution 192, one second = 2 beats = 384 ticks.
+    const chart = trackToCloneHeroChart(track, { bpm: 120, resolution: 192 });
+
