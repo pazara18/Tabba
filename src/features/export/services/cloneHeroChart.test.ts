@@ -42,3 +42,15 @@ describe("trackToCloneHeroChart", () => {
       makeEvent("b", 0.5, "A3"),
       makeEvent("c", 1, "E4"),
       makeEvent("d", 1.5, "B3"),
+    ]);
+
+    const chart = trackToCloneHeroChart(track, { bpm: 120 });
+
+    expect(chart).toContain("[Song]");
+    expect(chart).toContain("[SyncTrack]");
+    expect(chart).toContain("[Events]");
+    expect(chart).toContain("[ExpertSingle]");
+    expect(chart).toMatch(/Resolution = 192/);
+    expect(chart).toMatch(/B 120000/);
+  });
+
