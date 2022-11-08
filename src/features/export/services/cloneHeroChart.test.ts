@@ -65,3 +65,15 @@ describe("trackToCloneHeroChart", () => {
     // At 120 BPM and resolution 192, one second = 2 beats = 384 ticks.
     const chart = trackToCloneHeroChart(track, { bpm: 120, resolution: 192 });
 
+    expect(chart).toMatch(/^\s*0 = N \d+ \d+/m);
+    expect(chart).toMatch(/^\s*192 = N \d+ \d+/m);
+    expect(chart).toMatch(/^\s*384 = N \d+ \d+/m);
+    expect(chart).toMatch(/^\s*576 = N \d+ \d+/m);
+  });
+
+  it("infers BPM from onsets when no override is provided", () => {
+    const track = makeTrack(
+      Array.from({ length: 8 }, (_, index) => makeEvent(`n${index}`, index * 0.5, "E2"))
+    );
+
+    const bpm = inferBpmForTrack(track);
