@@ -40,3 +40,18 @@ export function trackToCloneHeroChart(
     renderNotesSection(difficulty, ghTrack.notes, bpm, resolution),
   ];
 
+  return lines.join("\n");
+}
+
+export function inferBpmForTrack(track: TabTrack): number {
+  const onsets = track.events.map((event) => event.startSeconds);
+  const estimate = estimateTempoFromOnsets(onsets);
+
+  return estimate?.bpm ?? DEFAULT_BPM;
+}
+
+function renderSongSection(
+  track: TabTrack,
+  bpm: number,
+  resolution: number,
+  metadata: CloneHeroChartMetadata
