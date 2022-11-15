@@ -70,3 +70,18 @@ function renderSongSection(
     ["MediaType", quote("cd")],
     ["MusicStream", quote(metadata.musicStream ?? "song.ogg")],
     ["BPM", bpm.toFixed(3)],
+  ];
+
+  const body = fields.map(([key, value]) => `  ${key} = ${value}`).join("\n");
+
+  return `[Song]\n{\n${body}\n}`;
+}
+
+function renderSyncSection(bpm: number): string {
+  const bpmMilli = Math.round(bpm * 1000);
+
+  return `[SyncTrack]\n{\n  0 = TS 4\n  0 = B ${bpmMilli}\n}`;
+}
+
+function renderEventsSection(): string {
+  return `[Events]\n{\n}`;
