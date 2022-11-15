@@ -55,3 +55,18 @@ function renderSongSection(
   bpm: number,
   resolution: number,
   metadata: CloneHeroChartMetadata
+): string {
+  const fields: [string, string][] = [
+    ["Name", quote(metadata.name ?? track.name)],
+    ["Artist", quote(metadata.artist ?? "Tabba")],
+    ["Charter", quote(metadata.charter ?? "Tabba")],
+    ["Offset", "0"],
+    ["Resolution", String(resolution)],
+    ["Player2", track.instrument === "bass" ? "bass" : "rhythm"],
+    ["Difficulty", "0"],
+    ["PreviewStart", "0"],
+    ["PreviewEnd", "0"],
+    ["Genre", quote("Rock")],
+    ["MediaType", quote("cd")],
+    ["MusicStream", quote(metadata.musicStream ?? "song.ogg")],
+    ["BPM", bpm.toFixed(3)],
