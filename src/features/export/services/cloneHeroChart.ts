@@ -85,3 +85,17 @@ function renderSyncSection(bpm: number): string {
 
 function renderEventsSection(): string {
   return `[Events]\n{\n}`;
+}
+
+function renderNotesSection(
+  difficulty: string,
+  notes: GhNote[],
+  bpm: number,
+  resolution: number
+): string {
+  const ticksByPosition = new Map<number, string[]>();
+
+  for (const note of notes) {
+    const tick = secondsToTicks(note.startSeconds, bpm, resolution);
+    const length = Math.max(0, secondsToTicks(note.sustainSeconds, bpm, resolution));
+
