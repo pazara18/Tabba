@@ -10,3 +10,17 @@ function makeEvent(
   stringNumber: number,
   fret: number,
   pitch = "E2",
+  durationSeconds = 0.25
+): TabEvent {
+  return {
+    id,
+    startSeconds,
+    durationSeconds,
+    kind: "single",
+    texture: "mono",
+    detectedPitches: [],
+    chosenPositions: [{ stringNumber, fret, pitch }],
+    candidates: [],
+    confidence: 1,
+    locked: false,
+  };
