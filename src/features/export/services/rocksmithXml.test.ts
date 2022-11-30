@@ -24,3 +24,18 @@ function makeEvent(
     confidence: 1,
     locked: false,
   };
+}
+
+function makeGuitarTrack(events: TabEvent[]): TabTrack {
+  return {
+    id: "track-guitar",
+    stemId: "stem-1",
+    name: "Lead",
+    instrument: "guitar",
+    tuning: standardGuitarTuning,
+    events,
+  };
+}
+
+function makeBassTrack(events: TabEvent[]): TabTrack {
+  return {
