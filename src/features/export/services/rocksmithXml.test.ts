@@ -53,3 +53,18 @@ describe("trackToRocksmithXml", () => {
     const track = makeGuitarTrack([makeEvent("a", 0, 6, 0, "E2")]);
     const xml = trackToRocksmithXml(track, { durationSeconds: 5 });
 
+    expect(xml).toMatch(/^<\?xml version="1\.0" encoding="utf-8"\?>/);
+    expect(xml).toContain("<song version=\"7\">");
+    expect(xml).toContain("<title>Lead</title>");
+    expect(xml).toContain("<arrangement>Lead</arrangement>");
+    expect(xml).toContain("<songLength>5.000</songLength>");
+  });
+
+  it("converts our stringNumber (1=highest) to Rocksmith string (0=lowest)", () => {
+    // stringNumber 6 (low E) -> rocksmith string 0
+    const lowE = makeEvent("low", 0, 6, 0);
+    // stringNumber 1 (high E) -> rocksmith string 5
+    const highE = makeEvent("high", 1, 1, 0, "E4");
+
+    const xml = trackToRocksmithXml(makeGuitarTrack([lowE, highE]));
+
