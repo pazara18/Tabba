@@ -39,3 +39,17 @@ function makeGuitarTrack(events: TabEvent[]): TabTrack {
 
 function makeBassTrack(events: TabEvent[]): TabTrack {
   return {
+    id: "track-bass",
+    stemId: "stem-1",
+    name: "Bass",
+    instrument: "bass",
+    tuning: standardBassTuning,
+    events,
+  };
+}
+
+describe("trackToRocksmithXml", () => {
+  it("emits valid song XML with the required top-level elements", () => {
+    const track = makeGuitarTrack([makeEvent("a", 0, 6, 0, "E2")]);
+    const xml = trackToRocksmithXml(track, { durationSeconds: 5 });
+
