@@ -68,3 +68,18 @@ describe("trackToRocksmithXml", () => {
 
     const xml = trackToRocksmithXml(makeGuitarTrack([lowE, highE]));
 
+    expect(xml).toMatch(/<note time="0\.000" string="0" fret="0"/);
+    expect(xml).toMatch(/<note time="1\.000" string="5" fret="0"/);
+  });
+
+  it("emits a 4-string tuning block for bass tracks", () => {
+    const track = makeBassTrack([makeEvent("a", 0, 4, 0, "E1")]);
+    const xml = trackToRocksmithXml(track);
+
+    expect(xml).toMatch(/<tuning string0="0" string1="0" string2="0" string3="0" \/>/);
+    expect(xml).toContain("<arrangement>Bass</arrangement>");
+  });
+
+  it("infers average tempo from event onsets", () => {
+    // 0.5s spacing = 120 BPM
+    const events = Array.from({ length: 8 }, (_, index) =>
