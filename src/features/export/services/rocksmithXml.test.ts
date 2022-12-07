@@ -83,3 +83,17 @@ describe("trackToRocksmithXml", () => {
   it("infers average tempo from event onsets", () => {
     // 0.5s spacing = 120 BPM
     const events = Array.from({ length: 8 }, (_, index) =>
+      makeEvent(`n${index}`, index * 0.5, 6, 0)
+    );
+
+    const xml = trackToRocksmithXml(makeGuitarTrack(events));
+
+    expect(xml).toMatch(/<averageTempo>120\.000<\/averageTempo>/);
+  });
+
+  it("produces an ebeat grid aligned to the inferred tempo", () => {
+    const events = Array.from({ length: 8 }, (_, index) =>
+      makeEvent(`n${index}`, index * 0.5, 6, 0)
+    );
+
+    const xml = trackToRocksmithXml(makeGuitarTrack(events), { durationSeconds: 4 });
