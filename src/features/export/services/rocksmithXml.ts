@@ -31,3 +31,20 @@ export function trackToRocksmithXml(
   const onsets = track.events.map((event) => event.startSeconds);
   const tempoEstimate = estimateTempoFromOnsets(onsets);
   const tempo = options.averageTempo ?? tempoEstimate?.bpm ?? DEFAULT_TEMPO;
+  const duration = options.durationSeconds ?? computeDefaultDuration(track);
+  const beats = tempoEstimate
+    ? buildBeatGrid(tempoEstimate, duration)
+    : buildBeatGrid({ bpm: tempo, beatOffsetSeconds: 0, confidence: 0 }, duration);
+  const tuningOffsets = computeTuningOffsets(track.tuning);
+  const metadata = options.metadata ?? {};
+
+  const notes = track.events.flatMap((event) => renderNotes(event, track));
+
+  const lines: (string | undefined)[] = [
+    `<?xml version="1.0" encoding="utf-8"?>`,
+    `<song version="7">`,
+    `  <title>${escapeXml(metadata.title ?? track.name)}</title>`,
+    `  <arrangement>${track.instrument === "bass" ? "Bass" : "Lead"}</arrangement>`,
+    `  <part>1</part>`,
+    `  <offset>0.000</offset>`,
+    `  <centOffset>0</centOffset>`,
