@@ -82,3 +82,20 @@ function computeDefaultDuration(track: TabTrack): number {
 
 function computeTuningOffsets(tuning: InstrumentTuning): number[] {
   const reference = tuning.instrument === "bass" ? BASS_E_STANDARD_MIDI : GUITAR_E_STANDARD_MIDI;
+  const sortedStrings = [...tuning.strings].sort(
+    (left, right) => right.stringNumber - left.stringNumber
+  );
+
+  return reference.map((referenceMidi, index) => {
+    const tuningString = sortedStrings[index];
+
+    if (!tuningString) {
+      return 0;
+    }
+
+    try {
+      return pitchToMidi(tuningString.openPitch) - referenceMidi;
+    } catch {
+      return 0;
+    }
+  });
