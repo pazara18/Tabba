@@ -65,3 +65,20 @@ export function trackToRocksmithXml(
     `      <chords count="0"></chords>`,
     `      <anchors count="0"></anchors>`,
     `      <handShapes count="0"></handShapes>`,
+    `    </level>`,
+    `  </levels>`,
+    `</song>`,
+  ];
+
+  return lines.filter((line): line is string => line !== undefined).join("\n");
+}
+
+function computeDefaultDuration(track: TabTrack): number {
+  return track.events.reduce(
+    (max, event) => Math.max(max, event.startSeconds + event.durationSeconds),
+    0
+  );
+}
+
+function computeTuningOffsets(tuning: InstrumentTuning): number[] {
+  const reference = tuning.instrument === "bass" ? BASS_E_STANDARD_MIDI : GUITAR_E_STANDARD_MIDI;
