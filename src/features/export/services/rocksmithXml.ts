@@ -99,3 +99,19 @@ function computeTuningOffsets(tuning: InstrumentTuning): number[] {
       return 0;
     }
   });
+}
+
+function renderTuning(track: TabTrack, offsets: number[]): string {
+  const stringCount = track.instrument === "bass" ? 4 : 6;
+  const attrs = Array.from({ length: stringCount }, (_, index) => {
+    const offset = offsets[index] ?? 0;
+    return `string${index}="${offset}"`;
+  }).join(" ");
+
+  return `<tuning ${attrs} />`;
+}
+
+function renderEbeats(beats: number[]): string {
+  if (beats.length === 0) {
+    return `<ebeats count="0"></ebeats>`;
+  }
