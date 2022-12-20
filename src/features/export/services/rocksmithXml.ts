@@ -115,3 +115,20 @@ function renderEbeats(beats: number[]): string {
   if (beats.length === 0) {
     return `<ebeats count="0"></ebeats>`;
   }
+
+  const lines = beats.map((time, index) => {
+    const measure = index % 4 === 0 ? Math.floor(index / 4) + 1 : -1;
+    return `    <ebeat time="${time.toFixed(3)}" measure="${measure}" />`;
+  });
+
+  return `<ebeats count="${beats.length}">\n${lines.join("\n")}\n  </ebeats>`;
+}
+
+function renderNotes(event: TabEvent, track: TabTrack): string[] {
+  const stringCount = track.instrument === "bass" ? 4 : 6;
+
+  return event.chosenPositions
+    .map((position) => renderNoteLine(event, position, stringCount))
+    .filter((line): line is string => line !== undefined);
+}
+
