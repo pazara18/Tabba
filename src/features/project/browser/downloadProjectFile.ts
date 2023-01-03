@@ -3,3 +3,5 @@ export function downloadTextFile(
   contents: string,
   mimeType = "application/json"
 ) {
+  const blob = new Blob([contents], { type: mimeType });
+  const objectUrl = URL.createObjectURL(blob);
