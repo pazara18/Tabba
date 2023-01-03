@@ -7,3 +7,4 @@ export function downloadTextFile(
   const objectUrl = URL.createObjectURL(blob);
   const link = document.createElement("a");
 
+  link.href = objectUrl;
