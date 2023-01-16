@@ -38,3 +38,14 @@ describe("createManualTabEvent", () => {
       startSeconds: 1,
       stringNumber: 1,
       tuning: standardGuitarTuning,
+    });
+
+    expect(event.durationSeconds).toBe(0.25);
+    expect(event.chosenPositions[0].pitch).toBe("E4");
+  });
+
+  it("creates an id with the runtime default id generator", () => {
+    const event = createManualTabEvent({
+      fret: 0,
+      startSeconds: 1,
+      stringNumber: 1,
