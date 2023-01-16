@@ -16,3 +16,14 @@ describe("createManualTabEvent", () => {
       id: "event-1",
       startSeconds: 12.5,
       durationSeconds: 1,
+      kind: "single",
+      texture: "mono",
+      detectedPitches: [],
+      chosenPositions: [{ stringNumber: 4, fret: 2, pitch: "E3" }],
+      confidence: 1,
+      locked: true,
+    });
+    expect(event.candidates.map((candidate) => candidate.id)).toEqual([
+      "single:4:2",
+      "single:5:7",
+      "single:6:12",
