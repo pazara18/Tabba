@@ -27,3 +27,14 @@ describe("createManualTabEvent", () => {
       "single:4:2",
       "single:5:7",
       "single:6:12",
+    ]);
+  });
+
+  it("supports custom duration", () => {
+    const event = createManualTabEvent({
+      createId: () => "event-2",
+      durationSeconds: 0.25,
+      fret: 0,
+      startSeconds: 1,
+      stringNumber: 1,
+      tuning: standardGuitarTuning,
