@@ -49,3 +49,13 @@ describe("createManualTabEvent", () => {
       fret: 0,
       startSeconds: 1,
       stringNumber: 1,
+      tuning: standardGuitarTuning,
+    });
+
+    expect(event.id).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    );
+  });
+
+  it("rejects impossible manual positions", () => {
+    expect(() =>
