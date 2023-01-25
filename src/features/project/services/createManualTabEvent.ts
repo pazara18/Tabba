@@ -12,3 +12,12 @@ interface CreateManualTabEventOptions {
   tuning: InstrumentTuning;
 }
 
+const defaultCreateId = () => crypto.randomUUID();
+
+export function createManualTabPosition(
+  tuning: InstrumentTuning,
+  stringNumber: number,
+  fret: number
+) {
+  if (fret < 0 || !Number.isInteger(fret)) {
+    throw new Error("Fret must be a non-negative integer.");
