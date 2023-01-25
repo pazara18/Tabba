@@ -21,3 +21,12 @@ export function createManualTabPosition(
 ) {
   if (fret < 0 || !Number.isInteger(fret)) {
     throw new Error("Fret must be a non-negative integer.");
+  }
+
+  const string = tuning.strings.find((candidate) => candidate.stringNumber === stringNumber);
+
+  if (!string) {
+    throw new Error(`String ${stringNumber} does not exist in ${tuning.name}.`);
+  }
+
+  return {
