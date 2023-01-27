@@ -30,3 +30,11 @@ export function createManualTabPosition(
   }
 
   return {
+    stringNumber,
+    fret,
+    pitch: transposePitch(string.openPitch, fret),
+  };
+}
+
+export function createManualTabEvent({
+  createId = defaultCreateId,
