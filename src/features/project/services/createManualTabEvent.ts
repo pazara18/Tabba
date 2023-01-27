@@ -38,3 +38,12 @@ export function createManualTabPosition(
 
 export function createManualTabEvent({
   createId = defaultCreateId,
+  durationSeconds = 1,
+  fret,
+  startSeconds,
+  stringNumber,
+  tuning,
+}: CreateManualTabEventOptions): TabEvent {
+  const position = createManualTabPosition(tuning, stringNumber, fret);
+
+  return {
