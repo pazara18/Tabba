@@ -8,3 +8,10 @@ describe("createProject", () => {
       name: "Stem tabs",
       createId: () => "project-1",
       now: () => new Date("2026-04-15T12:00:00.000Z"),
+    });
+
+    expect(project).toEqual({
+      schemaVersion: PROJECT_SCHEMA_VERSION,
+      id: "project-1",
+      name: "Stem tabs",
+      stems: [],
