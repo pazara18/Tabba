@@ -2,3 +2,9 @@ import { describe, expect, it } from "vitest";
 import { PROJECT_SCHEMA_VERSION } from "../types";
 import { createProject } from "./createProject";
 
+describe("createProject", () => {
+  it("creates an empty versioned project", () => {
+    const project = createProject({
+      name: "Stem tabs",
+      createId: () => "project-1",
+      now: () => new Date("2026-04-15T12:00:00.000Z"),
