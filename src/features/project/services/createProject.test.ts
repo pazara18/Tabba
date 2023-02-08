@@ -21,3 +21,9 @@ describe("createProject", () => {
     });
   });
 
+  it("uses a default project name when none is provided", () => {
+    const project = createProject({
+      createId: () => "project-2",
+      now: () => new Date("2026-04-15T13:00:00.000Z"),
+    });
+
