@@ -27,3 +27,10 @@ describe("createProject", () => {
       now: () => new Date("2026-04-15T13:00:00.000Z"),
     });
 
+    expect(project.name).toBe("Untitled Tabba Project");
+    expect(project.createdAt).toBe(project.updatedAt);
+  });
+
+  it("can create a project with runtime defaults", () => {
+    const project = createProject();
+
