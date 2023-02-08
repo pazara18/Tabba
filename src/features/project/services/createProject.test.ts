@@ -15,3 +15,9 @@ describe("createProject", () => {
       id: "project-1",
       name: "Stem tabs",
       stems: [],
+      tracks: [],
+      createdAt: "2026-04-15T12:00:00.000Z",
+      updatedAt: "2026-04-15T12:00:00.000Z",
+    });
+  });
+
