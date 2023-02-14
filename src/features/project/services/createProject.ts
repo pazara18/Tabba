@@ -4,3 +4,7 @@ import {
 } from "../types";
 
 interface CreateProjectOptions {
+  name?: string;
+  now?: () => Date;
+  createId?: () => string;
+}
