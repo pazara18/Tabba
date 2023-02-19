@@ -16,3 +16,6 @@ export function createProject(options: CreateProjectOptions = {}): TabbaProject 
   const createId = options.createId ?? defaultCreateId;
   const timestamp = now().toISOString();
 
+  return {
+    schemaVersion: PROJECT_SCHEMA_VERSION,
+    id: createId(),
