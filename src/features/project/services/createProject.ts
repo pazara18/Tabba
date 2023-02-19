@@ -8,3 +8,7 @@ interface CreateProjectOptions {
   now?: () => Date;
   createId?: () => string;
 }
+
+const defaultCreateId = () => crypto.randomUUID();
+
+export function createProject(options: CreateProjectOptions = {}): TabbaProject {
