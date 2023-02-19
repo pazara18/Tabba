@@ -12,3 +12,7 @@ interface CreateProjectOptions {
 const defaultCreateId = () => crypto.randomUUID();
 
 export function createProject(options: CreateProjectOptions = {}): TabbaProject {
+  const now = options.now ?? (() => new Date());
+  const createId = options.createId ?? defaultCreateId;
+  const timestamp = now().toISOString();
+
