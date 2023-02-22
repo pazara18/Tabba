@@ -8,3 +8,6 @@ describe("createProjectFileName", () => {
   });
 
   it("removes unsupported filename characters", () => {
+    const project = {
+      ...createProjectFixture(),
+      name: "Suno: Lead / Bass #4",
