@@ -15,3 +15,7 @@ describe("createProjectFileName", () => {
 
     expect(createProjectFileName(project)).toBe("suno-lead-bass-4.tabba.json");
   });
+
+  it("falls back when the project name has no filename characters", () => {
+    const project = {
+      ...createProjectFixture(),
