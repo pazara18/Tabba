@@ -11,3 +11,7 @@ describe("createProjectFileName", () => {
     const project = {
       ...createProjectFixture(),
       name: "Suno: Lead / Bass #4",
+    };
+
+    expect(createProjectFileName(project)).toBe("suno-lead-bass-4.tabba.json");
+  });
