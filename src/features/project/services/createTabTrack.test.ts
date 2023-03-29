@@ -7,3 +7,9 @@ describe("createTabTrack", () => {
     const track = createTabTrack({
       createId: () => "track-1",
       instrument: "guitar",
+      stemId: "stem-1",
+    });
+
+    expect(track).toEqual({
+      id: "track-1",
+      stemId: "stem-1",
