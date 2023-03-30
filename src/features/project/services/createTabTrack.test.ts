@@ -13,3 +13,8 @@ describe("createTabTrack", () => {
     expect(track).toEqual({
       id: "track-1",
       stemId: "stem-1",
+      name: "Guitar tab",
+      instrument: "guitar",
+      tuning: standardGuitarTuning,
+      events: [],
+    });
