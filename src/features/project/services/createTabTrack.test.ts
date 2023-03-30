@@ -24,3 +24,9 @@ describe("createTabTrack", () => {
     const track = createTabTrack({
       createId: () => "track-2",
       instrument: "bass",
+      stemId: "stem-1",
+    });
+
+    expect(track.tuning).toBe(standardBassTuning);
+    expect(track.name).toBe("Bass tab");
+  });
