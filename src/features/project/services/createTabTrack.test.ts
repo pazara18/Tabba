@@ -18,3 +18,9 @@ describe("createTabTrack", () => {
       tuning: standardGuitarTuning,
       events: [],
     });
+  });
+
+  it("creates a standard bass tab track for a stem", () => {
+    const track = createTabTrack({
+      createId: () => "track-2",
+      instrument: "bass",
