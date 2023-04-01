@@ -4,3 +4,7 @@ import type { TabTrack } from "../types";
 
 interface CreateTabTrackOptions {
   createId?: () => string;
+  instrument: InstrumentKind;
+  stemId: string;
+}
+
