@@ -8,3 +8,7 @@ interface CreateTabTrackOptions {
   stemId: string;
 }
 
+const defaultCreateId = () => crypto.randomUUID();
+
+export function createTabTrack({
+  createId = defaultCreateId,
