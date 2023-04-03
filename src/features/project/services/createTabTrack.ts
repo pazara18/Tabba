@@ -12,3 +12,7 @@ const defaultCreateId = () => crypto.randomUUID();
 
 export function createTabTrack({
   createId = defaultCreateId,
+  instrument,
+  stemId,
+}: CreateTabTrackOptions): TabTrack {
+  const tuning = instrument === "guitar" ? standardGuitarTuning : standardBassTuning;
