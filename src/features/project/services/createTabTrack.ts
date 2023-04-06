@@ -16,3 +16,7 @@ export function createTabTrack({
   stemId,
 }: CreateTabTrackOptions): TabTrack {
   const tuning = instrument === "guitar" ? standardGuitarTuning : standardBassTuning;
+  const label = instrument === "guitar" ? "Guitar" : "Bass";
+
+  return {
+    id: createId(),
