@@ -13,3 +13,6 @@ export function importProjectJson(jsonText: string): TabbaProject {
   }
 
   return migrated as TabbaProject;
+}
+
+function parseProjectJson(jsonText: string): unknown {
