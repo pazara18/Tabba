@@ -10,3 +10,6 @@ export function importProjectJson(jsonText: string): TabbaProject {
 
   if (!validation.valid) {
     throw new ProjectImportError("Invalid Tabba project file.", validation.issues);
+  }
+
+  return migrated as TabbaProject;
