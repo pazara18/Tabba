@@ -6,3 +6,7 @@ export function migrateProjectData(value: unknown): unknown {
   if (!isRecord(value)) {
     return value;
   }
+
+  if (value.schemaVersion === PROJECT_SCHEMA_VERSION) {
+    return value;
+  }
