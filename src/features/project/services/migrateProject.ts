@@ -10,3 +10,6 @@ export function migrateProjectData(value: unknown): unknown {
   if (value.schemaVersion === PROJECT_SCHEMA_VERSION) {
     return value;
   }
+
+  throw new ProjectImportError(
+    `Unsupported project schema version: ${String(value.schemaVersion)}.`
