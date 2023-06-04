@@ -34,3 +34,22 @@ describe("project JSON services", () => {
   });
 
   it("rejects unsupported schema versions", () => {
+    const project = { ...createProjectFixture(), schemaVersion: 99 };
+
+    expect(() => importProjectJson(JSON.stringify(project))).toThrow(
+      "Unsupported project schema version: 99."
+    );
+  });
+
+  it("returns validation issues for malformed top-level fields", () => {
+    const result = validateProject({
+      schemaVersion: PROJECT_SCHEMA_VERSION,
+      id: "",
+      name: 12,
+      createdAt: "not-a-date",
+      updatedAt: null,
+      stems: "missing",
+      tracks: {},
+    });
+
+    expect(result.valid).toBe(false);
