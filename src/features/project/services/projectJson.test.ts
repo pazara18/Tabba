@@ -16,3 +16,21 @@ describe("project JSON services", () => {
     expect(JSON.parse(json)).toEqual(createProjectFixture());
   });
 
+  it("imports a valid project JSON file", () => {
+    const project = createProjectFixture();
+    const imported = importProjectJson(serializeProject(project));
+
+    expect(imported).toEqual(project);
+  });
+
+  it("rejects invalid JSON", () => {
+    expect(() => importProjectJson("{")).toThrow(ProjectImportError);
+  });
+
+  it("rejects structurally invalid project JSON", () => {
+    expect(() => importProjectJson(JSON.stringify({ schemaVersion: 1 }))).toThrow(
+      "Invalid Tabba project file."
+    );
+  });
+
+  it("rejects unsupported schema versions", () => {
