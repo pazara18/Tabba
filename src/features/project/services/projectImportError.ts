@@ -3,3 +3,5 @@ export class ProjectImportError extends Error {
 
   constructor(message: string, issues: string[] = [message]) {
     super(message);
+    this.name = "ProjectImportError";
+    this.issues = issues;
