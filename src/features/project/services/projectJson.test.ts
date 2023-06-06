@@ -72,3 +72,21 @@ describe("project JSON services", () => {
           id: "stem-1",
           name: "Lead stem",
           offsetSeconds: Number.NaN,
+          durationSeconds: "long",
+          file: {
+            name: "lead.wav",
+            type: "",
+            sizeBytes: "large",
+            lastModifiedMs: "yesterday",
+          },
+        },
+        {
+          id: "stem-2",
+          name: "Rhythm stem",
+          offsetSeconds: 0,
+          file: "bad-file",
+        },
+        "bad-stem",
+      ],
+      tracks: [
+        {
