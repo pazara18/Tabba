@@ -53,3 +53,22 @@ describe("project JSON services", () => {
     });
 
     expect(result.valid).toBe(false);
+    expect(result.issues).toEqual([
+      "id must be a non-empty string.",
+      "name must be a non-empty string.",
+      "createdAt must be an ISO date string.",
+      "updatedAt must be an ISO date string.",
+      "stems must be an array.",
+      "tracks must be an array.",
+    ]);
+  });
+
+  it("returns validation issues for malformed nested fields", () => {
+    const project = createProjectFixture();
+    const invalidProject = {
+      ...project,
+      stems: [
+        {
+          id: "stem-1",
+          name: "Lead stem",
+          offsetSeconds: Number.NaN,
