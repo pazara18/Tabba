@@ -109,3 +109,22 @@ describe("project JSON services", () => {
               texture: "busy",
               detectedPitches: {},
               chosenPositions: null,
+              candidates: "none",
+              confidence: "high",
+              locked: "yes",
+            },
+            "bad-event",
+          ],
+        },
+        {
+          id: "track-2",
+          stemId: "stem-2",
+          name: "Rhythm guitar",
+          instrument: "guitar",
+          tuning: "bad-tuning",
+          events: [],
+        },
+        "bad-track",
+      ],
+    };
+
