@@ -90,3 +90,22 @@ describe("project JSON services", () => {
       ],
       tracks: [
         {
+          id: "track-1",
+          stemId: "stem-1",
+          name: "Lead guitar",
+          instrument: "synth",
+          tuning: {
+            id: "guitar-standard",
+            name: "Standard guitar",
+            instrument: "guitar",
+            strings: [{ stringNumber: "one", openPitch: "" }, "bad-string"],
+          },
+          events: [
+            {
+              id: "event-1",
+              startSeconds: "now",
+              durationSeconds: Infinity,
+              kind: "tap",
+              texture: "busy",
+              detectedPitches: {},
+              chosenPositions: null,
