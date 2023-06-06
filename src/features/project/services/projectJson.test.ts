@@ -128,3 +128,21 @@ describe("project JSON services", () => {
       ],
     };
 
+    const result = validateProject(invalidProject);
+
+    expect(result.valid).toBe(false);
+    expect(result.issues).toContain("stems[0].offsetSeconds must be a finite number.");
+    expect(result.issues).toContain("stems[0].durationSeconds must be a finite number.");
+    expect(result.issues).toContain("stems[0].file.type must be a non-empty string.");
+    expect(result.issues).toContain("stems[0].file.sizeBytes must be a finite number.");
+    expect(result.issues).toContain("stems[0].file.lastModifiedMs must be a finite number.");
+    expect(result.issues).toContain("stems[1].file must be an object.");
+    expect(result.issues).toContain("stems[2] must be an object.");
+    expect(result.issues).toContain("tracks[0].instrument must be guitar or bass.");
+    expect(result.issues).toContain(
+      "tracks[0].tuning.strings[0].stringNumber must be a finite number."
+    );
+    expect(result.issues).toContain(
+      "tracks[0].tuning.strings[0].openPitch must be a non-empty string."
+    );
+    expect(result.issues).toContain("tracks[0].tuning.strings[1] must be an object.");
