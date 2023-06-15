@@ -13,3 +13,8 @@ describe("updateProjectStems", () => {
 
     expect(project.stems).toHaveLength(1);
     expect(updated.stems.map((stem) => stem.id)).toEqual(["stem-1", "stem-2"]);
+    expect(updated.updatedAt).toBe("2026-04-15T15:00:00.000Z");
+  });
+
+  it("records stem duration by id", () => {
+    const project = createProjectFixture();
