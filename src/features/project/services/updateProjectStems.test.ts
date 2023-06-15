@@ -9,3 +9,7 @@ describe("updateProjectStems", () => {
       project,
       { id: "stem-2", name: "Bass", offsetSeconds: 0 },
       new Date("2026-04-15T15:00:00.000Z")
+    );
+
+    expect(project.stems).toHaveLength(1);
+    expect(updated.stems.map((stem) => stem.id)).toEqual(["stem-1", "stem-2"]);
