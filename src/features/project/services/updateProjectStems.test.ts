@@ -18,3 +18,7 @@ describe("updateProjectStems", () => {
 
   it("records stem duration by id", () => {
     const project = createProjectFixture();
+    const updated = setStemDuration(
+      project,
+      "stem-1",
+      61.25,
