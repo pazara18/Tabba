@@ -8,3 +8,7 @@ export function addStemToProject(
   return {
     ...project,
     stems: [...project.stems, stem],
+    updatedAt: updatedAt.toISOString(),
+  };
+}
+
