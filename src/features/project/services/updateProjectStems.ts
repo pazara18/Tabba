@@ -4,3 +4,7 @@ export function addStemToProject(
   project: TabbaProject,
   stem: Stem,
   updatedAt: Date
+): TabbaProject {
+  return {
+    ...project,
+    stems: [...project.stems, stem],
