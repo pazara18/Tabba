@@ -16,3 +16,6 @@ export function setStemDuration(
   project: TabbaProject,
   stemId: string,
   durationSeconds: number,
+  updatedAt: Date
+): TabbaProject {
+  return {
