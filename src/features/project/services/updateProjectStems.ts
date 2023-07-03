@@ -12,3 +12,7 @@ export function addStemToProject(
   };
 }
 
+export function setStemDuration(
+  project: TabbaProject,
+  stemId: string,
+  durationSeconds: number,
