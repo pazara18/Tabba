@@ -30,3 +30,32 @@ describe("updateProjectTracks", () => {
 
   it("adds events to a track in timeline order", () => {
     const project = createProjectFixture();
+    const track = project.tracks[0];
+    const lateEvent = createManualTabEvent({
+      createId: () => "event-late",
+      fret: 3,
+      startSeconds: 8,
+      stringNumber: 1,
+      tuning: track.tuning,
+    });
+    const earlyEvent = createManualTabEvent({
+      createId: () => "event-early",
+      fret: 5,
+      startSeconds: 2,
+      stringNumber: 2,
+      tuning: track.tuning,
+    });
+
+    const withLate = addEventToTrack(project, track.id, lateEvent, new Date());
+    const withBoth = addEventToTrack(withLate, track.id, earlyEvent, new Date());
+
+    expect(withBoth.tracks[0].events.map((event) => event.id)).toEqual([
+      "event-1",
+      "event-early",
+      "event-late",
+    ]);
+  });
+
+  it("adds multiple events to a track in timeline order", () => {
+    const project = createProjectFixture();
+    const track = project.tracks[0];
