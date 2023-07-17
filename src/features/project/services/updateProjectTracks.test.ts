@@ -89,3 +89,32 @@ describe("updateProjectTracks", () => {
     const previousSuggestion = {
       ...createManualTabEvent({
         createId: () => "suggested-old",
+        fret: 3,
+        startSeconds: 3,
+        stringNumber: 5,
+        tuning: track.tuning,
+      }),
+      locked: false,
+    };
+    const nextSuggestion = {
+      ...createManualTabEvent({
+        createId: () => "suggested-new",
+        fret: 5,
+        startSeconds: 5,
+        stringNumber: 5,
+        tuning: track.tuning,
+      }),
+      locked: false,
+    };
+    const projectWithSuggestion = addEventToTrack(project, track.id, previousSuggestion, new Date());
+
+    const updated = replaceSuggestedEventsInTrack(
+      projectWithSuggestion,
+      track.id,
+      [nextSuggestion],
+      new Date()
+    );
+
+    expect(updated.tracks[0].events.map((event) => event.id)).toEqual([
+      "event-1",
+      "suggested-new",
