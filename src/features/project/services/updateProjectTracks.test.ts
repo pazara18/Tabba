@@ -177,3 +177,32 @@ describe("updateProjectTracks", () => {
     const updated = shiftSuggestedEventsInTrack(
       projectWithSuggestion,
       track.id,
+      -0.25,
+      new Date("2026-04-15T19:00:00.000Z")
+    );
+
+    expect(updated.tracks[0].events.map((event) => [event.id, event.startSeconds])).toEqual([
+      ["event-1", 1],
+      ["suggested", 2.75],
+    ]);
+    expect(updated.updatedAt).toBe("2026-04-15T19:00:00.000Z");
+  });
+
+  it("does not shift unlocked suggestions before zero", () => {
+    const project = { ...createProjectFixture(), tracks: [] };
+    const track = createTabTrack({
+      createId: () => "track-1",
+      instrument: "guitar",
+      stemId: "stem-1",
+    });
+    const projectWithTrack = addTrackToProject(project, track, new Date());
+    const suggestion = {
+      ...createManualTabEvent({
+        createId: () => "suggested",
+        fret: 3,
+        startSeconds: 0.1,
+        stringNumber: 5,
+        tuning: track.tuning,
+      }),
+      locked: false,
+    };
