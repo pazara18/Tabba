@@ -148,3 +148,32 @@ describe("updateProjectTracks", () => {
 
     const updated = replaceSuggestedEventsInTrack(
       project,
+      track.id,
+      [overlappingSuggestion, laterSuggestion],
+      new Date()
+    );
+
+    expect(updated.tracks[0].events.map((event) => event.id)).toEqual([
+      "event-1",
+      "suggested-later",
+    ]);
+  });
+
+  it("shifts unlocked suggestions while preserving locked events", () => {
+    const project = lockFixtureEvents(createProjectFixture());
+    const track = project.tracks[0];
+    const suggestion = {
+      ...createManualTabEvent({
+        createId: () => "suggested",
+        fret: 3,
+        startSeconds: 3,
+        stringNumber: 5,
+        tuning: track.tuning,
+      }),
+      locked: false,
+    };
+    const projectWithSuggestion = addEventToTrack(project, track.id, suggestion, new Date());
+
+    const updated = shiftSuggestedEventsInTrack(
+      projectWithSuggestion,
+      track.id,
