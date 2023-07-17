@@ -59,3 +59,33 @@ describe("updateProjectTracks", () => {
   it("adds multiple events to a track in timeline order", () => {
     const project = createProjectFixture();
     const track = project.tracks[0];
+    const eventA = createManualTabEvent({
+      createId: () => "event-a",
+      fret: 3,
+      startSeconds: 8,
+      stringNumber: 1,
+      tuning: track.tuning,
+    });
+    const eventB = createManualTabEvent({
+      createId: () => "event-b",
+      fret: 5,
+      startSeconds: 2,
+      stringNumber: 2,
+      tuning: track.tuning,
+    });
+
+    const updated = addEventsToTrack(project, track.id, [eventA, eventB], new Date());
+
+    expect(updated.tracks[0].events.map((event) => event.id)).toEqual([
+      "event-1",
+      "event-b",
+      "event-a",
+    ]);
+  });
+
+  it("replaces previous unlocked suggestions while preserving locked edits", () => {
+    const project = lockFixtureEvents(createProjectFixture());
+    const track = project.tracks[0];
+    const previousSuggestion = {
+      ...createManualTabEvent({
+        createId: () => "suggested-old",
