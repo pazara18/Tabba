@@ -118,3 +118,33 @@ describe("updateProjectTracks", () => {
     expect(updated.tracks[0].events.map((event) => event.id)).toEqual([
       "event-1",
       "suggested-new",
+    ]);
+  });
+
+  it("does not add new suggestions that overlap locked edits", () => {
+    const project = lockFixtureEvents(createProjectFixture());
+    const track = project.tracks[0];
+    const overlappingSuggestion = {
+      ...createManualTabEvent({
+        createId: () => "suggested-overlap",
+        durationSeconds: 0.5,
+        fret: 3,
+        startSeconds: 1.2,
+        stringNumber: 5,
+        tuning: track.tuning,
+      }),
+      locked: false,
+    };
+    const laterSuggestion = {
+      ...createManualTabEvent({
+        createId: () => "suggested-later",
+        fret: 5,
+        startSeconds: 5,
+        stringNumber: 5,
+        tuning: track.tuning,
+      }),
+      locked: false,
+    };
+
+    const updated = replaceSuggestedEventsInTrack(
+      project,
