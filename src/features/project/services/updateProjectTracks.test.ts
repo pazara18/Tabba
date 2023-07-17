@@ -236,3 +236,32 @@ describe("updateProjectTracks", () => {
       stringNumber: 1,
       tuning: track.tuning,
     });
+
+    const updated = addEventToTrack(projectWithOtherTrack, track.id, event, new Date());
+
+    expect(updated.tracks[1]).toBe(otherTrack);
+  });
+
+  it("updates a manual event and recalculates its pitch", () => {
+    const project = createProjectFixture();
+    const track = project.tracks[0];
+
+    const updated = updateManualEvent(
+      project,
+      track.id,
+      "event-1",
+      {
+        durationSeconds: 0.75,
+        fret: 3,
+        startSeconds: 4,
+        stringNumber: 5,
+      },
+      new Date("2026-04-15T17:00:00.000Z")
+    );
+    const event = updated.tracks[0].events[0];
+
+    expect(event.startSeconds).toBe(4);
+    expect(event.durationSeconds).toBe(0.75);
+    expect(event.chosenPositions).toEqual([{ stringNumber: 5, fret: 3, pitch: "C3" }]);
+    expect(event.candidates[0].positions).toEqual([
+      { stringNumber: 5, fret: 3, pitch: "C3" },
