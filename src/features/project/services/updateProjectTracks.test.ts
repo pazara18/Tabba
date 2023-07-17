@@ -206,3 +206,33 @@ describe("updateProjectTracks", () => {
       }),
       locked: false,
     };
+
+    const updated = shiftSuggestedEventsInTrack(
+      addEventToTrack(projectWithTrack, track.id, suggestion, new Date()),
+      track.id,
+      -0.25,
+      new Date()
+    );
+
+    expect(updated.tracks[0].events[0].startSeconds).toBe(0);
+  });
+
+  it("leaves other tracks unchanged when adding an event", () => {
+    const project = createProjectFixture();
+    const track = project.tracks[0];
+    const otherTrack = createTabTrack({
+      createId: () => "track-other",
+      instrument: "bass",
+      stemId: "stem-1",
+    });
+    const projectWithOtherTrack = {
+      ...project,
+      tracks: [...project.tracks, otherTrack],
+    };
+    const event = createManualTabEvent({
+      createId: () => "event-new",
+      fret: 3,
+      startSeconds: 8,
+      stringNumber: 1,
+      tuning: track.tuning,
+    });
