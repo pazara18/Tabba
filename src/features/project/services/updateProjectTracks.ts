@@ -72,3 +72,22 @@ export function shiftSuggestedEventsInTrack(
   deltaSeconds: number,
   updatedAt: Date
 ): TabbaProject {
+  return updateTrackEvents(project, trackId, updatedAt, (track) =>
+    sortEventsByStart(
+      track.events.map((event) =>
+        event.locked
+          ? event
+          : { ...event, startSeconds: Math.max(0, event.startSeconds + deltaSeconds) }
+      )
+    )
+  );
+}
+
+export function updateManualEvent(
+  project: TabbaProject,
+  trackId: string,
+  eventId: string,
+  patch: ManualEventPatch,
+  updatedAt: Date
+): TabbaProject {
+  return updateTrackEvents(project, trackId, updatedAt, (track) =>
