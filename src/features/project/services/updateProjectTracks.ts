@@ -52,3 +52,23 @@ export function addEventsToTrack(
 
 export function replaceSuggestedEventsInTrack(
   project: TabbaProject,
+  trackId: string,
+  suggestedEvents: TabEvent[],
+  updatedAt: Date
+): TabbaProject {
+  return updateTrackEvents(project, trackId, updatedAt, (track) => {
+    const lockedEvents = track.events.filter((event) => event.locked);
+    const nonOverlappingSuggestions = suggestedEvents.filter(
+      (event) => !lockedEvents.some((lockedEvent) => eventsOverlap(event, lockedEvent))
+    );
+
+    return sortEventsByStart([...lockedEvents, ...nonOverlappingSuggestions]);
+  });
+}
+
+export function shiftSuggestedEventsInTrack(
+  project: TabbaProject,
+  trackId: string,
+  deltaSeconds: number,
+  updatedAt: Date
+): TabbaProject {
