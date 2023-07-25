@@ -33,3 +33,22 @@ export function addEventToTrack(
     tracks: project.tracks.map((track) =>
       track.id === trackId
         ? { ...track, events: sortEventsByStart([...track.events, event]) }
+        : track
+    ),
+    updatedAt: updatedAt.toISOString(),
+  };
+}
+
+export function addEventsToTrack(
+  project: TabbaProject,
+  trackId: string,
+  events: TabEvent[],
+  updatedAt: Date
+): TabbaProject {
+  return updateTrackEvents(project, trackId, updatedAt, (track) =>
+    sortEventsByStart([...track.events, ...events])
+  );
+}
+
+export function replaceSuggestedEventsInTrack(
+  project: TabbaProject,
