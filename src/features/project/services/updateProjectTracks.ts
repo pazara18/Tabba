@@ -14,3 +14,22 @@ export function addTrackToProject(
   project: TabbaProject,
   track: TabTrack,
   updatedAt: Date
+): TabbaProject {
+  return {
+    ...project,
+    tracks: [...project.tracks, track],
+    updatedAt: updatedAt.toISOString(),
+  };
+}
+
+export function addEventToTrack(
+  project: TabbaProject,
+  trackId: string,
+  event: TabEvent,
+  updatedAt: Date
+): TabbaProject {
+  return {
+    ...project,
+    tracks: project.tracks.map((track) =>
+      track.id === trackId
+        ? { ...track, events: sortEventsByStart([...track.events, event]) }
