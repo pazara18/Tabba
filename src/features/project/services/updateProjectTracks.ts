@@ -110,3 +110,22 @@ export function deleteEventFromTrack(
   );
 }
 
+function applyManualEventPatch(
+  track: TabTrack,
+  event: TabEvent,
+  patch: ManualEventPatch
+): TabEvent {
+  const currentPosition = event.chosenPositions[0];
+  const stringNumber = patch.stringNumber ?? currentPosition?.stringNumber;
+  const fret = patch.fret ?? currentPosition?.fret;
+
+  if (stringNumber === undefined || fret === undefined) {
+    return event;
+  }
+
+  const nextPosition = createManualTabPosition(track.tuning, stringNumber, fret);
+
+  return {
+    ...event,
+    startSeconds: patch.startSeconds ?? event.startSeconds,
+    durationSeconds: patch.durationSeconds ?? event.durationSeconds,
