@@ -91,3 +91,22 @@ export function updateManualEvent(
   updatedAt: Date
 ): TabbaProject {
   return updateTrackEvents(project, trackId, updatedAt, (track) =>
+    sortEventsByStart(
+      track.events.map((event) =>
+        event.id === eventId ? applyManualEventPatch(track, event, patch) : event
+      )
+    )
+  );
+}
+
+export function deleteEventFromTrack(
+  project: TabbaProject,
+  trackId: string,
+  eventId: string,
+  updatedAt: Date
+): TabbaProject {
+  return updateTrackEvents(project, trackId, updatedAt, (track) =>
+    track.events.filter((event) => event.id !== eventId)
+  );
+}
+
