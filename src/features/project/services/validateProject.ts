@@ -53,3 +53,21 @@ function validateStem(value: unknown, path: string, issues: string[]) {
   if (value.file !== undefined) {
     validateStemFile(value.file, `${path}.file`, issues);
   }
+}
+
+function validateStemFile(value: unknown, path: string, issues: string[]) {
+  if (!isRecord(value)) {
+    issues.push(`${path} must be an object.`);
+    return;
+  }
+
+  requireString(value.name, `${path}.name`, issues);
+  requireString(value.type, `${path}.type`, issues);
+  requireNumber(value.sizeBytes, `${path}.sizeBytes`, issues);
+
+  if (value.lastModifiedMs !== undefined) {
+    requireNumber(value.lastModifiedMs, `${path}.lastModifiedMs`, issues);
+  }
+}
+
+function validateTrack(value: unknown, path: string, issues: string[]) {
