@@ -34,3 +34,22 @@ export function validateProject(value: unknown): ValidationResult {
   }
 
   return { valid: issues.length === 0, issues };
+}
+
+function validateStem(value: unknown, path: string, issues: string[]) {
+  if (!isRecord(value)) {
+    issues.push(`${path} must be an object.`);
+    return;
+  }
+
+  requireString(value.id, `${path}.id`, issues);
+  requireString(value.name, `${path}.name`, issues);
+  requireNumber(value.offsetSeconds, `${path}.offsetSeconds`, issues);
+
+  if (value.durationSeconds !== undefined) {
+    requireNumber(value.durationSeconds, `${path}.durationSeconds`, issues);
+  }
+
+  if (value.file !== undefined) {
+    validateStemFile(value.file, `${path}.file`, issues);
+  }
