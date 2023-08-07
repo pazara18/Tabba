@@ -71,3 +71,22 @@ function validateStemFile(value: unknown, path: string, issues: string[]) {
 }
 
 function validateTrack(value: unknown, path: string, issues: string[]) {
+  if (!isRecord(value)) {
+    issues.push(`${path} must be an object.`);
+    return;
+  }
+
+  requireString(value.id, `${path}.id`, issues);
+  requireString(value.stemId, `${path}.stemId`, issues);
+  requireString(value.name, `${path}.name`, issues);
+  requireInstrument(value.instrument, `${path}.instrument`, issues);
+  validateTuning(value.tuning, `${path}.tuning`, issues);
+  requireArray(value.events, `${path}.events`, issues);
+
+  if (Array.isArray(value.events)) {
+    value.events.forEach((event, index) => validateEvent(event, `${path}.events[${index}]`, issues));
+  }
+}
+
+function validateTuning(value: unknown, path: string, issues: string[]) {
+  if (!isRecord(value)) {
