@@ -90,3 +90,21 @@ function validateTrack(value: unknown, path: string, issues: string[]) {
 
 function validateTuning(value: unknown, path: string, issues: string[]) {
   if (!isRecord(value)) {
+    issues.push(`${path} must be an object.`);
+    return;
+  }
+
+  requireString(value.id, `${path}.id`, issues);
+  requireString(value.name, `${path}.name`, issues);
+  requireInstrument(value.instrument, `${path}.instrument`, issues);
+  requireArray(value.strings, `${path}.strings`, issues);
+
+  if (Array.isArray(value.strings)) {
+    value.strings.forEach((string, index) => validateTuningString(string, `${path}.strings[${index}]`, issues));
+  }
+}
+
+function validateTuningString(value: unknown, path: string, issues: string[]) {
+  if (!isRecord(value)) {
+    issues.push(`${path} must be an object.`);
+    return;
