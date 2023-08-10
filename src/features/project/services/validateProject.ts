@@ -108,3 +108,22 @@ function validateTuningString(value: unknown, path: string, issues: string[]) {
   if (!isRecord(value)) {
     issues.push(`${path} must be an object.`);
     return;
+  }
+
+  requireNumber(value.stringNumber, `${path}.stringNumber`, issues);
+  requireString(value.openPitch, `${path}.openPitch`, issues);
+}
+
+function validateEvent(value: unknown, path: string, issues: string[]) {
+  if (!isRecord(value)) {
+    issues.push(`${path} must be an object.`);
+    return;
+  }
+
+  requireString(value.id, `${path}.id`, issues);
+  requireNumber(value.startSeconds, `${path}.startSeconds`, issues);
+  requireNumber(value.durationSeconds, `${path}.durationSeconds`, issues);
+  requireEventKind(value.kind, `${path}.kind`, issues);
+  requireTexture(value.texture, `${path}.texture`, issues);
+  requireArray(value.detectedPitches, `${path}.detectedPitches`, issues);
+  requireArray(value.chosenPositions, `${path}.chosenPositions`, issues);
