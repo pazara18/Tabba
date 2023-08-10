@@ -127,3 +127,21 @@ function validateEvent(value: unknown, path: string, issues: string[]) {
   requireTexture(value.texture, `${path}.texture`, issues);
   requireArray(value.detectedPitches, `${path}.detectedPitches`, issues);
   requireArray(value.chosenPositions, `${path}.chosenPositions`, issues);
+  requireArray(value.candidates, `${path}.candidates`, issues);
+  requireNumber(value.confidence, `${path}.confidence`, issues);
+  requireBoolean(value.locked, `${path}.locked`, issues);
+}
+
+function requireString(value: unknown, path: string, issues: string[]) {
+  if (typeof value !== "string" || value.length === 0) {
+    issues.push(`${path} must be a non-empty string.`);
+  }
+}
+
+function requireNumber(value: unknown, path: string, issues: string[]) {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    issues.push(`${path} must be a finite number.`);
+  }
+}
+
+function requireArray(value: unknown, path: string, issues: string[]) {
