@@ -17,3 +17,8 @@ export interface Stem {
   offsetSeconds: number;
   file?: StemFileMetadata;
 }
+
+export interface TabTrack {
+  id: string;
+  stemId: string;
+  name: string;
