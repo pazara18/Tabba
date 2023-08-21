@@ -12,3 +12,8 @@ export interface StemFileMetadata {
 
 export interface Stem {
   id: string;
+  name: string;
+  durationSeconds?: number;
+  offsetSeconds: number;
+  file?: StemFileMetadata;
+}
