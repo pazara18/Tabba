@@ -6,3 +6,9 @@ export const PROJECT_SCHEMA_VERSION = 1;
 export interface StemFileMetadata {
   name: string;
   type: string;
+  sizeBytes: number;
+  lastModifiedMs?: number;
+}
+
+export interface Stem {
+  id: string;
