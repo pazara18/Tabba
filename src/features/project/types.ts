@@ -22,3 +22,8 @@ export interface TabTrack {
   id: string;
   stemId: string;
   name: string;
+  instrument: InstrumentKind;
+  tuning: InstrumentTuning;
+  events: TabEvent[];
+}
+
