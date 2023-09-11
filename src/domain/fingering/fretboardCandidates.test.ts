@@ -12,3 +12,13 @@ describe("fretboardCandidates", () => {
   });
 
   it("respects maximum fret limits", () => {
+    expect(generatePitchPositions("E3", standardGuitarTuning, { maxFret: 5 })).toEqual([
+      { stringNumber: 4, fret: 2, pitch: "E3" },
+    ]);
+  });
+
+  it("returns no positions for pitches outside the instrument range", () => {
+    expect(generatePitchPositions("C1", standardGuitarTuning)).toEqual([]);
+  });
+
+  it("creates sorted candidate interpretations", () => {
