@@ -22,3 +22,13 @@ describe("fretboardCandidates", () => {
   });
 
   it("creates sorted candidate interpretations", () => {
+    const candidates = createPositionCandidates("E3", standardGuitarTuning, {
+      previousPosition: { stringNumber: 4, fret: 1, pitch: "D#3" },
+    });
+
+    expect(candidates[0]).toMatchObject({
+      id: "single:4:2",
+      label: "String 4, fret 2",
+      positions: [{ stringNumber: 4, fret: 2, pitch: "E3" }],
+    });
+  });
