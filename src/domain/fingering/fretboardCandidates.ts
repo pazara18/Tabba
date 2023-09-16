@@ -4,3 +4,17 @@ import type { CandidateInterpretation, TabPosition } from "../tab/types";
 
 interface FingeringOptions {
   maxFret?: number;
+  previousPosition?: TabPosition;
+}
+
+const defaultMaxFret = 24;
+
+export function generatePitchPositions(
+  pitch: string,
+  tuning: InstrumentTuning,
+  options: FingeringOptions = {}
+): TabPosition[] {
+  const targetMidi = pitchToMidi(pitch);
+  const maxFret = options.maxFret ?? defaultMaxFret;
+
+  return tuning.strings.flatMap((string) => {
