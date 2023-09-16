@@ -18,3 +18,17 @@ export function generatePitchPositions(
   const maxFret = options.maxFret ?? defaultMaxFret;
 
   return tuning.strings.flatMap((string) => {
+    const fret = targetMidi - pitchToMidi(string.openPitch);
+
+    if (fret < 0 || fret > maxFret) {
+      return [];
+    }
+
+    return [
+      {
+        stringNumber: string.stringNumber,
+        fret,
+        pitch: midiToPitch(targetMidi),
+      },
+    ];
+  });
