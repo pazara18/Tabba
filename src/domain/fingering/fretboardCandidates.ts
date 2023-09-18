@@ -32,3 +32,17 @@ export function generatePitchPositions(
       },
     ];
   });
+}
+
+export function createPositionCandidates(
+  pitch: string,
+  tuning: InstrumentTuning,
+  options: FingeringOptions = {}
+): CandidateInterpretation[] {
+  return generatePitchPositions(pitch, tuning, options)
+    .map((position) => ({
+      id: `single:${position.stringNumber}:${position.fret}`,
+      kind: "single" as const,
+      label: `String ${position.stringNumber}, fret ${position.fret}`,
+      positions: [position],
+      confidence: 1,
