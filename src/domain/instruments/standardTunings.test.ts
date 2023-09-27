@@ -16,3 +16,10 @@ describe("standardTunings", () => {
       { stringNumber: 4, openPitch: "D3" },
       { stringNumber: 5, openPitch: "A2" },
       { stringNumber: 6, openPitch: "E2" },
+    ]);
+  });
+
+  it("defines bass strings from highest to lowest pitch", () => {
+    expect(standardBassTuning).toMatchObject({
+      id: "bass-standard",
+      name: "Standard bass",
