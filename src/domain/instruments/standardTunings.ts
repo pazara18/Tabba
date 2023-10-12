@@ -11,3 +11,9 @@ export const standardGuitarTuning: InstrumentTuning = {
     { stringNumber: 4, openPitch: "D3" },
     { stringNumber: 5, openPitch: "A2" },
     { stringNumber: 6, openPitch: "E2" },
+  ],
+};
+
+export const standardBassTuning: InstrumentTuning = {
+  id: "bass-standard",
+  name: "Standard bass",
