@@ -5,3 +5,6 @@ export interface TuningString {
   openPitch: string;
 }
 
+export interface InstrumentTuning {
+  id: string;
+  name: string;
