@@ -11,3 +11,8 @@ describe("pitchNames", () => {
   it("converts MIDI notes to sharp pitch names", () => {
     expect(midiToPitch(60)).toBe("C4");
     expect(midiToPitch(63)).toBe("D#4");
+  });
+
+  it("transposes pitch names by semitone distance", () => {
+    expect(transposePitch("E2", 3)).toBe("G2");
+    expect(transposePitch("B3", 1)).toBe("C4");
