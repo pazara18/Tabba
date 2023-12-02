@@ -14,3 +14,14 @@ const pitchOffsets: Record<string, number> = {
   Ab: 8,
   A: 9,
   "A#": 10,
+  Bb: 10,
+  B: 11,
+};
+
+const sharpPitchNames = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+
+export function pitchToMidi(pitch: string): number {
+  const match = /^([A-G](?:#|b)?)(-?\d+)$/.exec(pitch);
+
+  if (!match) {
+    throw new Error(`Invalid pitch name: ${pitch}.`);
