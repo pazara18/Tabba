@@ -25,3 +25,13 @@ export function pitchToMidi(pitch: string): number {
 
   if (!match) {
     throw new Error(`Invalid pitch name: ${pitch}.`);
+  }
+
+  const [, pitchClass, octaveText] = match;
+  const offset = pitchOffsets[pitchClass];
+
+  if (offset === undefined) {
+    throw new Error(`Invalid pitch class: ${pitchClass}.`);
+  }
+
+  return (Number(octaveText) + 1) * 12 + offset;
