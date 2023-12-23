@@ -13,3 +13,13 @@ export interface TabPosition {
   pitch: string;
 }
 
+export interface BendTechnique {
+  type: "bend";
+  targetSemitones: number;
+  release: boolean;
+}
+
+export interface SlideTechnique {
+  type: "slide";
+  targetPosition: TabPosition;
+}
