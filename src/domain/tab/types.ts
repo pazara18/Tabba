@@ -23,3 +23,13 @@ export interface SlideTechnique {
   type: "slide";
   targetPosition: TabPosition;
 }
+
+export type TabTechnique = BendTechnique | SlideTechnique;
+
+export interface CandidateInterpretation {
+  id: string;
+  kind: TabEventKind;
+  label: string;
+  positions: TabPosition[];
+  confidence: number;
+  score?: number;
