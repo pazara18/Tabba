@@ -23,3 +23,39 @@ import { addStemToProject, setStemDuration } from "../features/project/services/
 import {
   addEventToTrack,
   addTrackToProject,
+  deleteEventFromTrack,
+  shiftSuggestedEventsInTrack,
+  updateManualEvent,
+} from "../features/project/services/updateProjectTracks";
+import type { EventPopoverPatch } from "../features/editor/components/EventPopover";
+import type { Stem } from "../features/project/types";
+import styles from "./App.module.css";
+
+export function App() {
+  const [project, setProject] = useState(() =>
+    createProject({ name: "Untitled Suno Stem Tabs" })
+  );
+  const [activeStemId, setActiveStemId] = useState<string | undefined>();
+  const [selectedEvent, setSelectedEvent] = useState<SelectedTabEvent | undefined>();
+  const [projectNotice, setProjectNotice] = useState<string | undefined>();
+  const [mixStates, setMixStates] = useState<Record<string, StemMix>>({});
+
+  const handleToggleStemMute = useCallback((stemId: string) => {
+    setMixStates((current) => toggleStemMute(current, stemId));
+  }, []);
+
+  const handleToggleStemSolo = useCallback((stemId: string) => {
+    setMixStates((current) => toggleStemSolo(current, stemId));
+  }, []);
+
+  const handleStemsCreated = useCallback((stems: Stem[]) => {
+    const updatedAt = new Date();
+
+    setProject((currentProject) =>
+      stems.reduce(
+        (nextProject, stem) => addStemToProject(nextProject, stem, updatedAt),
+        currentProject
+      )
+    );
+    setActiveStemId((currentStemId) => currentStemId ?? stems[0]?.id);
+  }, []);
