@@ -94,3 +94,38 @@ export function App() {
       setProject((currentProject) => {
         const track = currentProject.tracks.find((candidate) => candidate.id === trackId);
 
+        if (!track) {
+          return currentProject;
+        }
+
+        const event = createManualTabEvent({
+          fret,
+          startSeconds,
+          stringNumber,
+          tuning: track.tuning,
+        });
+
+        setSelectedEvent({ eventId: event.id, trackId });
+        return addEventToTrack(currentProject, trackId, event, new Date());
+      });
+    },
+    []
+  );
+
+  const handleAnalyzeTrack = useAnalyzeTrack({
+    activeSource,
+    project,
+    setProject,
+    setProjectNotice,
+  });
+
+  const handleShiftSuggestions = useCallback((trackId: string, deltaSeconds: number) => {
+    setProject((currentProject) =>
+      shiftSuggestedEventsInTrack(currentProject, trackId, deltaSeconds, new Date())
+    );
+    setProjectNotice(
+      `Shifted unlocked suggestions ${deltaSeconds > 0 ? "later" : "earlier"} by ${Math.abs(
+        deltaSeconds * 1000
+      )}ms.`
+    );
+  }, []);
