@@ -129,3 +129,38 @@ export function App() {
       )}ms.`
     );
   }, []);
+
+  const handleUpdateSelectedEvent = useCallback(
+    (patch: EventPopoverPatch) => {
+      if (!selectedEvent) {
+        return;
+      }
+
+      setProject((currentProject) =>
+        updateManualEvent(
+          currentProject,
+          selectedEvent.trackId,
+          selectedEvent.eventId,
+          patch,
+          new Date()
+        )
+      );
+    },
+    [selectedEvent]
+  );
+
+  const handleClearSelectedEvent = useCallback(() => {
+    setSelectedEvent(undefined);
+  }, []);
+
+  const handleDeleteSelectedEvent = useCallback(() => {
+    if (!selectedEvent) {
+      return;
+    }
+
+    setProject((currentProject) =>
+      deleteEventFromTrack(
+        currentProject,
+        selectedEvent.trackId,
+        selectedEvent.eventId,
+        new Date()
