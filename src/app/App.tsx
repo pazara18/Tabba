@@ -59,3 +59,38 @@ export function App() {
     );
     setActiveStemId((currentStemId) => currentStemId ?? stems[0]?.id);
   }, []);
+
+  const { clearSources, importFiles, sources } = useRuntimeStemSources({
+    existingStems: project.stems,
+    onStemsCreated: handleStemsCreated,
+  });
+
+  const activeSource = useMemo(
+    () => sources.find((source) => source.stemId === activeStemId),
+    [activeStemId, sources]
+  );
+
+  const handleStemDurationChange = useCallback((stemId: string, duration: number) => {
+    setProject((currentProject) =>
+      setStemDuration(currentProject, stemId, duration, new Date())
+    );
+  }, []);
+
+  const handleCreateTrack = useCallback(
+    (instrument: InstrumentKind) => {
+      if (!activeStemId) {
+        return;
+      }
+
+      const track = createTabTrack({ instrument, stemId: activeStemId });
+      setProject((currentProject) => addTrackToProject(currentProject, track, new Date()));
+      setSelectedEvent(undefined);
+    },
+    [activeStemId]
+  );
+
+  const handleAddManualEvent = useCallback(
+    (trackId: string, stringNumber: number, fret: number, startSeconds: number) => {
+      setProject((currentProject) => {
+        const track = currentProject.tracks.find((candidate) => candidate.id === trackId);
+
