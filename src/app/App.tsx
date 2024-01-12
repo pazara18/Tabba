@@ -164,3 +164,39 @@ export function App() {
         selectedEvent.trackId,
         selectedEvent.eventId,
         new Date()
+      )
+    );
+    setSelectedEvent(undefined);
+  }, [selectedEvent]);
+
+  const handleExportProject = useCallback(() => {
+    downloadTextFile(createProjectFileName(project), serializeProject(project));
+    setProjectNotice("Project exported.");
+  }, [project]);
+
+  const handleExportCloneHero = useCallback(
+    (trackId: string) => {
+      const track = project.tracks.find((candidate) => candidate.id === trackId);
+
+      if (!track) {
+        return;
+      }
+
+      const fileName = `${normalizeFileBaseName(track.name, "tabba-track")}.chart`;
+      downloadTextFile(fileName, trackToCloneHeroChart(track), "text/plain");
+      setProjectNotice(`Exported ${fileName}.`);
+    },
+    [project]
+  );
+
+  const handleExportRocksmith = useCallback(
+    (trackId: string) => {
+      const track = project.tracks.find((candidate) => candidate.id === trackId);
+
+      if (!track) {
+        return;
+      }
+
+      const fileName = `${normalizeFileBaseName(track.name, "tabba-track")}.xml`;
+      downloadTextFile(fileName, trackToRocksmithXml(track), "application/xml");
+      setProjectNotice(`Exported ${fileName}.`);
