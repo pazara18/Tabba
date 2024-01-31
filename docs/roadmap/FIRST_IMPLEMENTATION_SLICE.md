@@ -10,3 +10,35 @@ contains the first version of the project schema.
 
 ## Work Items
 
+1. Scaffold Vite, React, and TypeScript.
+2. Add development scripts:
+   - `npm run dev`
+   - `npm test`
+   - `npm run lint`
+   - `npm run build`
+3. Add a lean source tree:
+   - `src/app`
+   - `src/features/project`
+   - `src/features/audio`
+   - `src/features/editor`
+   - `src/domain/tab`
+   - `src/domain/instruments`
+   - `src/domain/fingering`
+   - `src/lib`
+   - `src/test`
+4. Define initial project schema types.
+5. Add a project creation service.
+6. Add one project creation test.
+7. Render an empty editor workspace.
+8. Add README development commands.
+
+## Initial UI Shape
+
+The first screen should communicate the real app, even before behavior exists:
+
+- top transport strip
+- left or top stem area
+- central timeline area
+- tab staff region
+- side panel placeholder for selected event details
+
