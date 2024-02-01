@@ -42,3 +42,36 @@ The first screen should communicate the real app, even before behavior exists:
 - tab staff region
 - side panel placeholder for selected event details
 
+This should not be a marketing page or a setup wizard.
+
+## Initial Types
+
+Start with enough shape to avoid rewriting the model immediately:
+
+```ts
+type InstrumentKind = "guitar" | "bass";
+type TabEventKind = "single" | "chord" | "bend" | "slide" | "unknown";
+type TextureKind = "mono" | "poly" | "uncertain";
+```
+
+Project data should include:
+
+- `schemaVersion`
+- project id
+- project name
+- stems
+- tab tracks
+- created and updated timestamps
+
+Stem data should include:
+
+- id
+- name
+- optional file metadata
+- duration when known
+- offset seconds
+
+Track data should include:
+
+- id
+- stem id
