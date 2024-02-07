@@ -104,3 +104,43 @@ Acceptance criteria:
 
 Goal: support musical pitch mapping and alternate positions for the same note.
 
+Deliverables:
+
+- Tuning definitions for standard guitar and bass.
+- Pitch representation and conversion utilities.
+- Fretboard position generation for a pitch and tuning.
+- Candidate scoring by distance and playability.
+- Candidate popover for selected notes.
+- Manual choice locking.
+
+Acceptance criteria:
+
+- Given a pitch, the app can list all playable string/fret positions.
+- The app can choose a default candidate near the prior selected position.
+- The user can switch to another candidate.
+- Locked events are not overwritten by re-fingering.
+- Tests cover tuning definitions, pitch conversion, generation, and scoring.
+
+Initial scoring factors:
+
+- fret distance from previous note
+- string distance from previous note
+- current phrase continuity
+- high-fret penalty
+- open-string adjustment
+- locked neighboring events
+
+## Milestone 5: Waveform and Loop Editing
+
+Goal: make timing correction fast enough for real use.
+
+Deliverables:
+
+- Waveform display for imported stems.
+- Shared playhead across waveform and tab staff.
+- Loop region selection.
+- Playback speed control.
+- Snap-to-grid toggle.
+- Free-time mode retained as the default.
+
+Acceptance criteria:
