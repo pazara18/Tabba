@@ -16,3 +16,17 @@ export function createProjectFixture(): TabbaProject {
         durationSeconds: 60,
         offsetSeconds: 0,
         file: {
+          name: "lead.wav",
+          type: "audio/wav",
+          sizeBytes: 2048,
+          lastModifiedMs: 1770000000000,
+        },
+      },
+    ],
+    tracks: [
+      {
+        id: "track-1",
+        stemId: "stem-1",
+        name: "Lead guitar",
+        instrument: "guitar",
+        tuning: standardGuitarTuning,
