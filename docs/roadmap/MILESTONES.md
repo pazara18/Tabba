@@ -144,3 +144,44 @@ Deliverables:
 - Free-time mode retained as the default.
 
 Acceptance criteria:
+
+- A user can loop a short region while editing notes.
+- A user can slow playback for manual transcription.
+- Waveform and tab staff stay synchronized during playback and seeking.
+- Editing remains responsive with ordinary song-length stems.
+
+## Milestone 6: Analysis Event Import Layer
+
+Goal: add analysis plumbing before sophisticated DSP exists.
+
+Deliverables:
+
+- Analysis job model.
+- Worker message protocol.
+- Mock or simple analysis result importer.
+- Suggested events rendered differently from locked user events.
+- Confidence display for detected events.
+- Event reclassification UI shell.
+
+Acceptance criteria:
+
+- Analysis can create unlocked suggested tab events.
+- Suggested events can be accepted, edited, locked, or deleted.
+- Re-running analysis does not overwrite locked events.
+- Worker failures are surfaced without breaking the editor.
+
+## Milestone 7: Mono/Poly and Chord Workflow
+
+Goal: treat complex detected sounds as editable musical events.
+
+Deliverables:
+
+- Texture classification field: mono, poly, uncertain.
+- Complex event UI for switching between single note, double-stop, chord, and
+  manual interpretation.
+- Chord position model.
+- Basic chord voicing candidate generation from pitch sets.
+- Chord fingering scoring.
+
+Acceptance criteria:
+
