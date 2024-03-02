@@ -70,3 +70,43 @@ src/
     project/
       components/
       hooks/
+      services/
+      types.ts
+    audio/
+      components/
+      hooks/
+      services/
+      workers/
+      types.ts
+    editor/
+      components/
+      hooks/
+      services/
+      types.ts
+    analysis/
+      workers/
+      services/
+      types.ts
+    export/
+      services/
+      types.ts
+  domain/
+    instruments/
+    tab/
+    fingering/
+    timing/
+  lib/
+    storage/
+    math/
+    audio/
+  test/
+    fixtures/
+    helpers/
+```
+
+Use the layout as a guide, not bureaucracy. If a folder has only one tiny file
+and no near-term need to grow, avoid creating needless nesting.
+
+## File Size and Modularity Rules
+
+This repository should not accumulate giant files.
