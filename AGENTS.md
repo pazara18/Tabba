@@ -31,3 +31,42 @@ Unless there is a strong reason to change direction, use:
 - Web Audio API for playback primitives
 - A waveform library only when it earns its dependency cost
 - Web Workers for expensive audio analysis
+- IndexedDB for local project persistence when browser storage is needed
+
+Avoid adding large frameworks or state libraries until the app complexity
+actually requires them.
+
+## Architecture Overview
+
+The app should be organized around clear domain boundaries:
+
+- **Project management**: project schema, import/export, autosave, migrations.
+- **Audio workspace**: stems, playback, waveform, offsets, looping, tempo/grid.
+- **Tab domain**: tunings, instruments, tab events, positions, techniques.
+- **Fingering engine**: pitch-to-position candidates and playability scoring.
+- **Analysis engine**: onset, pitch, mono/poly, bend/slide/vibrato suggestions.
+- **Editor UI**: timeline, tab staff, candidate popovers, keyboard workflows.
+- **Rendering/export**: tab viewer, plain text tab, future interchange formats.
+
+Keep these boundaries explicit. UI components may call application services or
+hooks, but they should not contain domain algorithms.
+
+## Proposed Source Layout
+
+When the application is scaffolded, prefer this structure:
+
+```text
+src/
+  app/
+    App.tsx
+    routes/
+    providers/
+  components/
+    common/
+    timeline/
+    tabStaff/
+    transport/
+  features/
+    project/
+      components/
+      hooks/
