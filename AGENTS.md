@@ -110,3 +110,42 @@ and no near-term need to grow, avoid creating needless nesting.
 ## File Size and Modularity Rules
 
 This repository should not accumulate giant files.
+
+- Target file size: **under 200 lines** for most files.
+- Soft limit: **250 lines**. When a file crosses this, look for a natural split.
+- Hard limit: **400 lines**. Do not exceed this without documenting the reason
+  in the PR or commit message.
+- React components should usually stay under **150 lines**.
+- Domain algorithms should be split by responsibility, not by arbitrary chunks.
+- Tests may be longer when table-driven cases are clearer in one place, but
+  helpers and fixtures should still be extracted.
+
+When a file grows, prefer these splits:
+
+- UI shell vs presentational child components.
+- Hook state management vs pure rendering.
+- Domain types vs domain algorithms.
+- Parsing/serialization vs validation/migration.
+- Analysis orchestration vs individual signal-processing steps.
+- Candidate generation vs candidate scoring.
+
+Do not solve large files by creating vague `utils.ts` dumping grounds. Extract
+modules with names that describe the domain concept they own.
+
+## Naming Guidelines
+
+- Name files after the thing they own: `scoreCandidates.ts`,
+  `generatePitchPositions.ts`, `ProjectImporter.tsx`.
+- Avoid broad names like `helpers.ts`, `misc.ts`, `common.ts`, or `manager.ts`.
+- Use `types.ts` sparingly for shared types inside a feature. If a type belongs
+  to a domain concept, put it near that concept.
+- Use explicit event names: `TabEvent`, `PitchEstimate`,
+  `CandidateInterpretation`, `TabPosition`.
+- Prefer boring, searchable names over clever abbreviations.
+
+## Domain Model Principles
+
+The model should separate audio facts from edited tab decisions.
+
+Recommended concepts:
+
