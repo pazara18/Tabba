@@ -149,3 +149,43 @@ The model should separate audio facts from edited tab decisions.
 
 Recommended concepts:
 
+```ts
+type InstrumentKind = "guitar" | "bass";
+type TabEventKind = "single" | "chord" | "bend" | "slide" | "unknown";
+type TextureKind = "mono" | "poly" | "uncertain";
+```
+
+Important model rules:
+
+- Store `schemaVersion` in every saved project.
+- Store stem metadata separately from tab tracks.
+- Store detected pitches separately from chosen tab positions.
+- Store confidence and candidate interpretations where analysis is uncertain.
+- Support `locked` user-edited events so later analysis does not overwrite them.
+- Support alternate tunings from the beginning.
+- Design for capo support even if the first UI does not expose it.
+
+## Audio and Timing Guidelines
+
+- Keep all internal timing in seconds unless a module clearly owns musical grid
+  math.
+- Do not assume Suno stems have reliable BPM metadata.
+- Support free-time editing and later add BPM/grid/tap-tempo features.
+- Plan for per-stem offset/trim because imported stems may include leading
+  silence.
+- Keep playback state centralized enough that waveform, tab staff, and transport
+  controls stay synchronized.
+- Expensive analysis must run off the main UI thread.
+
+## Fingering and Candidate Rules
+
+Candidate generation and candidate scoring are separate responsibilities.
+
+Candidate generation answers:
+
+- Which string/fret positions can play this pitch in the current tuning?
+- Which chord voicings can represent this pitch set?
+- Which positions are physically possible?
+
+Candidate scoring answers:
+
