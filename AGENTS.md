@@ -189,3 +189,42 @@ Candidate generation answers:
 
 Candidate scoring answers:
 
+- Which candidate is nearest to the previous hand position?
+- Which candidate best preserves phrase continuity?
+- Which candidate has a comfortable fret span?
+- Which candidate respects locked neighboring notes?
+- Which candidate is plausible for guitar vs bass?
+
+Do not bake UI assumptions into the fingering engine. It should be testable with
+plain data.
+
+## Analysis Philosophy
+
+Audio analysis should produce suggestions with confidence:
+
+- onset candidates
+- pitch estimates
+- mono/poly/uncertain texture classification
+- bend-like pitch curves
+- slide-like pitch transitions
+- chord or double-stop candidates
+
+Avoid hard coupling between analysis output and final tab output. Analysis may
+be wrong, and the editor must make correction cheap.
+
+## UI Guidelines
+
+- Build the actual editor as the first screen, not a marketing landing page.
+- Prioritize desktop editing. Mobile can be view-first until editing ergonomics
+  are intentionally designed.
+- Keep waveform, transport controls, timeline, and tab staff visually connected.
+- Make every detected event clickable and editable.
+- Provide fast correction flows: candidate popovers, keyboard fret entry,
+  arrow-key string/fret movement, locking, undo/redo, and loop selection.
+- Show uncertainty without making the UI feel broken.
+- Do not add explanatory copy inside the app where controls or labels should
+  carry the interaction.
+
+## State Management
+
+Start with React state, reducers, and focused hooks. Add a state library only
