@@ -228,3 +228,42 @@ be wrong, and the editor must make correction cheap.
 ## State Management
 
 Start with React state, reducers, and focused hooks. Add a state library only
+when there is repeated cross-feature coordination that becomes hard to reason
+about.
+
+Keep state categories distinct:
+
+- persistent project data
+- transient editor selection
+- playback state
+- analysis job state
+- UI-only popover/modal state
+
+Do not store derived data as mutable state unless caching is required for
+performance.
+
+## Persistence and Schema
+
+- Project export/import should be available early.
+- Use a versioned `.tabba.json` project format.
+- Add migrations when changing saved schema shape.
+- Avoid storing large audio blobs in JSON. If packaging audio becomes necessary,
+  introduce an explicit archive format rather than hiding binary data inside
+  ordinary project files.
+- Browser autosave should not replace explicit export.
+
+## Testing Guidelines
+
+Prioritize tests for domain logic and schema behavior:
+
+- pitch-to-position mapping
+- tuning parsing
+- candidate scoring
+- chord voicing constraints
+- bend amount classification
+- project serialization and migrations
+- analysis event grouping
+
+Use small synthetic fixtures for audio-analysis tests where possible. Do not
+depend only on large real audio files.
+
