@@ -36,3 +36,27 @@ These items matter, but they should not derail the first manual editor.
 - Keep project JSON as the source of truth.
 
 ## Deferred Analysis Work
+
+The first analysis implementation should be conservative. Later work can add:
+
+- onset detection
+- monophonic pitch tracking
+- event grouping
+- mono/poly classification
+- chord candidate generation
+- bend and slide curve detection
+- vibrato detection
+- phrase-level re-fingering
+
+## Export Research
+
+The known export path is plain text tab. These should be researched later:
+
+- MIDI export for note timing review.
+- MusicXML export for notation tools.
+- Guitar Pro-compatible export if a practical library or format path exists.
+- Packaged project archives containing JSON plus audio references or blobs.
+
+Do not add export dependencies until the core editor data model is stable.
+
+<!-- draft note 2 -->
