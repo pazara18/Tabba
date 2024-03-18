@@ -75,3 +75,48 @@ Track data should include:
 
 - id
 - stem id
+- instrument kind
+- tuning
+- events
+
+Event data should include:
+
+- id
+- start seconds
+- duration seconds
+- kind
+- detected pitches
+- chosen positions
+- candidates
+- confidence
+- locked flag
+
+## Tests
+
+Add focused tests for:
+
+- creating a project with a schema version
+- creating standard guitar and bass tunings
+- ensuring a new project starts with empty stems and tracks
+
+Do not add broad UI tests in this slice.
+
+## Definition of Done
+
+- The app starts locally.
+- The test suite runs.
+- The initial project schema exists.
+- The UI shape communicates the editor direction.
+- No source file exceeds the limits in `AGENTS.md`.
+- README explains the available commands.
+
+## Non-Goals
+
+- Audio import.
+- Waveform rendering.
+- Real transcription.
+- IndexedDB persistence.
+- Full tab editing.
+- Chord or bend detection.
+
+<!-- draft note 3 -->
