@@ -185,3 +185,66 @@ Deliverables:
 
 Acceptance criteria:
 
+- A complex event can be represented as a chord or reduced to a single note.
+- The user can choose between alternate chord fingerings.
+- Chord candidates respect tuning and fret span constraints.
+- Tests cover chord candidate constraints and scoring.
+
+## Milestone 8: Bend, Slide, and Technique Editing
+
+Goal: support guitar/bass techniques manually, then use pitch curves to assist.
+
+Deliverables:
+
+- Manual bend annotation.
+- Manual slide annotation.
+- Bend amount choices: quarter, half, full, one-and-a-half, two-step.
+- Bend-release support.
+- Technique rendering in the tab staff.
+- Pitch-curve data model for later analysis.
+
+Acceptance criteria:
+
+- A user can mark a note as a bend and choose bend amount.
+- A user can mark a transition as a slide.
+- Technique annotations save and reload.
+- Technique rendering is readable in the tab viewer.
+
+## Milestone 9: Real Audio Analysis
+
+Goal: replace mocks with useful, conservative analysis.
+
+Deliverables:
+
+- Onset detection.
+- Monophonic pitch tracking for clean bass and lead lines.
+- Event grouping.
+- Mono/poly/uncertain classification.
+- Candidate event generation for the editor.
+
+Acceptance criteria:
+
+- Clean bass stems produce useful note suggestions.
+- Clean single-note guitar lines produce useful note suggestions.
+- Distorted or polyphonic sections are marked uncertain or complex.
+- Analysis runs in a worker and does not block editing.
+
+## Milestone 10: Export and Review Workflows
+
+Goal: make finished work portable and readable outside the editor.
+
+Deliverables:
+
+- Plain text tab export.
+- Project summary view.
+- Print-friendly tab viewer.
+- Optional MIDI export spike.
+- Optional packaged project format spike for audio plus JSON.
+
+Acceptance criteria:
+
+- A user can export readable tab for a track.
+- Export output is deterministic for the same project.
+- The app JSON remains the source of truth.
+
+<!-- draft note 4 -->
