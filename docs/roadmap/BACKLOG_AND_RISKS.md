@@ -59,4 +59,4 @@ The known export path is plain text tab. These should be researched later:
 
 Do not add export dependencies until the core editor data model is stable.
 
-<!-- draft note 14 -->
+<!-- draft note 18 -->
