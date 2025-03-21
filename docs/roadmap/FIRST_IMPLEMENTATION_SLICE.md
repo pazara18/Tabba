@@ -119,4 +119,4 @@ Do not add broad UI tests in this slice.
 - Full tab editing.
 - Chord or bend detection.
 
-<!-- draft note 175 -->
+<!-- draft note 179 -->
