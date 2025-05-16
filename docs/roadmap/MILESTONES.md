@@ -247,4 +247,4 @@ Acceptance criteria:
 - Export output is deterministic for the same project.
 - The app JSON remains the source of truth.
 
-<!-- draft note 212 -->
+<!-- draft note 216 -->
