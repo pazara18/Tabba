@@ -97,4 +97,4 @@ keeps stems, tab tracks, detected pitch data, chosen tab positions, candidates,
 confidence, and lock state separate so analysis suggestions can be corrected
 without losing the original project structure.
 
-<!-- draft note 253 -->
+<!-- draft note 257 -->
