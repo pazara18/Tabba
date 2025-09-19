@@ -95,6 +95,3 @@ npm run build
 Tabba project exports use versioned `.tabba.json` data. The current schema
 keeps stems, tab tracks, detected pitch data, chosen tab positions, candidates,
 confidence, and lock state separate so analysis suggestions can be corrected
-without losing the original project structure.
-
-<!-- draft note 273 -->
