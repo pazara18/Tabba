@@ -267,3 +267,69 @@ Prioritize tests for domain logic and schema behavior:
 Use small synthetic fixtures for audio-analysis tests where possible. Do not
 depend only on large real audio files.
 
+UI tests should cover critical workflows once the editor exists:
+
+- import a stem
+- create a tab track
+- add/edit/delete a note
+- choose an alternate fingering
+- lock an event
+- save and reload a project
+
+## Dependency Guidelines
+
+- Prefer standard browser APIs for simple needs.
+- Add dependencies intentionally and document why they are useful.
+- Avoid libraries that force the project into a backend or cloud workflow.
+- Keep audio-analysis dependencies isolated behind services or workers so they
+  can be replaced.
+- Do not let a visualization library own the project data model.
+
+## Code Quality Rules
+
+- Keep functions small and named by intent.
+- Prefer pure functions for domain logic.
+- Avoid boolean parameter traps. Use options objects when a call has multiple
+  modes.
+- Avoid mutation across module boundaries.
+- Avoid global singletons except for narrow browser integration points.
+- Keep side effects at the edges: storage, audio playback, worker messaging,
+  file import/export.
+- Make invalid states hard to represent with TypeScript types.
+- Do not introduce barrel files by default. They can obscure ownership and make
+  circular imports harder to spot.
+
+## Styling Guidelines
+
+- Keep styles close to components unless a style is genuinely shared.
+- Do not build nested card layouts.
+- Avoid one-note color palettes dominated by a single hue family.
+- Keep controls stable in size so labels, icons, and hover states do not shift
+  timeline or tab layouts.
+- Use stable dimensions for tab grids, transport controls, timeline lanes, and
+  note markers.
+
+## Git and Workflow Expectations
+
+- Keep commits focused.
+- Do not mix architecture, formatting churn, and feature work in one change.
+- Do not rewrite or remove user changes unless explicitly asked.
+- Before large edits, inspect the current file and fit the existing style.
+- When introducing a new feature area, add or update tests for the domain logic
+  first where practical.
+
+## Early Build Order
+
+Recommended sequence:
+
+1. Scaffold the Vite/React/TypeScript app.
+2. Add project schema types and import/export for `.tabba.json`.
+3. Add local audio import and playback.
+4. Add a basic timeline and tab staff.
+5. Add manual guitar/bass note editing.
+6. Add pitch-to-position candidate generation.
+7. Add candidate scoring based on distance and context.
+8. Add lockable events and re-fingering for a selection.
+9. Add mono/poly/uncertain event classification.
+10. Add manual bends/slides, then pitch-curve suggestions.
+
