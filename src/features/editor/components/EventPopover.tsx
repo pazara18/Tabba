@@ -155,3 +155,39 @@ export function EventPopover({
       {event.candidates.length > 0 && (
         <section className={styles.candidates}>
           <h4>Alternate positions</h4>
+          {event.candidates.map((candidate) => {
+            const candidatePosition = candidate.positions[0];
+
+            if (!candidatePosition) {
+              return null;
+            }
+
+            const isActive =
+              candidatePosition.stringNumber === position.stringNumber &&
+              candidatePosition.fret === position.fret;
+
+            return (
+              <button
+                className={isActive ? styles.activeCandidate : styles.candidate}
+                key={candidate.id}
+                onClick={() =>
+                  onUpdate({
+                    fret: candidatePosition.fret,
+                    stringNumber: candidatePosition.stringNumber,
+                  })
+                }
+                type="button"
+              >
+                <span>{candidate.label}</span>
+                <small>{candidatePosition.pitch}</small>
+              </button>
+            );
+          })}
+        </section>
+      )}
+      <button className={styles.deleteButton} onClick={onDelete} type="button">
+        Delete event
+      </button>
+    </div>
+  );
+}
