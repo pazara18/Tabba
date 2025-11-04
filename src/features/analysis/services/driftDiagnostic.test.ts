@@ -141,3 +141,33 @@ describe("analysis pipeline drift", () => {
       attackPositions.push({ expectedSeconds, frequencyHz });
       const attackLength = Math.round(0.45 * sampleRate);
 
+      for (let offset = 0; offset < attackLength; offset += 1) {
+        const sampleIndex = startSample + offset;
+        if (sampleIndex >= samples.length) break;
+        const elapsedSeconds = offset / sampleRate;
+        const envelope = Math.exp(-elapsedSeconds / decayTimeConstant);
+        const phase = (2 * Math.PI * frequencyHz * sampleIndex) / sampleRate;
+        samples[sampleIndex] += 0.6 * envelope * Math.sin(phase);
+      }
+    }
+
+    const detectedTimes = runFullPipeline(samples, sampleRate).map((note) => note.startSeconds);
+    const firstFiveResiduals = attackPositions.slice(0, 5).map((attack) => {
+      const detected = nearestDetectedTime(detectedTimes, attack.expectedSeconds);
+      return detected - attack.expectedSeconds;
+    });
+    const lastFiveResiduals = attackPositions.slice(-5).map((attack) => {
+      const detected = nearestDetectedTime(detectedTimes, attack.expectedSeconds);
+      return detected - attack.expectedSeconds;
+    });
+
+    const meanAbsFirst =
+      firstFiveResiduals.reduce((sum, r) => sum + Math.abs(r), 0) / firstFiveResiduals.length;
+    const meanAbsLast =
+      lastFiveResiduals.reduce((sum, r) => sum + Math.abs(r), 0) / lastFiveResiduals.length;
+
+    // Late-in-song error must not be materially larger than early-in-song error.
+    // Cumulative drift would show as meanAbsLast growing well beyond meanAbsFirst.
+    expect(meanAbsLast).toBeLessThan(meanAbsFirst + 0.01);
+  });
+});
