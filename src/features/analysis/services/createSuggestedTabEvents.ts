@@ -58,3 +58,18 @@ export function createSuggestedTabEvents(
           pitch: note.pitch,
         },
       ],
+      chosenPositions: [chosenPosition],
+      candidates,
+      confidence: note.confidence,
+      locked: false,
+    });
+    previousPosition = chosenPosition;
+    previousPositionStartSeconds = note.startSeconds;
+  }
+
+  return createdEvents;
+}
+
+function sortEventsByStart(events: TabEvent[]): TabEvent[] {
+  return [...events].sort((left, right) => left.startSeconds - right.startSeconds);
+}
