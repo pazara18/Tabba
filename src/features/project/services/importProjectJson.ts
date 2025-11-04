@@ -16,3 +16,9 @@ export function importProjectJson(jsonText: string): TabbaProject {
 }
 
 function parseProjectJson(jsonText: string): unknown {
+  try {
+    return JSON.parse(jsonText) as unknown;
+  } catch {
+    throw new ProjectImportError("Project file must contain valid JSON.");
+  }
+}
