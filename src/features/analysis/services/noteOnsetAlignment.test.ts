@@ -120,3 +120,34 @@ describe("noteOnsetAlignment", () => {
     const sampleRate = 1_000;
     const samples = new Float32Array(1_000);
 
+    for (let index = 250; index < 500; index += 1) {
+      samples[index] = 0.08;
+    }
+
+    const [alignedNote] = alignNotesToEnergyOnsets(
+      [note("A1", 0.2)],
+      samples,
+      sampleRate,
+      {
+        hopSize: 10,
+        maxLookaheadSeconds: 0.1,
+        maxLookbackSeconds: 0.2,
+        rmsThreshold: 0.01,
+        windowSize: 20,
+      }
+    );
+
+    expect(alignedNote.startSeconds).toBeCloseTo(0.25);
+    expect(alignedNote.durationSeconds).toBeCloseTo(0.15);
+  });
+});
+
+function note(pitch: string, startSeconds: number) {
+  return {
+    confidence: 0.9,
+    durationSeconds: 0.2,
+    frequencyHz: pitch === "A1" ? 55 : 61.74,
+    pitch,
+    startSeconds,
+  };
+}
