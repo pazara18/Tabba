@@ -49,3 +49,18 @@ export function toggleStemSolo(
   return {
     ...mixStates,
     [stemId]: { ...current, solo: !current.solo },
+  };
+}
+
+export function dropStemMix(
+  mixStates: Record<string, StemMix>,
+  stemId: string
+): Record<string, StemMix> {
+  if (!(stemId in mixStates)) {
+    return mixStates;
+  }
+
+  const next = { ...mixStates };
+  delete next[stemId];
+  return next;
+}
