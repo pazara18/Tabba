@@ -95,3 +95,28 @@ export function estimateFundamentalFrequency(
 }
 
 export function frequencyToPitch(frequencyHz: number): string {
+  const midiNote = Math.round(69 + 12 * Math.log2(frequencyHz / 440));
+  return midiToPitch(midiNote);
+}
+
+function calculateRms(samples: Float32Array): number {
+  const energy = samples.reduce((sum, sample) => sum + sample * sample, 0);
+  return Math.sqrt(energy / samples.length);
+}
+
+function normalizedCorrelation(samples: Float32Array, lag: number): number {
+  let correlation = 0;
+  let leftEnergy = 0;
+  let rightEnergy = 0;
+
+  for (let index = 0; index + lag < samples.length; index += 1) {
+    const left = samples[index];
+    const right = samples[index + lag];
+    correlation += left * right;
+    leftEnergy += left * left;
+    rightEnergy += right * right;
+  }
+
+  const normalization = Math.sqrt(leftEnergy * rightEnergy);
+  return normalization === 0 ? 0 : correlation / normalization;
+}
