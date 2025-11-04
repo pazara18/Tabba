@@ -5,3 +5,5 @@ export class ProjectImportError extends Error {
     super(message);
     this.name = "ProjectImportError";
     this.issues = issues;
+  }
+}
