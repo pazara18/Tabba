@@ -108,3 +108,31 @@ function createDetectedNote(
   ];
 }
 
+function getDominantPitch(frames: PitchFrame[]): string {
+  const countsByPitch = frames.reduce<Map<string, number>>((counts, frame) => {
+    return counts.set(frame.pitch, (counts.get(frame.pitch) ?? 0) + 1);
+  }, new Map());
+
+  return [...countsByPitch.entries()].sort(
+    ([leftPitch, leftCount], [rightPitch, rightCount]) =>
+      rightCount - leftCount || pitchToMidi(rightPitch) - pitchToMidi(leftPitch)
+  )[0][0];
+}
+
+function getGroupStartSeconds(group: PitchFrameGroup): number {
+  return group.frames[0].startSeconds;
+}
+
+function getGroupEndSeconds(group: PitchFrameGroup): number {
+  const last = group.frames[group.frames.length - 1];
+
+  return last.startSeconds + last.durationSeconds;
+}
+
+function getGroupDurationSeconds(group: PitchFrameGroup): number {
+  return getGroupEndSeconds(group) - getGroupStartSeconds(group);
+}
+
+function average(values: number[]): number {
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
