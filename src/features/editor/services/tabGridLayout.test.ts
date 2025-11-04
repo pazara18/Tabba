@@ -107,3 +107,31 @@ describe("tabGridLayout", () => {
 
     expect(event.columnIndex).toBe(8);
     expect(event.cellOffsetPercent).toBeCloseTo(20);
+  });
+});
+
+function createEvent(
+  id: string,
+  startSeconds: number,
+  stringNumber: number,
+  fret: number
+): TabEvent {
+  return {
+    id,
+    startSeconds,
+    durationSeconds: 0.5,
+    kind: "single",
+    texture: "mono",
+    detectedPitches: [],
+    chosenPositions: [
+      {
+        stringNumber,
+        fret,
+        pitch: stringNumber === 4 ? (fret === 2 ? "E3" : "G3") : "A3",
+      },
+    ],
+    candidates: [],
+    confidence: 1,
+    locked: true,
+  };
+}
