@@ -19,3 +19,9 @@ export async function decodeAudioFile(file: File): Promise<DecodedAudioFile> {
     return {
       durationSeconds: audioBuffer.duration,
       sampleRate: audioBuffer.sampleRate,
+      samples: mergeChannelsToMono(channels),
+    };
+  } finally {
+    await audioContext.close();
+  }
+}
