@@ -19,3 +19,9 @@ describe("createProjectFileName", () => {
   it("falls back when the project name has no filename characters", () => {
     const project = {
       ...createProjectFixture(),
+      name: " !!! ",
+    };
+
+    expect(createProjectFileName(project)).toBe("tabba-project.tabba.json");
+  });
+});
