@@ -8,3 +8,7 @@ describe("formatPlaybackTime", () => {
     expect(formatPlaybackTime(61.005)).toBe("1:01.005");
   });
 
+  it("clamps negative display time to zero", () => {
+    expect(formatPlaybackTime(-4)).toBe("0:00.000");
+  });
+});
