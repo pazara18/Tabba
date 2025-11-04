@@ -52,3 +52,19 @@ describe("toggleStemMute / toggleStemSolo", () => {
   });
 });
 
+describe("getStemMix", () => {
+  it("returns the default mix when stem is unknown", () => {
+    expect(getStemMix({}, "missing")).toEqual({ muted: false, solo: false });
+  });
+});
+
+describe("dropStemMix", () => {
+  it("removes a stem entry", () => {
+    expect(dropStemMix({ a: muted, b: solo }, "a")).toEqual({ b: solo });
+  });
+
+  it("returns the same reference when stem is not present", () => {
+    const input = { a: muted };
+    expect(dropStemMix(input, "missing")).toBe(input);
+  });
+});
