@@ -99,3 +99,29 @@ function renderNotesSection(
     const tick = secondsToTicks(note.startSeconds, bpm, resolution);
     const length = Math.max(0, secondsToTicks(note.sustainSeconds, bpm, resolution));
 
+    if (note.lane < 0 || note.lane >= GH_LANE_COUNT) {
+      continue;
+    }
+
+    const existing = ticksByPosition.get(tick) ?? [];
+    existing.push(`  ${tick} = N ${note.lane} ${length}`);
+    ticksByPosition.set(tick, existing);
+  }
+
+  const orderedTicks = [...ticksByPosition.keys()].sort((left, right) => left - right);
+  const body = orderedTicks.flatMap((tick) => ticksByPosition.get(tick) ?? []).join("\n");
+
+  return `[${difficulty}]\n{\n${body}${body.length > 0 ? "\n" : ""}}`;
+}
+
+function secondsToTicks(seconds: number, bpm: number, resolution: number): number {
+  if (seconds <= 0 || bpm <= 0) {
+    return 0;
+  }
+
+  return Math.round((seconds * bpm * resolution) / 60);
+}
+
+function quote(value: string): string {
+  return `"${value.replace(/"/g, "'")}"`;
+}
