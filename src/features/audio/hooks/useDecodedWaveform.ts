@@ -37,3 +37,15 @@ export function useDecodedWaveform(file?: File): DecodedWaveformState {
           setState({
             error: error instanceof Error ? error.message : "Waveform decode failed.",
             isLoading: false,
+            peaks: [],
+          });
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [file]);
+
+  return state;
+}
