@@ -85,3 +85,25 @@ function collectMidiPitches(events: TabEvent[]): number[] {
 
   for (const event of events) {
     for (const position of event.chosenPositions) {
+      const value = safePitchToMidi(position.pitch);
+
+      if (value !== undefined) {
+        midi.push(value);
+      }
+    }
+  }
+
+  return midi;
+}
+
+function safePitchToMidi(pitch: string): number | undefined {
+  if (!pitch) {
+    return undefined;
+  }
+
+  try {
+    return pitchToMidi(pitch);
+  } catch {
+    return undefined;
+  }
+}
