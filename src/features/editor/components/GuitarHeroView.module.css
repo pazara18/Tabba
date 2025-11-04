@@ -98,3 +98,31 @@
   place-items: center;
   color: rgba(255, 255, 255, 0.55);
   font-size: 0.9rem;
+  padding: 20px;
+  text-align: center;
+}
+
+.lane0 .note,
+.lane0 .sustain {
+  background: #35c45a;
+}
+
+.lane1 .note,
+.lane1 .sustain {
+  background: #d8454f;
+}
+
+.lane2 .note,
+.lane2 .sustain {
+  background: #f4c430;
+}
+
+.lane3 .note,
+.lane3 .sustain {
+  background: #3a8fd9;
+}
+
+.lane4 .note,
+.lane4 .sustain {
+  background: #ef8b2c;
+}
