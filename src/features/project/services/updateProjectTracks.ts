@@ -129,3 +129,36 @@ function applyManualEventPatch(
     ...event,
     startSeconds: patch.startSeconds ?? event.startSeconds,
     durationSeconds: patch.durationSeconds ?? event.durationSeconds,
+    chosenPositions: [nextPosition],
+    candidates: createPositionCandidates(nextPosition.pitch, track.tuning, {
+      previousPosition: nextPosition,
+    }),
+    locked: true,
+  };
+}
+
+function updateTrackEvents(
+  project: TabbaProject,
+  trackId: string,
+  updatedAt: Date,
+  updateEvents: (track: TabTrack) => TabEvent[]
+): TabbaProject {
+  return {
+    ...project,
+    tracks: project.tracks.map((track) =>
+      track.id === trackId ? { ...track, events: updateEvents(track) } : track
+    ),
+    updatedAt: updatedAt.toISOString(),
+  };
+}
+
+function sortEventsByStart(events: TabEvent[]): TabEvent[] {
+  return [...events].sort((left, right) => left.startSeconds - right.startSeconds);
+}
+
+function eventsOverlap(left: TabEvent, right: TabEvent): boolean {
+  return (
+    left.startSeconds < right.startSeconds + right.durationSeconds &&
+    right.startSeconds < left.startSeconds + left.durationSeconds
+  );
+}
