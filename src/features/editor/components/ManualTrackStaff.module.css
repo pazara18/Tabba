@@ -136,3 +136,37 @@
 
 .note,
 .selectedNote {
+  position: absolute;
+  top: 50%;
+  left: var(--note-offset);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: grid;
+  width: 26px;
+  min-height: 22px;
+  place-items: center;
+  border: 1px solid #c98738;
+  border-radius: 6px;
+  color: #111518;
+  background: #f1c27d;
+  cursor: pointer;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  line-height: 1;
+  box-shadow: 0 3px 8px rgba(17, 21, 24, 0.18);
+}
+
+.selectedNote {
+  border-color: #d64d45;
+  background: #f5dfbf;
+  outline: 2px solid rgba(214, 77, 69, 0.34);
+}
+
+.playhead {
+  position: absolute;
+  inset-block: -2px;
+  width: 2px;
+  background: #d64d45;
+  pointer-events: none;
+  z-index: 3;
+}
