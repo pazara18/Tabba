@@ -63,3 +63,22 @@ export function PracticeControls({
 }
 
 interface LoopTimeInputProps {
+  label: string;
+  onChange: (value: number) => void;
+  value: number;
+}
+
+function LoopTimeInput({ label, onChange, value }: LoopTimeInputProps) {
+  return (
+    <label>
+      {label}
+      <input
+        min={0}
+        onChange={(event) => onChange(Number(event.currentTarget.value))}
+        step={0.05}
+        type="number"
+        value={Number(value.toFixed(2))}
+      />
+    </label>
+  );
+}
