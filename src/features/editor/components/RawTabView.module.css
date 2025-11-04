@@ -48,3 +48,17 @@
   background: #3e8b84;
 }
 
+.tab {
+  margin: 0;
+  padding: 12px 14px;
+  max-height: 62vh;
+  overflow: auto;
+  border: 1px solid #e2e6e7;
+  border-radius: 6px;
+  background: #fbfcfb;
+  color: #1f2930;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  white-space: pre;
+}
