@@ -26,3 +26,11 @@
 .practiceControls input[type="number"] {
   width: 82px;
 }
+
+.loopToggle {
+  min-height: 32px;
+  padding: 0 8px;
+  border: 1px solid #ccd3d6;
+  border-radius: 6px;
+  background: #f8faf9;
+}
