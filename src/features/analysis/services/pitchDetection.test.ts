@@ -105,3 +105,30 @@ describe("pitchDetection", () => {
   });
 });
 
+function createSineWave(frequencyHz: number, sampleRate: number, durationSeconds: number) {
+  const samples = new Float32Array(sampleRate * durationSeconds);
+
+  for (let index = 0; index < samples.length; index += 1) {
+    samples[index] = Math.sin((2 * Math.PI * frequencyHz * index) / sampleRate);
+  }
+
+  return samples;
+}
+
+function frame(pitch: string, startSeconds: number) {
+  const frequencies: Record<string, number> = {
+    "A#1": 58.27,
+    A2: 110,
+    B1: 61.74,
+    C2: 65.41,
+    C3: 130.81,
+  };
+
+  return {
+    confidence: 0.9,
+    durationSeconds: 0.05,
+    frequencyHz: frequencies[pitch] ?? 110,
+    pitch,
+    startSeconds,
+  };
+}
