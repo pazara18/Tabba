@@ -12,3 +12,8 @@ describe("instrumentAnalysisOptions", () => {
   });
 
   it("covers the upper frets for guitar analysis", () => {
+    expect(getInstrumentPitchOptions("guitar")).toMatchObject({
+      maxFrequencyHz: 1400,
+    });
+  });
+});
