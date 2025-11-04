@@ -136,3 +136,38 @@ function scoreAlignment(
   for (const time of onsets) {
     const phaseOffset = positiveModulo(time - phase, beatSeconds);
     const distance = Math.min(phaseOffset, beatSeconds - phaseOffset);
+    const normalized = distance / tolerance;
+
+    total += Math.max(0, 1 - normalized);
+  }
+
+  return total / onsets.length;
+}
+
+function positiveModulo(value: number, modulus: number): number {
+  return ((value % modulus) + modulus) % modulus;
+}
+
+export function buildBeatGrid(
+  estimate: TempoEstimate,
+  durationSeconds: number
+): number[] {
+  if (durationSeconds <= 0 || estimate.bpm <= 0) {
+    return [];
+  }
+
+  const beatSeconds = 60 / estimate.bpm;
+  const beats: number[] = [];
+
+  for (
+    let beat = estimate.beatOffsetSeconds;
+    beat <= durationSeconds;
+    beat += beatSeconds
+  ) {
+    if (beat >= 0) {
+      beats.push(beat);
+    }
+  }
+
+  return beats;
+}
