@@ -22,3 +22,10 @@ describe("updateProjectStems", () => {
       project,
       "stem-1",
       61.25,
+      new Date("2026-04-15T15:30:00.000Z")
+    );
+
+    expect(updated.stems[0].durationSeconds).toBe(61.25);
+    expect(updated.updatedAt).toBe("2026-04-15T15:30:00.000Z");
+  });
+});
