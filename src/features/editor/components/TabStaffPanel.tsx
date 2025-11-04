@@ -154,3 +154,39 @@ export function TabStaffPanel({
                   {track.name}
                 </option>
               ))}
+            </select>
+          </label>
+        )}
+        <span>Playhead {currentTime.toFixed(2)}s</span>
+      </div>
+      {!activeStemId && <p className={styles.emptyState}>Import or select a stem first.</p>}
+      {activeStemId && activeTracks.length === 0 && (
+        <p className={styles.emptyState}>No tab tracks for selected stem.</p>
+      )}
+      {selectedTrack && viewMode === "staff" && (
+        <ManualTrackStaff
+          key={selectedTrack.id}
+          currentTime={currentTime}
+          duration={duration}
+          onAddNote={(trackId, stringNumber, startSeconds) =>
+            onAddNote(trackId, stringNumber, selectedFret, startSeconds)
+          }
+          onAnalyzeTrack={onAnalyzeTrack}
+          onClearSelectedEvent={onClearSelectedEvent}
+          onDeleteSelectedEvent={onDeleteSelectedEvent}
+          onSelectEvent={onSelectEvent}
+          onShiftSuggestions={onShiftSuggestions}
+          onUpdateSelectedEvent={onUpdateSelectedEvent}
+          selectedEvent={selectedEvent}
+          track={selectedTrack}
+        />
+      )}
+      {selectedTrack && viewMode === "raw" && (
+        <RawTabView duration={duration} track={selectedTrack} />
+      )}
+      {selectedTrack && viewMode === "gh" && (
+        <GuitarHeroView currentTime={currentTime} track={selectedTrack} />
+      )}
+    </section>
+  );
+}
