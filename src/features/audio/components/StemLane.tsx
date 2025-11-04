@@ -89,3 +89,26 @@ export function StemLane({
                     title="Mute"
                     type="button"
                   >
+                    M
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {projectNotice && <p className={styles.notice}>{projectNotice}</p>}
+    </section>
+  );
+}
+
+function formatDuration(durationSeconds?: number): string {
+  if (durationSeconds === undefined) {
+    return "duration unknown";
+  }
+
+  const minutes = Math.floor(durationSeconds / 60);
+  const seconds = Math.floor(durationSeconds % 60);
+
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
