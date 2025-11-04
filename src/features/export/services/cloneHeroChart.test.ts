@@ -77,3 +77,23 @@ describe("trackToCloneHeroChart", () => {
     );
 
     const bpm = inferBpmForTrack(track);
+
+    // 0.5s beats = 120 BPM.
+    expect(bpm).toBeCloseTo(120, 1);
+  });
+
+  it("skips events without valid pitches", () => {
+    const events = [
+      makeEvent("a", 0, "E2"),
+      makeEvent("b", 0.5, ""),
+      makeEvent("c", 1, "not-a-pitch"),
+      makeEvent("d", 1.5, "A3"),
+    ];
+    const track = makeTrack(events);
+
+    const chart = trackToCloneHeroChart(track, { bpm: 120 });
+    const noteLines = chart.split("\n").filter((line) => /^\s*\d+ = N /.test(line));
+
+    expect(noteLines).toHaveLength(2);
+  });
+});
