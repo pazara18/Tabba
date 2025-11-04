@@ -41,3 +41,15 @@ export function getPeakHeightPercent(peak: WaveformPeak): number {
   return Math.max(4, Math.min(100, amplitude * 100));
 }
 
+function findPeak(samples: Float32Array, start: number, end: number): WaveformPeak {
+  let min = 0;
+  let max = 0;
+
+  for (let index = start; index < end; index += 1) {
+    const sample = samples[index] ?? 0;
+    min = Math.min(min, sample);
+    max = Math.max(max, sample);
+  }
+
+  return { max, min };
+}
