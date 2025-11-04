@@ -226,3 +226,48 @@ function TabStaffLine({
                     <button
                       className={isSelected ? styles.selectedNote : styles.note}
                       key={`${event.id}-${position.stringNumber}`}
+                      onClick={(clickEvent) => {
+                        clickEvent.stopPropagation();
+                        onSelectEvent({ eventId: event.id, trackId: track.id });
+                      }}
+                      style={getNoteStyle(getLineRelativePercent(event.startSeconds, line))}
+                      title={`${event.startSeconds.toFixed(2)}s`}
+                      type="button"
+                    >
+                      {position.fret}
+                    </button>
+                  );
+                })}
+                {isLastString && popoverEvent && (
+                  <EventPopover
+                    anchorPercent={clampPopoverAnchor(popoverAnchorPercent)}
+                    event={popoverEvent}
+                    onClose={onClearSelectedEvent}
+                    onDelete={onDeleteSelectedEvent}
+                    onUpdate={onUpdateSelectedEvent}
+                    track={track}
+                  />
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function clampPopoverAnchor(percent: number): number {
+  return Math.min(96, Math.max(4, percent));
+}
+
+function formatLineTime(totalSeconds: number): string {
+  const safe = Math.max(0, totalSeconds);
+  const minutes = Math.floor(safe / 60);
+  const seconds = Math.floor(safe % 60);
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+function getNoteStyle(linePercent: number): CSSProperties {
+  return { "--note-offset": `${linePercent}%` } as CSSProperties;
+}
