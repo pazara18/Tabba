@@ -77,3 +77,23 @@ export function TimelinePanel({
       <PracticeControls
         duration={duration}
         loopRegion={loopRegion}
+        onLoopRegionChange={onLoopRegionChange}
+        onPlaybackRateChange={onPlaybackRateChange}
+        playbackRate={playbackRate}
+      />
+    </section>
+  );
+}
+
+const createMarkers = createTimelineMarkers;
+
+function getDisplayPeaks(peaks: WaveformPeak[]): WaveformPeak[] {
+  if (peaks.length > 0) {
+    return peaks;
+  }
+
+  return Array.from({ length: 48 }, (_, index) => {
+    const amplitude = (24 + ((index * 17) % 56)) / 100;
+    return { min: -amplitude, max: amplitude };
+  });
+}
