@@ -64,3 +64,22 @@ export function getActiveLineIndex(currentTime: number, lines: TabLine[]): numbe
   return lines[lines.length - 1].lineIndex;
 }
 
+export function getEventsForLine(events: TabEvent[], line: TabLine): TabEvent[] {
+  return events.filter(
+    (event) => event.startSeconds >= line.startSeconds && event.startSeconds < line.endSeconds
+  );
+}
+
+export function getLineRelativePercent(
+  timeSeconds: number,
+  line: TabLine
+): number {
+  if (line.durationSeconds <= 0) {
+    return 0;
+  }
+
+  const offset = timeSeconds - line.startSeconds;
+  const ratio = offset / line.durationSeconds;
+
+  return Math.min(100, Math.max(0, ratio * 100));
+}
