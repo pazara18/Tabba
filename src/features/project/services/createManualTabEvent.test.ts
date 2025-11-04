@@ -59,3 +59,21 @@ describe("createManualTabEvent", () => {
 
   it("rejects impossible manual positions", () => {
     expect(() =>
+      createManualTabEvent({
+        fret: -1,
+        startSeconds: 0,
+        stringNumber: 1,
+        tuning: standardGuitarTuning,
+      })
+    ).toThrow("Fret must be a non-negative integer.");
+
+    expect(() =>
+      createManualTabEvent({
+        fret: 0,
+        startSeconds: 0,
+        stringNumber: 9,
+        tuning: standardGuitarTuning,
+      })
+    ).toThrow("String 9 does not exist in Standard guitar.");
+  });
+});
