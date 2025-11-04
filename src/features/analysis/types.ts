@@ -9,3 +9,7 @@ export interface PitchFrame {
 export interface DetectedNote {
   confidence: number;
   durationSeconds: number;
+  frequencyHz: number;
+  pitch: string;
+  startSeconds: number;
+}
