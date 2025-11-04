@@ -145,3 +145,37 @@ function requireNumber(value: unknown, path: string, issues: string[]) {
 }
 
 function requireArray(value: unknown, path: string, issues: string[]) {
+  if (!Array.isArray(value)) {
+    issues.push(`${path} must be an array.`);
+  }
+}
+
+function requireBoolean(value: unknown, path: string, issues: string[]) {
+  if (typeof value !== "boolean") {
+    issues.push(`${path} must be a boolean.`);
+  }
+}
+
+function requireIsoDate(value: unknown, path: string, issues: string[]) {
+  if (typeof value !== "string" || Number.isNaN(Date.parse(value))) {
+    issues.push(`${path} must be an ISO date string.`);
+  }
+}
+
+function requireInstrument(value: unknown, path: string, issues: string[]) {
+  if (value !== "guitar" && value !== "bass") {
+    issues.push(`${path} must be guitar or bass.`);
+  }
+}
+
+function requireEventKind(value: unknown, path: string, issues: string[]) {
+  if (!["single", "chord", "bend", "slide", "unknown"].includes(String(value))) {
+    issues.push(`${path} must be a supported tab event kind.`);
+  }
+}
+
+function requireTexture(value: unknown, path: string, issues: string[]) {
+  if (!["mono", "poly", "uncertain"].includes(String(value))) {
+    issues.push(`${path} must be mono, poly, or uncertain.`);
+  }
+}
