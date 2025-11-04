@@ -16,3 +16,9 @@ describe("createRuntimeStemImports", () => {
     const fileA = new File([new Uint8Array(2048)], "lead.wav", { type: "audio/wav" });
     const fileB = new File([new Uint8Array(2048)], "lead.wav", { type: "audio/wav" });
     const imports = createRuntimeStemImports([fileA, fileB], project.stems);
+
+    expect(imports).toHaveLength(1);
+    expect(imports[0].stem.id).toBe("stem-1");
+    expect(imports[0].source.stemId).toBe("stem-1");
+  });
+});
