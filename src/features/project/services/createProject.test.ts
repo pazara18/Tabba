@@ -34,3 +34,13 @@ describe("createProject", () => {
   it("can create a project with runtime defaults", () => {
     const project = createProject();
 
+    expect(project.schemaVersion).toBe(PROJECT_SCHEMA_VERSION);
+    expect(project.id).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    );
+    expect(Date.parse(project.createdAt)).not.toBeNaN();
+    expect(project.createdAt).toBe(project.updatedAt);
+    expect(project.stems).toEqual([]);
+    expect(project.tracks).toEqual([]);
+  });
+});
