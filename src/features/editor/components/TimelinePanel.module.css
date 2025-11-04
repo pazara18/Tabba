@@ -46,3 +46,17 @@
 .playhead {
   position: absolute;
   inset-block: 8px;
+  z-index: 1;
+  width: 2px;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(16, 20, 23, 0.6);
+  pointer-events: none;
+}
+
+.loopRegion {
+  position: absolute;
+  inset-block: 8px;
+  border: 1px solid rgba(241, 194, 125, 0.82);
+  background: rgba(241, 194, 125, 0.18);
+  pointer-events: none;
+}
