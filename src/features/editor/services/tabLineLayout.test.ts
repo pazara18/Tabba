@@ -67,3 +67,21 @@ describe("getEventsForLine", () => {
       makeEvent("b", 7.999),
       makeEvent("c", 8),
       makeEvent("d", 15),
+      makeEvent("e", 19),
+    ];
+
+    expect(getEventsForLine(events, lines[0]).map((event) => event.id)).toEqual(["a", "b"]);
+    expect(getEventsForLine(events, lines[1]).map((event) => event.id)).toEqual(["c", "d"]);
+    expect(getEventsForLine(events, lines[2]).map((event) => event.id)).toEqual(["e"]);
+  });
+});
+
+describe("getLineRelativePercent", () => {
+  it("returns the percent of time inside the line", () => {
+    const lines = createTabLines(20, 8);
+    expect(getLineRelativePercent(0, lines[0])).toBe(0);
+    expect(getLineRelativePercent(4, lines[0])).toBe(50);
+    expect(getLineRelativePercent(8, lines[1])).toBe(0);
+    expect(getLineRelativePercent(12, lines[1])).toBe(50);
+  });
+});
