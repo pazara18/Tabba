@@ -79,3 +79,24 @@ describe("eventsToGhTrack", () => {
     const lanes = new Set(track.notes.map((note) => note.lane));
     expect(lanes.size).toBe(track.notes.length);
   });
+
+  it("carries over sustain seconds from the event duration", () => {
+    const events = [makeEvent("a", 0, [{ pitch: "E2" }], 1.25)];
+    const track = eventsToGhTrack(events);
+    expect(track.notes[0].sustainSeconds).toBe(1.25);
+  });
+
+  it("ignores positions with missing or invalid pitch strings", () => {
+    const events = [
+      makeEvent("a", 0, [
+        { pitch: "" },
+        { pitch: "not-a-pitch" },
+        { pitch: "E2" },
+      ]),
+    ];
+
+    const track = eventsToGhTrack(events);
+    expect(track.notes).toHaveLength(1);
+    expect(track.notes[0].eventId).toBe("a");
+  });
+});
