@@ -54,3 +54,17 @@ describe("estimateTempoFromOnsets", () => {
     const estimate = estimateTempoFromOnsets(onsets, { minBpm: 50, maxBpm: 90 });
 
     expect(estimate?.bpm).toBeCloseTo(72, 1);
+  });
+});
+
+describe("buildBeatGrid", () => {
+  it("returns an empty grid for non-positive duration", () => {
+    expect(buildBeatGrid({ bpm: 120, beatOffsetSeconds: 0, confidence: 1 }, 0)).toEqual([]);
+  });
+
+  it("emits beats at 60/bpm intervals starting from the beat offset", () => {
+    const grid = buildBeatGrid({ bpm: 120, beatOffsetSeconds: 0.25, confidence: 1 }, 2.25);
+
+    expect(grid).toEqual([0.25, 0.75, 1.25, 1.75, 2.25]);
+  });
+});
