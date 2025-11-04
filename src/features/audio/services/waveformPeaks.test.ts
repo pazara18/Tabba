@@ -30,3 +30,12 @@ describe("waveformPeaks", () => {
   });
 
   it("handles missing channels", () => {
+    expect(Array.from(mergeChannelsToMono([]))).toEqual([]);
+  });
+
+  it("converts peaks into bounded display heights", () => {
+    expect(getPeakHeightPercent({ min: 0, max: 0 })).toBe(4);
+    expect(getPeakHeightPercent({ min: -0.5, max: 0.25 })).toBe(50);
+    expect(getPeakHeightPercent({ min: -2, max: 1 })).toBe(100);
+  });
+});
