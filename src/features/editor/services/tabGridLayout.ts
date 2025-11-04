@@ -110,3 +110,31 @@ export function getTabGridCellOffsetPercent(
 }
 
 export function getTabEventsForString(
+  events: TabEvent[],
+  stringNumber: number,
+  durationSeconds: number,
+  columnCount: number
+): PositionedTabGridEvent[] {
+  return events
+    .flatMap((event) =>
+      event.chosenPositions
+        .filter((position) => position.stringNumber === stringNumber)
+        .map((position) => ({
+          cellOffsetPercent: getTabGridCellOffsetPercent(
+            event.startSeconds,
+            durationSeconds,
+            columnCount
+          ),
+          columnIndex: getTabGridColumnIndex(event.startSeconds, durationSeconds, columnCount),
+          event,
+          position,
+        }))
+    )
+    .sort((eventA, eventB) => eventA.event.startSeconds - eventB.event.startSeconds);
+}
+
+function assertPositiveColumnCount(columnCount: number): void {
+  if (!Number.isInteger(columnCount) || columnCount < 1) {
+    throw new Error("Tab grid column count must be a positive integer.");
+  }
+}
