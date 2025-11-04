@@ -397,3 +397,76 @@ export function useProjectTransport({
     };
   }, [stopFrameUpdates, teardownAllSources]);
 
+  const play = useCallback(() => {
+    if (buffersRef.current.size === 0) {
+      return;
+    }
+
+    let offset = pausedOffsetRef.current;
+    const totalDuration = computeMaxDuration();
+
+    if (offset >= totalDuration) {
+      offset = 0;
+    }
+
+    const loop = loopRegionRef.current;
+    if (loop) {
+      const normalized = normalizeLoopRegion(loop, totalDuration);
+      if (
+        normalized.enabled &&
+        (offset < normalized.startSeconds || offset >= normalized.endSeconds)
+      ) {
+        offset = normalized.startSeconds;
+      }
+    }
+
+    startPlaybackAt(offset);
+  }, [computeMaxDuration, startPlaybackAt]);
+
+  const pause = useCallback(() => {
+    if (sourceEntriesRef.current.size === 0) {
+      return;
+    }
+
+    const offset = computeLivePosition();
+    teardownAllSources();
+    stopFrameUpdates();
+    pausedOffsetRef.current = offset;
+    setCurrentTime(offset);
+    setIsPlaying(false);
+  }, [computeLivePosition, stopFrameUpdates, teardownAllSources]);
+
+  const stop = useCallback(() => {
+    teardownAllSources();
+    stopFrameUpdates();
+    pausedOffsetRef.current = 0;
+    setCurrentTime(0);
+    setIsPlaying(false);
+  }, [stopFrameUpdates, teardownAllSources]);
+
+  const seek = useCallback(
+    (timeSeconds: number) => {
+      const totalDuration = computeMaxDuration();
+      const nextTime = Math.min(Math.max(0, timeSeconds), totalDuration);
+
+      pausedOffsetRef.current = nextTime;
+      setCurrentTime(nextTime);
+
+      if (sourceEntriesRef.current.size > 0) {
+        startPlaybackAt(nextTime);
+      }
+    },
+    [computeMaxDuration, startPlaybackAt]
+  );
+
+  return {
+    currentTime,
+    duration,
+    hasSource,
+    isPlaying,
+    pause,
+    play,
+    seek,
+    stop,
+  };
+}
