@@ -14,3 +14,8 @@ export function findMatchingStemForAudioFile(
 
     return (
       metadata.name === file.name &&
+      metadata.sizeBytes === file.size &&
+      metadata.type === file.type
+    );
+  });
+}
