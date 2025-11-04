@@ -35,3 +35,14 @@
 @media (max-width: 820px) {
   .body {
     grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-inline-end: 0;
+    border-block-end: 1px solid #d9dddc;
+  }
+
+  .mainColumn {
+    padding: 12px;
+  }
+}
