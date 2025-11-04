@@ -26,3 +26,12 @@ describe("timelineLayout", () => {
     expect(getTimelinePercent(30, 60)).toBe(50);
     expect(getTimelinePercent(-5, 60)).toBe(0);
     expect(getTimelinePercent(70, 60)).toBe(100);
+    expect(getTimelinePercent(10, 0)).toBe(0);
+  });
+
+  it("formats markers as minute and second labels", () => {
+    expect(formatTimelineMarker(0)).toBe("0:00");
+    expect(formatTimelineMarker(61)).toBe("1:01");
+    expect(formatTimelineMarker(-1)).toBe("0:00");
+  });
+});
