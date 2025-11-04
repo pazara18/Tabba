@@ -138,3 +138,38 @@
   place-items: center;
   border: 1px solid #ccd3d6;
   border-radius: 6px;
+  color: #4b5961;
+  background: #ffffff;
+  cursor: pointer;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.soloButton:hover,
+.muteButton:hover {
+  background: #eef5f3;
+}
+
+.soloButtonActive {
+  border-color: #c98738;
+  color: #5b3b18;
+  background: #f1c27d;
+}
+
+.muteButtonActive {
+  border-color: #748088;
+  color: #ffffff;
+  background: #4b5961;
+}
+
+.notice {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid #d8c087;
+  border-radius: 8px;
+  color: #4f4122;
+  background: #fff7df;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
