@@ -82,3 +82,24 @@ function renderNote(note: GhNote, currentTime: number) {
           style={{
             top: `${sustainTopPercent}%`,
             height: `${sustainHeightPercent}%`,
+          }}
+        />
+      )}
+      <div
+        className={`${styles.note} ${note.isChord ? styles.noteChord : ""}`}
+        style={{ top: `${topPercent}%` }}
+      />
+    </div>
+  );
+}
+
+function groupByLane(notes: GhNote[]): Record<number, GhNote[]> {
+  const byLane: Record<number, GhNote[]> = {};
+  for (const note of notes) {
+    if (!byLane[note.lane]) {
+      byLane[note.lane] = [];
+    }
+    byLane[note.lane].push(note);
+  }
+  return byLane;
+}
