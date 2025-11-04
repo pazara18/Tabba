@@ -132,3 +132,34 @@ function renderNotes(event: TabEvent, track: TabTrack): string[] {
     .filter((line): line is string => line !== undefined);
 }
 
+function renderNoteLine(
+  event: TabEvent,
+  position: TabPosition,
+  stringCount: number
+): string | undefined {
+  const rocksmithString = stringCount - position.stringNumber;
+
+  if (rocksmithString < 0 || rocksmithString >= stringCount) {
+    return undefined;
+  }
+
+  return `<note time="${event.startSeconds.toFixed(3)}" string="${rocksmithString}" fret="${position.fret}" sustain="${event.durationSeconds.toFixed(3)}" />`;
+}
+
+function renderNotesBlock(notes: string[]): string {
+  if (notes.length === 0) {
+    return `<notes count="0"></notes>`;
+  }
+
+  const indented = notes.map((line) => `        ${line}`).join("\n");
+  return `<notes count="${notes.length}">\n${indented}\n      </notes>`;
+}
+
+function escapeXml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
