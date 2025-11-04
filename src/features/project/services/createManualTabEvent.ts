@@ -47,3 +47,17 @@ export function createManualTabEvent({
   const position = createManualTabPosition(tuning, stringNumber, fret);
 
   return {
+    id: createId(),
+    startSeconds,
+    durationSeconds,
+    kind: "single",
+    texture: "mono",
+    detectedPitches: [],
+    chosenPositions: [position],
+    candidates: createPositionCandidates(position.pitch, tuning, {
+      previousPosition: position,
+    }),
+    confidence: 1,
+    locked: true,
+  };
+}
