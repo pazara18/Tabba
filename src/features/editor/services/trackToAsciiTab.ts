@@ -99,3 +99,29 @@ function writeFretAt(cells: string[], startColumn: number, fret: number): void {
   const text = String(Math.max(0, Math.floor(fret)));
 
   for (let index = 0; index < text.length; index += 1) {
+    const column = startColumn + index;
+    if (column < cells.length) {
+      cells[column] = text[index];
+    }
+  }
+}
+
+function padLabel(label: string, width: number): string {
+  if (label.length >= width) {
+    return label;
+  }
+  return label + " ".repeat(width - label.length);
+}
+
+function formatStringLabel(openPitch: string): string {
+  // Strip the octave digit so labels look like UG (E, A, D, G, B, e).
+  const match = openPitch.match(/^([A-Ga-g][#b]?)/);
+  return match ? match[1] : openPitch;
+}
+
+function formatTimeLabel(totalSeconds: number): string {
+  const safe = Math.max(0, totalSeconds);
+  const minutes = Math.floor(safe / 60);
+  const seconds = Math.floor(safe % 60);
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
