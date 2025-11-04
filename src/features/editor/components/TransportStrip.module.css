@@ -64,3 +64,22 @@
   color: #6f7d84;
   background: transparent;
   cursor: not-allowed;
+}
+
+.timeReadout {
+  min-width: 84px;
+  color: #f1c27d;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.95rem;
+  text-align: end;
+}
+
+@media (max-width: 640px) {
+  .transport {
+    grid-template-columns: 1fr;
+  }
+
+  .timeReadout {
+    text-align: start;
+  }
+}
