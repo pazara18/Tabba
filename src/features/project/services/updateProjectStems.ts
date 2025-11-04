@@ -19,3 +19,10 @@ export function setStemDuration(
   updatedAt: Date
 ): TabbaProject {
   return {
+    ...project,
+    stems: project.stems.map((stem) =>
+      stem.id === stemId ? { ...stem, durationSeconds } : stem
+    ),
+    updatedAt: updatedAt.toISOString(),
+  };
+}
