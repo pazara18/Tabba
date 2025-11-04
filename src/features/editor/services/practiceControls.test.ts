@@ -40,3 +40,15 @@ describe("practiceControls", () => {
       )
     ).toEqual({
       enabled: false,
+      startSeconds: 20,
+      endSeconds: 20,
+    });
+  });
+
+  it("normalizes playback rate", () => {
+    expect(normalizePlaybackRate(0.1)).toBe(0.5);
+    expect(normalizePlaybackRate(2)).toBe(1.25);
+    expect(normalizePlaybackRate(Number.NaN)).toBe(1);
+    expect(normalizePlaybackRate(0.75)).toBe(0.75);
+  });
+});
