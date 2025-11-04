@@ -27,3 +27,12 @@ export function createStemFromAudioFile(
 }
 
 function createStemName(fileName: string): string {
+  const trimmedName = fileName.trim();
+  const extensionStart = trimmedName.lastIndexOf(".");
+
+  if (extensionStart <= 0) {
+    return trimmedName || "Untitled stem";
+  }
+
+  return trimmedName.slice(0, extensionStart);
+}
