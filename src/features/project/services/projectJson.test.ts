@@ -146,3 +146,37 @@ describe("project JSON services", () => {
       "tracks[0].tuning.strings[0].openPitch must be a non-empty string."
     );
     expect(result.issues).toContain("tracks[0].tuning.strings[1] must be an object.");
+    expect(result.issues).toContain(
+      "tracks[0].events[0].kind must be a supported tab event kind."
+    );
+    expect(result.issues).toContain("tracks[0].events[0].texture must be mono, poly, or uncertain.");
+    expect(result.issues).toContain("tracks[0].events[0].detectedPitches must be an array.");
+    expect(result.issues).toContain("tracks[0].events[0].chosenPositions must be an array.");
+    expect(result.issues).toContain("tracks[0].events[0].candidates must be an array.");
+    expect(result.issues).toContain("tracks[0].events[0].confidence must be a finite number.");
+    expect(result.issues).toContain("tracks[0].events[0].locked must be a boolean.");
+    expect(result.issues).toContain("tracks[0].events[1] must be an object.");
+    expect(result.issues).toContain("tracks[1].tuning must be an object.");
+    expect(result.issues).toContain("tracks[2] must be an object.");
+  });
+
+  it("passes through current schema projects during migration", () => {
+    const project = createProjectFixture();
+
+    expect(migrateProjectData(project)).toBe(project);
+  });
+
+  it("leaves non-object migration input for validation to reject", () => {
+    expect(migrateProjectData("not-a-project")).toBe("not-a-project");
+  });
+
+  it("marks a project saved with an updated timestamp", () => {
+    const saved = markProjectSaved(
+      createProjectFixture(),
+      new Date("2026-04-15T14:00:00.000Z")
+    );
+
+    expect(saved.updatedAt).toBe("2026-04-15T14:00:00.000Z");
+    expect(saved.createdAt).toBe("2026-04-15T12:00:00.000Z");
+  });
+});
