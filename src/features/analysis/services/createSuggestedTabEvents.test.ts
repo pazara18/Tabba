@@ -101,3 +101,29 @@ describe("createSuggestedTabEvents", () => {
         lockedEvents: [
           lockedEvent("locked-older", 1, { stringNumber: 1, fret: 0, pitch: "E4" }),
           lockedEvent("locked-nearest", 2, { stringNumber: 2, fret: 5, pitch: "E4" }),
+        ].reverse(),
+      }
+    );
+
+    expect(event.chosenPositions).toEqual([{ stringNumber: 2, fret: 5, pitch: "E4" }]);
+  });
+});
+
+function lockedEvent(
+  id: string,
+  startSeconds: number,
+  position: { fret: number; pitch: string; stringNumber: number }
+) {
+  return {
+    id,
+    startSeconds,
+    durationSeconds: 0.5,
+    kind: "single" as const,
+    texture: "mono" as const,
+    detectedPitches: [],
+    chosenPositions: [position],
+    candidates: [],
+    confidence: 1,
+    locked: true,
+  };
+}
