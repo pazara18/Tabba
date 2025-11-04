@@ -40,3 +40,15 @@ export function TransportStrip({
           disabled={!hasSource}
           onClick={isPlaying ? onPause : onPlay}
           type="button"
+          aria-label={isPlaying ? "Pause" : "Play"}
+        >
+          <span>{isPlaying ? "Ⅱ" : "▶"}</span>
+        </button>
+        <button disabled={!hasSource} onClick={onStop} type="button" aria-label="Stop">
+          <span>■</span>
+        </button>
+      </div>
+      <time className={styles.timeReadout}>{formatPlaybackTime(currentTime)}</time>
+    </header>
+  );
+}
