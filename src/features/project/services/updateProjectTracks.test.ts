@@ -265,3 +265,59 @@ describe("updateProjectTracks", () => {
     expect(event.chosenPositions).toEqual([{ stringNumber: 5, fret: 3, pitch: "C3" }]);
     expect(event.candidates[0].positions).toEqual([
       { stringNumber: 5, fret: 3, pitch: "C3" },
+    ]);
+    expect(event.locked).toBe(true);
+    expect(updated.updatedAt).toBe("2026-04-15T17:00:00.000Z");
+  });
+
+  it("keeps events sorted after changing start time", () => {
+    const project = createProjectFixture();
+    const track = project.tracks[0];
+    const earlyEvent = createManualTabEvent({
+      createId: () => "event-early",
+      fret: 5,
+      startSeconds: 2,
+      stringNumber: 2,
+      tuning: track.tuning,
+    });
+    const withBoth = addEventToTrack(project, track.id, earlyEvent, new Date());
+
+    const updated = updateManualEvent(
+      withBoth,
+      track.id,
+      "event-1",
+      { startSeconds: 0.5 },
+      new Date()
+    );
+
+    expect(updated.tracks[0].events.map((event) => event.id)).toEqual([
+      "event-1",
+      "event-early",
+    ]);
+  });
+
+  it("deletes an event from a track", () => {
+    const project = createProjectFixture();
+    const track = project.tracks[0];
+
+    const updated = deleteEventFromTrack(
+      project,
+      track.id,
+      "event-1",
+      new Date("2026-04-15T18:00:00.000Z")
+    );
+
+    expect(updated.tracks[0].events).toEqual([]);
+    expect(updated.updatedAt).toBe("2026-04-15T18:00:00.000Z");
+  });
+});
+
+function lockFixtureEvents(project: ReturnType<typeof createProjectFixture>) {
+  return {
+    ...project,
+    tracks: project.tracks.map((track) => ({
+      ...track,
+      events: track.events.map((event) => ({ ...event, locked: true })),
+    })),
+  };
+}
