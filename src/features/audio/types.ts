@@ -6,3 +6,6 @@ export interface AudioStemFile {
 }
 
 export interface RuntimeStemSource {
+  stemId: string;
+  file: File;
+}
