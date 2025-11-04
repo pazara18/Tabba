@@ -40,3 +40,15 @@ describe("createStemFromAudioFile", () => {
     ).toBe("Untitled stem");
   });
 
+  it("creates an id with the runtime default id generator", () => {
+    const stem = createStemFromAudioFile({
+      name: "runtime.wav",
+      type: "audio/wav",
+      size: 1,
+    });
+
+    expect(stem.id).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    );
+  });
+});
