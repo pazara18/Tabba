@@ -110,3 +110,34 @@
 .exportButtons {
   display: inline-flex;
   gap: 6px;
+}
+
+.exportButtons button {
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #ccd3d6;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #1f2930;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.exportButtons button:hover {
+  background: #eef5f3;
+}
+
+.tools span,
+.emptyState {
+  color: #748088;
+  font-size: 0.875rem;
+}
+
+.emptyState {
+  margin: 0;
+  padding: 14px;
+  border: 1px dashed #c9d1d4;
+  border-radius: 8px;
+  background: #ffffff;
+}
