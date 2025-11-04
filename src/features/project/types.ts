@@ -27,3 +27,12 @@ export interface TabTrack {
   events: TabEvent[];
 }
 
+export interface TabbaProject {
+  schemaVersion: typeof PROJECT_SCHEMA_VERSION;
+  id: string;
+  name: string;
+  stems: Stem[];
+  tracks: TabTrack[];
+  createdAt: string;
+  updatedAt: string;
+}
