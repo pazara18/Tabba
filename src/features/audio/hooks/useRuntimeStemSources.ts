@@ -35,3 +35,14 @@ export function useRuntimeStemSources({
           (source) => !imported.some((entry) => entry.source.stemId === source.stemId)
         ),
         ...imported.map(({ source }) => source),
+      ]);
+    },
+    [existingStems, onStemsCreated]
+  );
+
+  const clearSources = useCallback(() => {
+    setSources([]);
+  }, []);
+
+  return { clearSources, importFiles, sources };
+}
