@@ -24,3 +24,11 @@ export function ProjectActions({ onExportProject, onImportProject }: ProjectActi
           if (file) {
             onImportProject(file);
           }
+
+          event.currentTarget.value = "";
+        }}
+        type="file"
+      />
+    </div>
+  );
+}
