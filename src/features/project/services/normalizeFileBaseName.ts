@@ -5,3 +5,5 @@ export function normalizeFileBaseName(name: string, fallback: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+  return normalized || fallback;
+}
