@@ -123,3 +123,31 @@ export function EditorWorkspace({
             onPlaybackRateChange={(rate) => setPlaybackRate(normalizePlaybackRate(rate))}
             onSeek={transport.seek}
             playbackRate={playbackRate}
+            waveformError={waveform.error}
+            waveformLoading={waveform.isLoading}
+            waveformPeaks={waveform.peaks}
+          />
+          <TabStaffPanel
+            activeStemId={activeStemId}
+            currentTime={transport.currentTime}
+            duration={timelineDuration}
+            onAddNote={(trackId, stringNumber, fret, startSeconds) =>
+              onAddManualEvent(trackId, stringNumber, fret, startSeconds)
+            }
+            onAnalyzeTrack={onAnalyzeTrack}
+            onClearSelectedEvent={onClearSelectedEvent}
+            onCreateTrack={onCreateTrack}
+            onDeleteSelectedEvent={onDeleteSelectedEvent}
+            onExportCloneHero={onExportCloneHero}
+            onExportRocksmith={onExportRocksmith}
+            onSelectEvent={onSelectEvent}
+            onShiftSuggestions={onShiftSuggestions}
+            onUpdateSelectedEvent={onUpdateSelectedEvent}
+            selectedEvent={selectedEvent}
+            tracks={project.tracks}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
