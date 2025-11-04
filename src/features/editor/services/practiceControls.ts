@@ -33,3 +33,13 @@ export function normalizeLoopRegion(
 }
 
 export function normalizePlaybackRate(rate: number): number {
+  if (!Number.isFinite(rate)) {
+    return 1;
+  }
+
+  return clamp(rate, playbackRates[0], playbackRates[playbackRates.length - 1]);
+}
+
+function clamp(value: number, minimum: number, maximum: number): number {
+  return Math.min(maximum, Math.max(minimum, value));
+}
