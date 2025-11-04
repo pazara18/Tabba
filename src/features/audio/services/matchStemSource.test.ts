@@ -26,3 +26,11 @@ describe("matchStemSource", () => {
       findMatchingStemForAudioFile(
         {
           name: "lead.wav",
+          type: "audio/wav",
+          size: 4096,
+        },
+        project.stems
+      )
+    ).toBeUndefined();
+  });
+});
