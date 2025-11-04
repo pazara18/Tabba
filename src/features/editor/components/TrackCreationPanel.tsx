@@ -12,3 +12,8 @@ export function TrackCreationPanel({ onCreateTrack }: TrackCreationPanelProps) {
         + Guitar
       </button>
       <button type="button" onClick={() => onCreateTrack("bass")}>
+        + Bass
+      </button>
+    </div>
+  );
+}
