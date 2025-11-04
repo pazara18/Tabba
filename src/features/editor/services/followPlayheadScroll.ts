@@ -30,3 +30,12 @@ export function getFollowPlayheadScrollLeft({
   }
 
   return clampScrollLeft(playheadX - viewportWidth * targetRatio, contentWidth, viewportWidth);
+}
+
+function clampScrollLeft(
+  scrollLeft: number,
+  contentWidth: number,
+  viewportWidth: number
+): number {
+  return Math.min(Math.max(0, scrollLeft), Math.max(0, contentWidth - viewportWidth));
+}
