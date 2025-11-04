@@ -13,3 +13,8 @@
   background: #2f716c;
   cursor: pointer;
   font-weight: 650;
+}
+
+.creationPanel button:hover {
+  background: #3e8b84;
+}
