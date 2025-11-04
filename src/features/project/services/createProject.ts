@@ -19,3 +19,10 @@ export function createProject(options: CreateProjectOptions = {}): TabbaProject 
   return {
     schemaVersion: PROJECT_SCHEMA_VERSION,
     id: createId(),
+    name: options.name ?? "Untitled Tabba Project",
+    stems: [],
+    tracks: [],
+    createdAt: timestamp,
+    updatedAt: timestamp,
+  };
+}
