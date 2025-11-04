@@ -97,3 +97,28 @@ describe("trackToRocksmithXml", () => {
     );
 
     const xml = trackToRocksmithXml(makeGuitarTrack(events), { durationSeconds: 4 });
+    const ebeatMatches = xml.match(/<ebeat time="[^"]+"/g) ?? [];
+
+    expect(ebeatMatches.length).toBeGreaterThanOrEqual(8);
+  });
+
+  it("omits albumYear when not provided and emits it when supplied", () => {
+    const track = makeGuitarTrack([makeEvent("a", 0, 6, 0)]);
+
+    const withoutYear = trackToRocksmithXml(track);
+    expect(withoutYear).not.toContain("<albumYear>");
+
+    const withYear = trackToRocksmithXml(track, { metadata: { albumYear: 2004 } });
+    expect(withYear).toContain("<albumYear>2004</albumYear>");
+  });
+
+  it("escapes XML-unsafe characters in metadata", () => {
+    const track = makeGuitarTrack([makeEvent("a", 0, 6, 0)]);
+    const xml = trackToRocksmithXml(track, {
+      metadata: { title: "Rock & Roll <Live>", artistName: "A \"Name\"" },
+    });
+
+    expect(xml).toContain("Rock &amp; Roll &lt;Live&gt;");
+    expect(xml).toContain("A &quot;Name&quot;");
+  });
+});
