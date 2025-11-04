@@ -16,3 +16,9 @@ export function migrateProjectData(value: unknown): unknown {
   );
 }
 
+export function markProjectSaved(project: TabbaProject, savedAt: Date): TabbaProject {
+  return {
+    ...project,
+    updatedAt: savedAt.toISOString(),
+  };
+}
