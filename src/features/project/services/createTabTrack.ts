@@ -20,3 +20,10 @@ export function createTabTrack({
 
   return {
     id: createId(),
+    stemId,
+    name: `${label} tab`,
+    instrument,
+    tuning,
+    events: [],
+  };
+}
