@@ -63,3 +63,19 @@ export function useAnalyzeTrack({
                 ? undefined
                 : decoded.durationSeconds - htmlAudioDurationSeconds,
             firstEventStartSeconds: events[0]?.startSeconds,
+            lastEventStartSeconds: events[events.length - 1]?.startSeconds,
+            eventCount: events.length,
+          });
+
+          setProject((currentProject) =>
+            replaceSuggestedEventsInTrack(currentProject, trackId, events, new Date())
+          );
+          setProjectNotice(`Analysis found ${events.length} suggested notes.`);
+        })
+        .catch((error: unknown) => {
+          setProjectNotice(error instanceof Error ? error.message : "Analysis failed.");
+        });
+    },
+    [activeSource, project.stems, project.tracks, setProject, setProjectNotice]
+  );
+}
