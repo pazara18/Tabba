@@ -14,3 +14,8 @@ export function getInstrumentPitchOptions(instrument: InstrumentKind): PitchDete
       rmsThreshold: 0.012,
     };
   }
+
+  return {
+    maxFrequencyHz: 1400,
+  };
+}
