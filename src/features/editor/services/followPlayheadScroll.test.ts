@@ -44,3 +44,16 @@ describe("followPlayheadScroll", () => {
         viewportWidth: 800,
       })
     ).toBe(200);
+  });
+
+  it("does nothing when the content fits", () => {
+    expect(
+      getFollowPlayheadScrollLeft({
+        contentWidth: 600,
+        currentScrollLeft: 100,
+        playheadX: 500,
+        viewportWidth: 800,
+      })
+    ).toBe(0);
+  });
+});
