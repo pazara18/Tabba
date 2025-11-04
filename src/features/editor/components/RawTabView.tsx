@@ -28,3 +28,12 @@ export function RawTabView({ duration, track }: RawTabViewProps) {
         <div>
           <h3>{track.name}</h3>
           <span>{track.events.length} events</span>
+        </div>
+        <button className={styles.copyButton} onClick={handleCopy} type="button">
+          {copyState === "copied" ? "Copied" : copyState === "error" ? "Copy failed" : "Copy"}
+        </button>
+      </div>
+      <pre className={styles.tab}>{ascii}</pre>
+    </article>
+  );
+}
