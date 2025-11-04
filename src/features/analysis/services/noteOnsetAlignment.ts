@@ -156,3 +156,39 @@ function splitNoteAtInnerOnsets(
   }));
 }
 
+function isEnergyRise(
+  currentRms: number,
+  previousRms: number,
+  settings: Required<NoteOnsetAlignmentOptions>
+): boolean {
+  if (previousRms < settings.rmsThreshold) {
+    return true;
+  }
+
+  return currentRms / previousRms >= settings.onsetRiseRatio;
+}
+
+function findFirstActiveSample(
+  samples: Float32Array,
+  start: number,
+  end: number,
+  settings: Required<NoteOnsetAlignmentOptions>
+): number {
+  for (let index = start; index < Math.min(end, samples.length); index += 1) {
+    if (Math.abs(samples[index]) >= settings.rmsThreshold) {
+      return index;
+    }
+  }
+
+  return start;
+}
+
+function calculateRms(samples: Float32Array): number {
+  if (samples.length === 0) {
+    return 0;
+  }
+
+  const energy = samples.reduce((sum, sample) => sum + sample * sample, 0);
+
+  return Math.sqrt(energy / samples.length);
+}
