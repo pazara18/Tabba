@@ -85,3 +85,25 @@ describe("trackToAsciiTab", () => {
       makeEvent("a", 0, [{ stringNumber: 4, fret: 0 }]),
       makeEvent("b", 9, [{ stringNumber: 4, fret: 5 }]),
     ];
+    const track = makeBassTrack(events);
+    const ascii = trackToAsciiTab(track, 16, { lineDurationSeconds: 8, columnsPerLine: 16 });
+
+    const stanzas = ascii.split("\n\n");
+    expect(stanzas).toHaveLength(2);
+    expect(stanzas[0].split("\n")[0]).toBe("0:00");
+    expect(stanzas[1].split("\n")[0]).toBe("0:08");
+  });
+
+  it("writes multi-digit frets across adjacent columns", () => {
+    const events = [
+      makeEvent("a", 0, [{ stringNumber: 1, fret: 12 }]),
+    ];
+    const track = makeGuitarTrack(events);
+    const ascii = trackToAsciiTab(track, 8, { lineDurationSeconds: 8, columnsPerLine: 16 });
+
+    const rows = ascii.split("\n");
+    const highRow = rows.find((row) => row.startsWith("E|")) ?? "";
+    expect(highRow[2]).toBe("1");
+    expect(highRow[3]).toBe("2");
+  });
+});
