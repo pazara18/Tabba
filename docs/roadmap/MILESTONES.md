@@ -245,6 +245,3 @@ Acceptance criteria:
 
 - A user can export readable tab for a track.
 - Export output is deterministic for the same project.
-- The app JSON remains the source of truth.
-
-<!-- draft note 288 -->
