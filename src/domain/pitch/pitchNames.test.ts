@@ -16,3 +16,11 @@ describe("pitchNames", () => {
   it("transposes pitch names by semitone distance", () => {
     expect(transposePitch("E2", 3)).toBe("G2");
     expect(transposePitch("B3", 1)).toBe("C4");
+  });
+
+  it("rejects invalid pitch input", () => {
+    expect(() => pitchToMidi("H2")).toThrow("Invalid pitch name");
+    expect(() => pitchToMidi("Cb4")).toThrow("Invalid pitch class");
+    expect(() => midiToPitch(60.5)).toThrow("MIDI note must be an integer");
+  });
+});
