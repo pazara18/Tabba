@@ -17,3 +17,11 @@ export const standardGuitarTuning: InstrumentTuning = {
 export const standardBassTuning: InstrumentTuning = {
   id: "bass-standard",
   name: "Standard bass",
+  instrument: "bass",
+  strings: [
+    { stringNumber: 1, openPitch: "G2" },
+    { stringNumber: 2, openPitch: "D2" },
+    { stringNumber: 3, openPitch: "A1" },
+    { stringNumber: 4, openPitch: "E1" },
+  ],
+};
