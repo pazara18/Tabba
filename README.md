@@ -1,100 +1,338 @@
-# Tabba
-<img width="1375" height="379" alt="image" src="https://github.com/user-attachments/assets/7d1d4d36-4057-4373-beba-79892367b406" />
+# AGENTS.md
 
-Tabba is a local-first browser app for creating, editing, and viewing guitar and
-bass tablature for Suno song stem exports.
+Guidance for coding agents and humans working in this repository.
 
-The app is being built as an assisted editor: analysis may suggest events and
-fingerings, but the musician chooses the final tab.
+This project is **Tabba**, a local-first in-browser application for creating,
+editing, and viewing guitar and bass tablature for Suno song stem exports. The
+near-term product is an assisted tab editor: audio analysis may suggest notes,
+positions, chords, bends, or slides, but the musician remains the final editor.
 
-## Field milestones - the route so far
+## Product Direction
 
-Every gate below is closed and stamped. The route from a loose idea to the
-frozen 1.0 workbench ran through eight of them.
+- Build a local browser app first. Do not introduce a backend unless a concrete
+  feature requires it.
+- Keep imported audio local to the browser. Privacy and offline operation are
+  product requirements, not implementation details.
+- Focus on guitar and bass tablature. Do not add drums or vocals until the
+  guitar/bass workflows are solid.
+- Treat transcription as assistance. The app should present candidates and
+  confidence, not pretend uncertain analysis is authoritative.
+- Preserve raw analysis results separately from user choices so a user can
+  re-finger, reclassify, or lock events without losing the underlying evidence.
 
-- [x] **M1 - Audio import + waveform** (Suno stem export -> decoded buffer) - closed **2019-08-15**, 14:05 CEST
-- [x] **M2 - Attack detection** (onset picking with drift diagnostics) - closed **2020-09-24**, 11:30 CEST
-- [x] **M3 - Pitch tracking** (frequency bins to string/fret candidates) - closed **2021-11-06**, 16:20 CET
-- [x] **M4 - Tab editor** (measure grid, string/fret entry, undo stack) - closed **2022-12-08**, 13:45 CET
-- [x] **M5 - Export pipeline** (PDF-ready tab rendering, text export) - closed **2023-10-19**, 15:10 CEST
-- [x] **M6 - Project model** (local-first storage, autosave, versioned sessions) - closed **2024-11-28**, 09:55 CET
-- [x] **M7 - Analysis assist** (suggested fingerings, musician-always-decides flow) - closed **2025-12-11**, 12:00 CET
-- [x] **M8 - Tabba 1.0 - stable project format freeze** - closed **2026-08-09**, 12:00 CEST
+## Preferred Stack
 
-### Commits per year - the build log
+Unless there is a strong reason to change direction, use:
 
-\\	ext
-2018 ▇▇▇▇ 26
-2019 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 120
-2020 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 130
-2021 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 140
-2022 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 150
-2023 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 160
-2024 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 170
-2025 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 180
-2026 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 120
-\
-## The field team
+- Vite
+- TypeScript
+- React
+- CSS modules or small colocated styles
+- Web Audio API for playback primitives
+- A waveform library only when it earns its dependency cost
+- Web Workers for expensive audio analysis
+- IndexedDB for local project persistence when browser storage is needed
 
-- **rShimizu1988** - audited the development setup on a clean checkout and
-  documented the exact Node/browser versions that build green (Sep 2025).
-- **DavideEvans77347** - reviewed the planning chapter and tied every open
-  item to a measurable exit check (Oct 2025).
-- **HuseyinGupta78** - extended the project-files guide with the analysis
-  pipeline map and where each test lives (Nov 2025).
-- **Hoffmann68** - proofread the docs and fixed stale command examples in
-  the development section (Dec 2025).
+Avoid adding large frameworks or state libraries until the app complexity
+actually requires them.
 
-## Development
+## Architecture Overview
 
-Install dependencies:
+The app should be organized around clear domain boundaries:
 
-```sh
-npm install
+- **Project management**: project schema, import/export, autosave, migrations.
+- **Audio workspace**: stems, playback, waveform, offsets, looping, tempo/grid.
+- **Tab domain**: tunings, instruments, tab events, positions, techniques.
+- **Fingering engine**: pitch-to-position candidates and playability scoring.
+- **Analysis engine**: onset, pitch, mono/poly, bend/slide/vibrato suggestions.
+- **Editor UI**: timeline, tab staff, candidate popovers, keyboard workflows.
+- **Rendering/export**: tab viewer, plain text tab, future interchange formats.
+
+Keep these boundaries explicit. UI components may call application services or
+hooks, but they should not contain domain algorithms.
+
+## Proposed Source Layout
+
+When the application is scaffolded, prefer this structure:
+
+```text
+src/
+  app/
+    App.tsx
+    routes/
+    providers/
+  components/
+    common/
+    timeline/
+    tabStaff/
+    transport/
+  features/
+    project/
+      components/
+      hooks/
+      services/
+      types.ts
+    audio/
+      components/
+      hooks/
+      services/
+      workers/
+      types.ts
+    editor/
+      components/
+      hooks/
+      services/
+      types.ts
+    analysis/
+      workers/
+      services/
+      types.ts
+    export/
+      services/
+      types.ts
+  domain/
+    instruments/
+    tab/
+    fingering/
+    timing/
+  lib/
+    storage/
+    math/
+    audio/
+  test/
+    fixtures/
+    helpers/
 ```
 
-Start the local development server:
+Use the layout as a guide, not bureaucracy. If a folder has only one tiny file
+and no near-term need to grow, avoid creating needless nesting.
 
-```sh
-npm run dev
+## File Size and Modularity Rules
+
+This repository should not accumulate giant files.
+
+- Target file size: **under 200 lines** for most files.
+- Soft limit: **250 lines**. When a file crosses this, look for a natural split.
+- Hard limit: **400 lines**. Do not exceed this without documenting the reason
+  in the PR or commit message.
+- React components should usually stay under **150 lines**.
+- Domain algorithms should be split by responsibility, not by arbitrary chunks.
+- Tests may be longer when table-driven cases are clearer in one place, but
+  helpers and fixtures should still be extracted.
+
+When a file grows, prefer these splits:
+
+- UI shell vs presentational child components.
+- Hook state management vs pure rendering.
+- Domain types vs domain algorithms.
+- Parsing/serialization vs validation/migration.
+- Analysis orchestration vs individual signal-processing steps.
+- Candidate generation vs candidate scoring.
+
+Do not solve large files by creating vague `utils.ts` dumping grounds. Extract
+modules with names that describe the domain concept they own.
+
+## Naming Guidelines
+
+- Name files after the thing they own: `scoreCandidates.ts`,
+  `generatePitchPositions.ts`, `ProjectImporter.tsx`.
+- Avoid broad names like `helpers.ts`, `misc.ts`, `common.ts`, or `manager.ts`.
+- Use `types.ts` sparingly for shared types inside a feature. If a type belongs
+  to a domain concept, put it near that concept.
+- Use explicit event names: `TabEvent`, `PitchEstimate`,
+  `CandidateInterpretation`, `TabPosition`.
+- Prefer boring, searchable names over clever abbreviations.
+
+## Domain Model Principles
+
+The model should separate audio facts from edited tab decisions.
+
+Recommended concepts:
+
+```ts
+type InstrumentKind = "guitar" | "bass";
+type TabEventKind = "single" | "chord" | "bend" | "slide" | "unknown";
+type TextureKind = "mono" | "poly" | "uncertain";
 ```
 
-Run tests:
+Important model rules:
 
-```sh
-npm test
-```
+- Store `schemaVersion` in every saved project.
+- Store stem metadata separately from tab tracks.
+- Store detected pitches separately from chosen tab positions.
+- Store confidence and candidate interpretations where analysis is uncertain.
+- Support `locked` user-edited events so later analysis does not overwrite them.
+- Support alternate tunings from the beginning.
+- Design for capo support even if the first UI does not expose it.
 
-Run tests with coverage:
+## Audio and Timing Guidelines
 
-```sh
-npm run test:coverage
-```
+- Keep all internal timing in seconds unless a module clearly owns musical grid
+  math.
+- Do not assume Suno stems have reliable BPM metadata.
+- Support free-time editing and later add BPM/grid/tap-tempo features.
+- Plan for per-stem offset/trim because imported stems may include leading
+  silence.
+- Keep playback state centralized enough that waveform, tab staff, and transport
+  controls stay synchronized.
+- Expensive analysis must run off the main UI thread.
 
-Run linting:
+## Fingering and Candidate Rules
 
-```sh
-npm run lint
-```
+Candidate generation and candidate scoring are separate responsibilities.
 
-Build for production:
+Candidate generation answers:
 
-```sh
-npm run build
-```
+- Which string/fret positions can play this pitch in the current tuning?
+- Which chord voicings can represent this pitch set?
+- Which positions are physically possible?
 
-## Planning
+Candidate scoring answers:
 
-- [Agent guidance](AGENTS.md)
-- [Execution plan](EXECUTION_PLAN.md)
-- [Roadmap milestones](docs/roadmap/MILESTONES.md)
-- [First implementation slice](docs/roadmap/FIRST_IMPLEMENTATION_SLICE.md)
+- Which candidate is nearest to the previous hand position?
+- Which candidate best preserves phrase continuity?
+- Which candidate has a comfortable fret span?
+- Which candidate respects locked neighboring notes?
+- Which candidate is plausible for guitar vs bass?
 
-## Project Files
+Do not bake UI assumptions into the fingering engine. It should be testable with
+plain data.
 
-Tabba project exports use versioned `.tabba.json` data. The current schema
-keeps stems, tab tracks, detected pitch data, chosen tab positions, candidates,
-confidence, and lock state separate so analysis suggestions can be corrected
-without losing the original project structure.
+## Analysis Philosophy
 
-<!-- draft note 285 -->
+Audio analysis should produce suggestions with confidence:
+
+- onset candidates
+- pitch estimates
+- mono/poly/uncertain texture classification
+- bend-like pitch curves
+- slide-like pitch transitions
+- chord or double-stop candidates
+
+Avoid hard coupling between analysis output and final tab output. Analysis may
+be wrong, and the editor must make correction cheap.
+
+## UI Guidelines
+
+- Build the actual editor as the first screen, not a marketing landing page.
+- Prioritize desktop editing. Mobile can be view-first until editing ergonomics
+  are intentionally designed.
+- Keep waveform, transport controls, timeline, and tab staff visually connected.
+- Make every detected event clickable and editable.
+- Provide fast correction flows: candidate popovers, keyboard fret entry,
+  arrow-key string/fret movement, locking, undo/redo, and loop selection.
+- Show uncertainty without making the UI feel broken.
+- Do not add explanatory copy inside the app where controls or labels should
+  carry the interaction.
+
+## State Management
+
+Start with React state, reducers, and focused hooks. Add a state library only
+when there is repeated cross-feature coordination that becomes hard to reason
+about.
+
+Keep state categories distinct:
+
+- persistent project data
+- transient editor selection
+- playback state
+- analysis job state
+- UI-only popover/modal state
+
+Do not store derived data as mutable state unless caching is required for
+performance.
+
+## Persistence and Schema
+
+- Project export/import should be available early.
+- Use a versioned `.tabba.json` project format.
+- Add migrations when changing saved schema shape.
+- Avoid storing large audio blobs in JSON. If packaging audio becomes necessary,
+  introduce an explicit archive format rather than hiding binary data inside
+  ordinary project files.
+- Browser autosave should not replace explicit export.
+
+## Testing Guidelines
+
+Prioritize tests for domain logic and schema behavior:
+
+- pitch-to-position mapping
+- tuning parsing
+- candidate scoring
+- chord voicing constraints
+- bend amount classification
+- project serialization and migrations
+- analysis event grouping
+
+Use small synthetic fixtures for audio-analysis tests where possible. Do not
+depend only on large real audio files.
+
+UI tests should cover critical workflows once the editor exists:
+
+- import a stem
+- create a tab track
+- add/edit/delete a note
+- choose an alternate fingering
+- lock an event
+- save and reload a project
+
+## Dependency Guidelines
+
+- Prefer standard browser APIs for simple needs.
+- Add dependencies intentionally and document why they are useful.
+- Avoid libraries that force the project into a backend or cloud workflow.
+- Keep audio-analysis dependencies isolated behind services or workers so they
+  can be replaced.
+- Do not let a visualization library own the project data model.
+
+## Code Quality Rules
+
+- Keep functions small and named by intent.
+- Prefer pure functions for domain logic.
+- Avoid boolean parameter traps. Use options objects when a call has multiple
+  modes.
+- Avoid mutation across module boundaries.
+- Avoid global singletons except for narrow browser integration points.
+- Keep side effects at the edges: storage, audio playback, worker messaging,
+  file import/export.
+- Make invalid states hard to represent with TypeScript types.
+- Do not introduce barrel files by default. They can obscure ownership and make
+  circular imports harder to spot.
+
+## Styling Guidelines
+
+- Keep styles close to components unless a style is genuinely shared.
+- Do not build nested card layouts.
+- Avoid one-note color palettes dominated by a single hue family.
+- Keep controls stable in size so labels, icons, and hover states do not shift
+  timeline or tab layouts.
+- Use stable dimensions for tab grids, transport controls, timeline lanes, and
+  note markers.
+
+## Git and Workflow Expectations
+
+- Keep commits focused.
+- Do not mix architecture, formatting churn, and feature work in one change.
+- Do not rewrite or remove user changes unless explicitly asked.
+- Before large edits, inspect the current file and fit the existing style.
+- When introducing a new feature area, add or update tests for the domain logic
+  first where practical.
+
+## Early Build Order
+
+Recommended sequence:
+
+1. Scaffold the Vite/React/TypeScript app.
+2. Add project schema types and import/export for `.tabba.json`.
+3. Add local audio import and playback.
+4. Add a basic timeline and tab staff.
+5. Add manual guitar/bass note editing.
+6. Add pitch-to-position candidate generation.
+7. Add candidate scoring based on distance and context.
+8. Add lockable events and re-fingering for a selection.
+9. Add mono/poly/uncertain event classification.
+10. Add manual bends/slides, then pitch-curve suggestions.
+
+Keep each step shippable and small enough to review.
+
+// draft note 311
