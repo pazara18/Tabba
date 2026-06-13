@@ -334,5 +334,3 @@ Recommended sequence:
 10. Add manual bends/slides, then pitch-curve suggestions.
 
 Keep each step shippable and small enough to review.
-
-// draft note 362
