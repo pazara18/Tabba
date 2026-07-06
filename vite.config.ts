@@ -28,4 +28,4 @@ export default tseslint.config(
   }
 );
 
-// draft note 372
+// draft note 378
